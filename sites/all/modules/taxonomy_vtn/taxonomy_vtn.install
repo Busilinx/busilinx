@@ -1,0 +1,56 @@
+<?php
+// $Id: taxonomy_vtn.install,v 1.1.2.9 2010/06/23 06:28:22 alexiswilke Exp $
+
+/**
+ * @file
+ * The installation file, now for:
+ * - delete veriables
+ * - check requirements
+ *
+ */
+
+
+/**
+ * Implementation of hook_requirements($phase)
+ */
+function taxonomy_vtn_requirements($phase) {
+  $requirements = array();
+  // Ensure translations don't break at install time
+  $t = get_t();
+
+  // Test Drupal version (it's certainly unlikely to happen in 2010... who knows?!)
+  // We may even need a higher version, not too sure...
+  if (version_compare(VERSION, '6.2', '<')) {
+    $msg = $t('Your Drupal installation is too old. The Taxonomy VTN module requires at least 6.2.');
+    drupal_set_message($msg, 'error');
+    $requirements['taxonomy_vtn']['description'] = $msg;
+    $requirements['taxonomy_vtn']['severity'] = REQUIREMENT_ERROR;
+  }
+
+  return $requirements;
+}
+
+
+/**
+ * Implementation of hook_enable().
+ */
+function taxonomy_vtn_enable() {
+  module_invoke('taxonomy_vtn', 'checklocales');
+
+  drupal_set_message(t('The Taxonomy VTN module has been enabled. You may wish to go to <a href="!url">the settings page</a>.', array('!url' => url('admin/settings/taxonomy_vtn'))));
+
+}
+
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function taxonomy_vtn_uninstall() {
+  global $user;
+
+  db_query("DELETE FROM {variable} WHERE name LIKE 'taxonomy_vtn_%%'");
+
+  watchdog('Taxonomy VTN', 'Taxonomy VTN module uninstalled by @user.', array('@user' => $user->name));
+  drupal_set_message(t('The Taxonomy VTN module has been uninstalled.'), 'status');
+}
+

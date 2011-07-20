@@ -1,0 +1,41 @@
+6.x-2.5
+-------
+* Last release was pretty cocked up. Version number did not get updated.
+
+6.x-2.4
+-------
+* Documentation change only. Made it clearer that nodequeue needs to be
+  installed for multiple nodes on the same slideshow.
+
+6.x-2.3
+-------
+* Set the thumbnails to a fixed height of 40px.
+
+6.x-2.2
+-------
+* Completed the admin section allowing control over the slideshow options.
+* Added transition_speed, continuous, show_controls and slide_controls fields to
+  {fancy_slide} db table.
+* Added animation field to {fancy_slide} db table.
+* Moved the jQuery that fires each fancy slideshow into the slideshow template
+  itself. This introduces inline jQuery, but this appears to be the best way of
+  allowing each slideshow to have its own options.
+
+6.x-2.1
+-------
+* Cleaned up jQuery code. Added different animations transitions (fade and slide
+  for now).
+
+6.x-2.0
+-------
+* Major redesign. Now possible to create slideshows via a nice interface.
+* Images can now link to their nodes.
+
+6.x-1.1
+-------
+* It is now possible to add alt text through the imagefield module and this will
+  be used as the caption for the image on the slideshow.
+  
+6.x-1.0
+-------
+* Initial build.

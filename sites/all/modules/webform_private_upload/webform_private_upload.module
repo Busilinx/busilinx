@@ -1,0 +1,577 @@
+<?php
+// $Id: webform_private_upload.module,v 1.1 2009/09/10 15:47:46 jcfiala Exp $
+
+/**
+ * @file
+ * Add a private files directory to a site set to public download method.
+ *
+ * Private files in Drupal 6 are trouble.  There can only be one files
+ * directory, and the download method is either public or private for ALL
+ * files.  If it is set to private all files are forced to go through a
+ * full drupal bootstrap, which makes pages with multiple images unusabily
+ * slow.
+ *
+ * This module addresses these problems:
+ * It creates a secure subdirectory inside fo the standard, public webform files
+ *   directory (which can be set at admin/settings/webform/private_upload).
+ * It warns you if files in the private directory are accessable.
+ * It offers to place a .htaccess file in that directory that will prevent
+ *   files from being directly accessed on Apache webservers.
+ * It provides a per-file checkbox for specifying a particular file as public
+ *   or private.
+ * It allows you to set the default method to public or private.
+ * It only allows access to files to users who have access to the node it is
+ *   attached to.
+ *
+ * Definition of private: If a user has 'view private webform file uploads' the user can
+ * view all uploaded webform files.  Otherwise, they cannot.
+ *
+ * To be completely honest, much of this code is directly adapted from the
+ *   private_upload module, only adapted to work with webform.  Because
+ *   webform puts files in files/webform, it's not easy to use private_upload with
+ *   webform unless only webform files are private uploads.
+ */
+
+// *****************************************************************************
+// Hook Functions **************************************************************
+// *****************************************************************************
+
+/**
+ * Implements hook_perm().
+ */
+function webform_private_upload_perm() {
+  return array('view private webform file uploads');
+}
+
+/**
+ * hook_menu().
+ *
+ * @param unknown_type $may_cache
+ * @return unknown
+ */
+function webform_private_upload_menu() {
+
+  $items['admin/settings/webform/private_upload'] = array(
+    'title' => 'Webform Private Uploads',
+    'description' => 'Configure settings for webform private file upload.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('webform_private_upload_admin'),
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_LOCAL_TASK,
+  );
+  $items['admin/webform_private_upload/add_htaccess'] = array(
+    'access arguments' => array('administer site configuration'),
+    'page callback' => '_webform_private_upload_add_htaccess',
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_menu_alter().
+ *
+ * We need webform to have local task setup, so we create a default local task menu item that copies the existing
+ * admin/settings/webform menu item.
+ */
+function webform_private_upload_menu_alter(&$items) {
+  $items['admin/settings/webform/config'] = $items['admin/settings/webform'];
+  $items['admin/settings/webform/config']['type'] = MENU_DEFAULT_LOCAL_TASK;
+}
+
+/**
+ * hook_requrements().
+ *
+ * @param $phase: 'runtime' or 'install'
+ * @param &$status: Not part of the hook. Used to collect messages for alternative display.
+ * @return array of requirements;
+ */
+function webform_private_upload_requirements($phase) {
+  $status = array();
+  return _webform_private_upload_requirements($phase, $status);
+}
+
+/**
+ * Does the real work of hook_requirements, but with an extra param to collect
+ *  status info.
+ *
+ * @param $phase: 'runtime' or 'install'
+ * @param &$status: Not part of the hook. Used to collect messages for alternative display.
+ * @return array of requirements
+ * D6 - good.
+ */
+function _webform_private_upload_requirements($phase, &$status) {
+  $t = get_t();   // Ensure translations don't break at install time.
+  $requirements = array();
+
+  if (module_exists('uploadpath')) {
+    $requirements['webform_private_upload_conflict'] = array(
+      'title' => $t('Webform Private Upload'),
+      'severity' => REQUIREMENT_ERROR,
+      'value' => $t('Conflict with Upload Path'),
+      'description' => $t('Webform Private Upload will not work if Upload Path is installed'),
+    );
+  }
+
+  $public = file_directory_path();
+  $private_path = _webform_private_upload_path();
+
+  // Attempt to create the directory if it doesn't already exist.
+  if (!file_check_directory($private_path, FILE_CREATE_DIRECTORY)) {
+    $requirements['webform_private_upload_writable'] = array(
+      'title' => $t('Webform Private Upload'),
+      'severity' => REQUIREMENT_WARNING,
+      'value' => $t('Private Downloads directory is not writable'),
+      'description' => $t('Please make sure directory !dir exists and is writable.', array('!dir' => $private_path)),
+    );
+    $status[] = '<div class="error">'. $requirements['webform_private_upload_writable']['description'] .'</div>';
+  }
+  else {
+    $status[] = "<div class='ok'>$private_path exists and is writable. Great.</div>";
+  }
+
+  // Write out a .htaccess file if one doesn't already exist in the private folder.
+  if (!file_exists($private_path .'/.htaccess')) {
+    _webform_private_upload_add_htaccess();
+  }
+  else {
+    $status[] = '<div class="ok">'. $t("You have an .htaccess file in private folder. Great.") ."</div>";
+  }
+
+  // Write a test file to the private folder to test public access.
+  $test_file = $private_path .'/privacy_test.txt';
+  if (!file_exists($test_file)) {
+    $test_path = file_create_path($test_file);
+    file_save_data( "This is just a test.", $test_path, FILE_EXISTS_REPLACE );
+    drupal_set_message("Added test file: $test_path.");
+  }
+
+  if (file_exists($test_file)) {
+    $url = $GLOBALS['base_url'] .'/'. $test_file;
+    if ( !_webform_private_upload_is_url_protected( $url )) {
+      $requirements['webform_private_upload_readable'] = array(
+        'title' => $t('Webform Private Upload'),
+        'severity' => REQUIREMENT_WARNING,
+        'value' => $t('Private directory is publically accessable!'),
+        'description' => $t('Very bad! Your private files are not private!'),
+      );
+      $status[] = '<div class="error">'. $requirements['webform_private_upload_readable']['description'] .'</div>';
+    }
+    else {
+      $secure = TRUE; // good can't read files in private folder
+      $status[] = '<div class="ok">'. $t("Your private folder is not accessable. Great!") ."</div>";
+    }
+  }
+  else { // unable to write the test file
+    $requirements['webform_private_upload_testfile'] = array(
+      'title' => $t('Webform Private Upload'),
+      'severity' => REQUIREMENT_WARNING,
+      'value' => $t('Unable to write test file.'),
+      'description' => $t( "Unable to add test file to your private folder. Unable to test security of your private folder!"),
+    );
+    $status[] = '<div class="error">'. $requirements['webform_private_upload_testfile']['description'] .'</div>';
+  }
+
+  if (variable_get('file_downloads', FILE_DOWNLOADS_PUBLIC) == FILE_DOWNLOADS_PRIVATE) {
+    $requirements['webform_private_upload_method'] = array(
+      'title' => $t('Webform Private Upload'),
+      'severity' => REQUIREMENT_WARNING,
+      'value' => $t('Private Downloads'),
+      'description' => $t('Private Upload will not work with file upload method set to private. Please enable <a href="!url">Public File Transfer</a>.', array('!url' => url('admin/settings/file-system'))),
+    );
+    $status[] = '<div class="error">'. $requirements['webform_private_upload_method']['description'] .'</div>';
+  }
+  else {
+    $status[] = '<div class="ok">'. $t("File download method is set to public. Great.") .'</div>';
+  }
+
+  if (count($requirements) ) { // failed
+    if ($phase == 'runtime') {
+      foreach ($requirements as $key => $req ) {
+        if ($requirements[$key]['severity'] == REQUIREMENT_WARNING) {
+          $requirements[$key]['severity'] = REQUIREMENT_ERROR; // bump up to error if after install
+        }
+      }
+    }
+  }
+  else { // success
+    $requirements['webform_private_upload'] = array(
+      'title' => $t('Webform Private Upload'),
+      'severity' => REQUIREMENT_OK,
+      'value' => $t('Private Upload is correctly configured and secure.'),
+    );
+
+  }
+
+  return $requirements;
+}
+
+/**
+ * hook_file_download: hook to veto file downloads.
+ *
+ * Added for D6.  Files no longer one-to-one with a node,
+ *  so we need to check all the nodes that a file is associated with.
+ * If the user has access to ANY node that this file is attached to, they
+ *  can access the file.
+ * A private file that is not attached to at least one node cannot be viewed
+ *  by anyone.
+ *
+ * @param string $file: partial filepath
+ * @return: -1 if access is blocked.
+ */
+function webform_private_upload_file_download($file) {
+  $private_dir = 'webform/'. variable_get('webform_private_upload_path', 'private');
+  if (_webform_private_upload_starts_with($file, $private_dir)) {
+    if (!user_access('view private webform file uploads')) {
+      return -1;
+    }
+  }
+}
+
+
+/**
+ * hook_form_alter().
+ *
+ * Need to overload the display of form information for files and give it the private upload url!
+ */
+function webform_private_upload_form_alter(&$form, $form_state, $form_id) {
+  if (preg_match('@^webform_client_form_\d+$@', $form_id) && array_key_exists('submitted', $form)) {
+
+    foreach (element_children($form['submitted']) as $key) {
+      $matches = array();
+      if (preg_match('@<a .*>(.*)</a>@iu', $form['submitted'][$key]['#suffix'], $matches)) {
+        $form['submitted'][$key]['#suffix'] = l($matches[1], webform_private_upload_file_url($form['submitted'][$key]['#default_value']));
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for the form_id webform_component_edit_form.
+ *
+ * The idea is to point out to the user, when he is setting the path for the upload, what the
+ * private upload path is.
+ */
+function webform_private_upload_form_webform_component_edit_form_alter(&$form, $form_state) {
+  if ($form['type']['#value'] == 'file') {
+    $form['extra']['savelocation']['#description'] .= '<div style="display: block"><strong>'.
+      t('If you set the location within %location, then the uploads will be private.',
+        array('%location' => _webform_private_upload_path())) .'</strong></div>';
+  }
+}
+
+
+// *****************************************************************************
+// Settings Functions **********************************************************
+// *****************************************************************************
+
+/**
+ * Setting page.
+ * Also reports status and acts as launching point for migration.
+ */
+function webform_private_upload_admin() {
+
+  $form['settings'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Webform Private Upload Settings'),
+    '#collapsible' => TRUE,
+  );
+
+  $public_webform = file_directory_path() .'/webform/';
+
+  $form['settings']['webform_private_upload_path'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Private Upload Path'),
+    '#field_prefix' => $public_webform,
+    '#default_value' => variable_get('webform_private_upload_path', 'private'),
+    '#description' => t('This folder will be inside of "!public".', array( '!public' => $public_webform)),
+    '#required' => TRUE,
+  );
+
+  /*$form['settings']['webform_private_upload_default'] = array(
+    '#type' => 'select',
+    '#title' => t('Default Upload Privacy Setting'),
+    '#default_value' => variable_get('webform_private_upload_default', 'private' ),
+    '#options' => array ( 'private' => 'private', 'public' => 'public' ),
+    '#description' => t('Are uploads public or private by default?'),
+  );*/
+
+  // STATUS REPORT ***************************************************************
+
+  $form['status'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Webform Private Upload Status'),
+    '#collapsible' => TRUE,
+  );
+
+  $public = file_directory_path() .'/webform';
+  $status[] = "Public Webform File Folder: '$public'";
+  $private_path = _webform_private_upload_path();
+  $output = "Private Webform File Folder: '$private_path'";
+  $status[] = $output;
+
+  // get status messages from the requirements hook.
+  _webform_private_upload_requirements('runtime', $status);
+
+  // loop through all the file in private folder & collect stats.
+  $private_file_count = 0;
+  $d = opendir( $private_path );
+  if ($d) {
+    while ( $f = readdir($d) ) {
+      if ( $f != '.' && $f != '..' && $f != '.htaccess' && $f != 'privacy_test.txt') {
+        $private_file_count++;
+      }
+    }
+    closedir( $d );
+
+    $output = t("There are '!fs_count' files in the private folder.",
+                array('!fs_count' => $private_file_count));
+    $status[] = '<div class="ok">'. $output . t(" Great.") .'</div>';
+
+  }
+  else { // unable to open folder!
+    $status[] = '<div class="error">'.
+                t("'!private_path' is not a valid directory (!is).",
+                  array('!private_path' => $private_path, '!is' => is_dir($private_path)))
+                .'</div>';
+  }
+
+  $form['status']['info'] = array(
+    '#value' => '<ul><li>'. implode( '</li><li>', $status ) .'</li></ul>',
+  );
+
+  return system_settings_form($form);
+}
+
+/**
+ * Make sure the new webform_private_upload_path can be created and writen to.
+ */
+function webform_private_upload_admin_validate($form, &$form_state) {
+  //variable_set('webform_private_upload_path', $form_values['webform_private_upload_path'] );
+  if (preg_match('/\.\./', $form_state['values']['webform_private_upload_path'])) {
+    form_set_error('webform_private_upload_path',
+                   t('No value containing ".." is allowed as a path.'));
+    return FALSE;
+  }
+  $webform_private_upload_path = file_create_path($form_state['values']['webform_private_upload_path']);
+
+  // FILE_CREATE_DIRECTORY and FILE_MODIFY_PERMISSIONS
+  if (!file_check_directory($webform_private_upload_path, TRUE, 'webform_private_upload_path')) {
+    return FALSE;
+  }
+}
+
+function webform_private_upload_help($path, $arg) {
+  if ($path == 'admin/settings/webform/private_upload') {
+    return '<p>'.
+  t('This is where you set the directory under webform to store private files in.  Any file upload component for any webform
+    that writes the file to this directory will have it\'s uploads private - any that avoid this directory will be the usual
+    public sort.  Note that if you set the path to !here then every webform uploaded file will be private.',
+    array('!here' => '<strong>.</strong>')) .'</p>';
+  }
+}
+
+// *****************************************************************************
+// Callback Functions **********************************************************
+// *****************************************************************************
+
+/**
+ * Callback to inject an .htaccess file into the webform_private_upload_path folder
+ */
+function _webform_private_upload_add_htaccess() {
+  if ($dir_path = _webform_private_upload_path()) {
+    $path = file_create_path($dir_path .'/.htaccess' );
+    if ($path) {
+      file_save_data( "SetHandler This_is_a_Drupal_security_line_do_not_remove
+Deny from all", $path, FILE_EXISTS_REPLACE );
+      drupal_set_message(t("Added .htaccess file at @path", array('@path' => $path)));
+    }
+    else {
+      drupal_set_message(t("Was not able to create the .htaccess file at @path - please have your server admin check the logs.",
+                           array('@path' => _webform_private_upload_path())));
+    }
+  }
+  else {
+    drupal_set_message(t("The directory you set for the private uploads is not valid.  Please go to !link and fix the path.",
+                         array('!link' => l(t('Webform Private Upload Settings'), 'admin/settings/webform/private_upload'))));
+  }
+}
+
+// *****************************************************************************
+// Theme functions ***********************************************************
+// *****************************************************************************
+
+/**
+ * hook_theme - theme registry.
+ * New for D6
+ */
+
+function webform_private_upload_theme() {
+  return array(
+    'webform_mail_file' => array(
+      'arguments' => array('data' => NULL, 'component' => NULL),
+    ),
+  );
+}
+
+/**
+ * Format the output of emailed data for this component
+ *
+ * @param mixed $data
+ *   A string or array of the submitted data.
+ * @param array $component
+ *   An array of information describing the component, directly correlating to
+ *   the webform_component database schema.
+ * @return
+ *   Textual output to be included in the email.
+ */
+function webform_private_upload_webform_mail_file($data, $component) {
+  $file = is_string($data) ? unserialize($data) : $data;
+  $output = $component['name'] .':-: '. (!empty($file['filepath']) ? webform_private_upload_file_url($file['filepath']) : '') ."\n";
+  return $output;
+}
+
+// *****************************************************************************
+// Utility functions ***********************************************************
+// *****************************************************************************
+
+/**
+ * Returns the system path for the private folder,
+ * Or false if the folder is invalid.
+ *
+ */
+function _webform_private_upload_path() {
+  return file_create_path('webform/'. variable_get('webform_private_upload_path', 'private') );
+}
+
+/**
+ * Utility
+ * @return bool: does str1 start with str2
+ */
+function _webform_private_upload_starts_with( $str, $start ) {
+  if ( count($str) == 0 ) return FALSE; // avoid false positive.
+  return strstr($str, $start) == $str;
+}
+
+/**
+ * Utility: replace start with new in str1.
+ * @return string: the modified string.
+ */
+function _webform_private_upload_replace_start_with( $str, $start, $new ) {
+  return substr_replace( $str, $new, 0, strlen($start) );
+}
+
+/**
+ * @param $filepath
+ * @return boolean - if the $filepath refers to a private file
+ */
+function _webform_private_upload_is_file_private( $filepath ) {
+//  $private_prefix = 'webform_private_upload'; // fake path of private file (for public consumption and menu)
+  $private_path = _webform_private_upload_path();
+  $is_in = _webform_private_upload_starts_with($filepath, $private_path );
+  return $is_in;
+}
+
+
+/**
+ * Create a URL for the file that changes if the file is public or private.
+ * TODO - Push to get a file_create_url hook into Drupal7.
+ *
+ * @param file object $file
+ * @return str: the correct URL
+ */
+function _webform_private_upload_create_url($file) {
+  if (_webform_private_upload_is_file_private($file->filepath)) {
+    $download_method = variable_get('file_downloads', FILE_DOWNLOADS_PUBLIC); // this should be PUBLIC, but don't break misconfigured systems
+    variable_set('file_downloads', FILE_DOWNLOADS_PRIVATE);
+  }
+  // Generate valid URL for both existing attachments and preview of new attachments (these have 'upload' in fid)
+  $href = file_create_url((strpos($file->fid, 'upload') === FALSE ? $file->filepath : file_create_filename($file->filename, file_create_path())));
+  if (_webform_private_upload_is_file_private($file->filepath)) {
+    variable_set('file_downloads', $download_method);
+  }
+  return $href;
+}
+
+/**
+ * _webform_private_upload_is_url_protected()
+ *
+ * Based on work by schultkl: http://drupal.org/node/201547
+ * fsockopen used b/c get_headers() fails when allow_url_fopen disabled.
+ *
+ * Status codes checked:
+ *
+ *   200 OK:    The request has succeeded.
+ *   302 Found: The requested resource resides temporarily under a different URI
+ *   See: http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+ *
+ * @param $url: url to check if publicly accessible
+ * @return boolean true if proven to be non-publically accessible, else false (public, or unknown)
+ */
+function _webform_private_upload_is_url_protected($url) {
+
+  $return_val          = FALSE;
+  $socket_open_timeout = 30;
+  $read_data_timeout   = 10;
+  $max_chunk           = 1024;
+  $status_codes        = array("200", "302"); // see function header for code details
+
+  // parse and open a socket to the requested resource
+  $url_info=parse_url($url);
+  $port=isset($url_info['port']) ? $url_info['port'] : 80;
+  $fp=fsockopen($url_info['host'], $port, $errno, $errstr, $socket_open_timeout);
+
+  if (!$fp) {
+    drupal_set_message( t("Unable to test file access: ") . $errstr, 'error' );
+    return FALSE; // Failure - file status is unknown.
+  }
+
+  stream_set_timeout($fp, $read_data_timeout);
+
+  // Request resource headers
+  $head = "HEAD ". @$url_info['path'] ."?". @$url_info['query'];
+  $head .= " HTTP/1.0\r\nHost: ". @$url_info['host'] ."\r\n\r\n";
+  fputs($fp, $head);
+
+  // Read resource headers
+  if ($header=trim(fgets($fp, $max_chunk))) {
+    $header_array = explode(': ', $header);
+    $header_type = $header_array[0];
+
+    foreach ($status_codes as $status_code) {
+      if ( strstr($header_type, $status_code)) {
+        fclose($fp);
+        return FALSE; // Falure - file is publically accessable.
+      }
+    }
+  }
+
+  fclose($fp);
+  return TRUE; // good
+}
+
+/************************************************************************************************
+ * Webform integration code.
+ ************************************************************************************************/
+/**
+ * Helper function to create proper URLs for uploaded file.
+ */
+function webform_private_upload_file_url($filepath) {
+  if (!empty($filepath)) {
+    $info = pathinfo($filepath);
+    if (_webform_private_upload_is_file_private($filepath)) {
+      $temp_private = TRUE;
+      $download_method = variable_get('file_downloads', FILE_DOWNLOADS_PUBLIC); // this should be PUBLIC, but don't break misconfigured systems
+      variable_set('file_downloads', FILE_DOWNLOADS_PRIVATE);
+    }
+    $file_url = file_create_url($info['dirname'] .'/'. rawurlencode($info['basename']));
+    if ($temp_private) {
+      variable_set('file_downloads', $download_method);
+    }
+  }
+  return isset($file_url) ? $file_url : '';
+}
+
+function webform_private_upload_theme_registry_alter(&$theme_registry) {
+  //dpm($theme_registry['webform_mail_file']);
+  $theme_registry['webform_mail_file']['function'] = 'webform_private_upload_webform_mail_file';
+}

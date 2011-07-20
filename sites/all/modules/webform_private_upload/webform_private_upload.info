@@ -1,0 +1,12 @@
+; $Id: webform_private_upload.info,v 1.1 2009/09/10 15:47:46 jcfiala Exp $
+name = Webform Private Upload
+description = Allow individual files from webform submissions to be kept in a private file directory.
+dependencies[] = webform
+package = Other
+core = 6.x
+; Information added by drupal.org packaging script on 2009-09-10
+version = "6.x-1.0"
+core = "6.x"
+project = "webform_private_upload"
+datestamp = "1252598246"
+

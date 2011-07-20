@@ -1,0 +1,12 @@
+; $Id: brightcove.info,v 1.1.2.1 2010/05/25 17:39:24 meba Exp $
+name = Brightcove
+description = Brightcove integration module - basic API
+core = 6.x
+
+
+; Information added by drupal.org packaging script on 2010-06-07
+version = "6.x-1.0"
+core = "6.x"
+project = "brightcove"
+datestamp = "1275903004"
+

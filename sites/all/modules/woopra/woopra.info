@@ -1,0 +1,12 @@
+; $Id: woopra.info,v 1.1.2.2 2008/04/23 08:44:51 tomdeb Exp $
+name = Woopra
+description = Adds support for the Woopra web analytics system
+package = Other
+core = 6.x
+
+; Information added by drupal.org packaging script on 2010-01-11
+version = "6.x-1.3"
+core = "6.x"
+project = "woopra"
+datestamp = "1263219314"
+

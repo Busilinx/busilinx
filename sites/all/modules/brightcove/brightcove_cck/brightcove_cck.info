@@ -1,0 +1,15 @@
+name = Brightcove CCK Field
+description = A CCK field allowing to attach videos to nodes.
+core = 6.x
+package = CCK
+
+dependencies[] = brightcove
+dependencies[] = content
+dependencies[] = modalframe
+
+; Information added by drupal.org packaging script on 2010-06-07
+version = "6.x-1.0"
+core = "6.x"
+project = "brightcove"
+datestamp = "1275903004"
+

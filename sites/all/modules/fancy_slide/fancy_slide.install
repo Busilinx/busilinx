@@ -1,0 +1,223 @@
+<?php
+/**
+ * @file
+ *    Installation functions for fancy_slide.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function fancy_slide_install() {
+  drupal_install_schema('fancy_slide');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function fancy_slide_uninstall() {
+  drupal_uninstall_schema('fancy_slide');
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function fancy_slide_schema() {
+  $schema = array();
+  $t = get_t();
+  
+  $schema['fancy_slide'] = array(
+    'description' => $t('Fancy_slide slideshows.'),
+    'fields'      => array(
+      'sid'       => array(
+        'type'        => 'serial',
+        'unsigned'    => TRUE,
+        'not null'    => TRUE,
+        'description' => $t('The auto-incrementing slideshow id.'),
+      ),
+      'name'       => array(
+        'type'        => 'varchar',
+        'length'      => 128,
+        'not null'    => TRUE,
+        'default'     => '',
+        'description' => $t('The slideshow\'s name.'),
+      ),
+      'width'      => array(
+        'type'        => 'int',
+        'unsighed'    => TRUE,
+        'not null'    => TRUE,
+        'default'     => 860,
+        'description' => $t('Width of the slideshow in pixels.'),
+      ),
+      'height'     => array(
+        'type'        => 'int',
+        'unsighed'    => TRUE,
+        'not null'    => TRUE,
+        'default'     => 352,
+        'description' => $t('Height of the slideshow in pixels.'),
+      ),
+      'field'       => array(
+        'type'        => 'varchar',
+        'length'      => 128,
+        'not null'    => TRUE,
+        'default'     => 'field_image',
+        'description' => $t('The machine name of the field that contains the slideshow image.'),
+      ),
+      'delay'       => array(
+        'type'        => 'int',
+        'unsigned'    => TRUE,
+        'not null'    => TRUE,
+        'default'     => 0,
+        'description' => $t('The delay in seconds between each slide. 0 means the slides will not automatically advance.'),
+      ),
+      'preset'      => array(
+        'type'        => 'varchar',
+        'length'      => 128,
+        'not null'    => TRUE,
+        'default'     => '',
+        'description' => $t('The imagecache preset name to use on images in this slideshow. If omitted, images will not be processed with imagecache.'),
+      ),
+      'vertical'    => array(
+        'type'        => 'int',
+        'unsigned'    => TRUE,
+        'not null'    => TRUE,
+        'default'     => 0,
+        'description' => $t('0 for a horizontal slide animation. 1 for vertical.'),
+      ),
+      'type'        => array(
+        'type'        => 'int',
+        'unsigned'    => TRUE,
+        'not null'    => TRUE,
+        'default'     => 0,
+        'description' => $t('The type of slideshow to use, such as single node or nodequeue.'),
+      ),
+      'nodequeue'   => array(
+        'type'        => 'int',
+        'unsigned'    => TRUE,
+        'not null'    => TRUE,
+        'default'     => 0,
+        'description' => $t('The nodequeue subqueue ID to use if using a nodequeue slideshow.'),
+      ),
+      'nid'         => array(
+        'type'        => 'int',
+        'unsigned'    => TRUE,
+        'not null'    => TRUE,
+        'default'     => 0,
+        'description' => $t('The node ID to use if using a single node slideshow.'),
+      ),
+      'animation'   => array(
+        'type'        => 'varchar',
+        'length'      => 32,
+        'not null'    => TRUE,
+        'default'     => '',
+        'description' => $t('The name of the animation used for this slideshow.'),
+      ),
+      'transition_speed' => array(
+        'type'        => 'int',
+        'unsigned'    => TRUE,
+        'not null'    => TRUE,
+        'default'     => 1000,
+        'description' => $t('The speed of the animation between slides.'),
+      ),
+      'continuous'  => array(
+        'type'        => 'int',
+        'unsigned'    => TRUE,
+        'not null'    => TRUE,
+        'default'     => 0,
+        'description' => $t('Whether or not the slideshow returns to the first slide once the last slide has been reached.'),
+      ),
+      'show_controls' => array(
+        'type'        => 'int',
+        'unsigned'    => TRUE,
+        'not null'    => TRUE,
+        'default'     => 0,
+        'description' => $t('Whether or not the controller bar appears on the slideshow.'),
+      ),
+      'slide_controls' => array(
+        'type'        => 'int',
+        'unsigned'    => TRUE,
+        'not null'    => TRUE,
+        'default'     => 0,
+        'description' => $t('Whether or not the slideshow controls slide in and out on mouseover.'),
+      ),
+    ),
+    'primary key' => array('sid'),
+  );
+  
+  return $schema;
+}
+
+function fancy_slide_update_6101() {
+  $ret = array();
+  $t = get_t();
+  
+  db_add_field(
+    $ret,
+    'fancy_slide',
+    'animation',
+    array(
+      'type'        => 'varchar',
+      'length'      => 32,
+      'not null'    => TRUE,
+      'default'     => '',
+      'description' => $t('The name of the animation used for this slideshow.'),
+    )
+  );
+  
+  return $ret;
+}
+
+function fancy_slide_update_6102() {
+  $ret = array();
+  $t = get_t();
+  
+  db_add_field(
+    $ret,
+    'fancy_slide',
+    'transition_speed',
+    array(
+      'type'        => 'int',
+      'unsigned'    => TRUE,
+      'not null'    => TRUE,
+      'default'     => 1000,
+      'description' => $t('The speed of the animation between slides.'),
+    )
+  );
+  db_add_field(
+    $ret,
+    'fancy_slide',
+    'continuous',
+    array(
+      'type'        => 'int',
+      'unsigned'    => TRUE,
+      'not null'    => TRUE,
+      'default'     => 0,
+      'description' => $t('Whether or not the slideshow returns to the first slide once the last slide has been reached.'),
+    )
+  );
+  db_add_field(
+    $ret,
+    'fancy_slide',
+    'show_controls',
+    array(
+      'type'        => 'int',
+      'unsigned'    => TRUE,
+      'not null'    => TRUE,
+      'default'     => 0,
+      'description' => $t('Whether or not the controller bar appears on the slideshow.'),
+    )
+  );
+  db_add_field(
+    $ret,
+    'fancy_slide',
+    'slide_controls',
+    array(
+      'type'        => 'int',
+      'unsigned'    => TRUE,
+      'not null'    => TRUE,
+      'default'     => 0,
+      'description' => $t('Whether or not the slideshow controls slide in and out on mouseover.'),
+    )
+  );
+  
+  return $ret;
+}

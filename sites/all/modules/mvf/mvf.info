@@ -1,0 +1,16 @@
+; $Id: mvf.info,v 1.1 2009/07/28 01:06:45 crea Exp $
+name = Measured Value Field
+description = Defines a field with an amount and a unit of measurement.
+dependencies[] = content
+dependencies[] = units
+dependencies[] = format_number
+dependencies[] = formatted_number
+package = CCK
+core = 6.x
+
+; Information added by drupal.org packaging script on 2010-10-23
+version = "6.x-1.1"
+core = "6.x"
+project = "mvf"
+datestamp = "1287851132"
+

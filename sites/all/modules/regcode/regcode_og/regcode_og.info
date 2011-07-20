@@ -1,0 +1,20 @@
+name = Organic Group assignment
+description = Adds automated organic groups assignment functionality
+core = 6.x
+dependencies[] = regcode
+dependencies[] = og
+package = Registration
+
+; Information added by drupal.org packaging script on 2010-01-06
+version = "6.x-0.5-beta"
+core = "6.x"
+project = "regcode_og"
+datestamp = "1262750107"
+
+
+; Information added by drupal.org packaging script on 2011-02-18
+version = "6.x-2.7"
+core = "6.x"
+project = "regcode"
+datestamp = "1298049136"
+

@@ -1,0 +1,2885 @@
+/**
+ * $Id: theme.css,v 1.1.2.19 2010/03/23 03:29:25 jmburnz Exp $
+ * adaptivethemes.com
+ *
+ * @file theme.css
+ * theme.css is the file to use when building your theme. 
+ * Make a copy first as a backup.
+ */
+
+/**********************************************************
+ *                    HTML & Body
+ **********************************************************/
+html {
+}
+body {
+	font-family:Arial, Helvetica, sans-serif;
+	background-color:#FFF;
+}
+/* Admin menu */
+body.admin-menu {
+}
+body.admin-menu #container {
+}
+/**********************************************************
+ *                 HTML Elements
+ **********************************************************/
+h1 {
+}
+h2 {
+}
+h3 {
+}
+h4 {
+}
+h5 {
+}
+h6 {
+}
+p {
+}
+strong {
+}
+em, dfn {
+}
+dfn {
+}
+sup, sub {
+}
+del {
+}
+ins {
+}
+blockquote {
+}
+cite {
+}
+q {
+}
+address {
+}
+ul {
+}
+ol {
+}
+li {
+}
+dl {
+}
+dd {
+}
+dt {
+}
+abbr {
+}
+acronym {
+}
+pre, code, tt {
+}
+p code {
+}
+samp {
+}
+kbd {
+}
+var {
+}
+/**********************************************************
+ *                 Global Link Styles
+ **********************************************************/
+a {
+	color:#270F5C;
+	font-weight:bold;
+	text-decoration:none;
+}
+a:link {
+}
+a:visited {
+}
+a:hover {
+	color:#6792BF;
+	text-decoration:underline;
+}
+a:active {
+	color:#680D2A;
+}
+a.active {
+	color:#680D2A;
+}
+/* Set global a:active and a:focus styles. */
+a:active, a:focus {
+}
+li a {
+	color:#270F5C;
+	font-weight:bold;
+	text-decoration:none;
+}
+li a:link {
+}
+li a:visited {
+}
+li a:hover {
+	color:#6792BF;
+	text-decoration:underline;
+}
+li a:active {
+	color:#680D2A;
+}
+li a.active {
+	color:#680D2A;
+}
+/**********************************************************
+ *                    Body Classes
+ **********************************************************/
+ /* NOTE: these are not active by default; you need to 
+    enable them in the Advanced theme settings. */
+
+/* Front or not front. */
+.front {
+}
+.not-front {
+}
+/* Is the user logged in. */
+.logged-in {
+}
+.not-logged-in {
+}
+/* Content type body classes. */
+.article-type-book {
+}
+.article-type-blog {
+}
+.article-type-forum {
+}
+.article-type-page {
+}
+.article-type-poll {
+}
+.article-type-story {
+}
+/**********************************************************
+ *                  The wrapper divs
+ *    Be careful how you modify these, see layout.css
+ **********************************************************/
+#header-container {position: relative;}
+#container {
+}
+/* Column wrappers */
+#columns {
+}
+.columns-inner {
+}
+/* Content wrappers */
+#content-column {
+}
+.content-inner {
+}
+/* Main content wrappers*/
+#main-content {
+}
+#content {
+}
+/**********************************************************
+ *                       Regions
+ **********************************************************/
+/*  is a full width region at the very top of the page. */
+#leaderboard {
+	margin-top:5px;
+}
+/* Header region is embedded in the header, floated between the logo/site_name
+   and the search box. */
+#header-region {
+	position: absolute;
+	width: 80em;
+}
+/* Menu Bar sits below the header and is ideal for dynamic menus 
+   such as http://drupal.org/project/superfish. */
+#menu-bar {
+}
+/* Secondary content is a full width region between the header and the
+   main columns. */
+#secondary-content {
+}
+/* Tertiary content is a full width region above the footer, below the
+   main content. */
+#tertiary-content {
+}
+/* Content top and bottom are above and below the main content, within the main 
+   content column. Content aside floats to the right within the main central
+   column, but below content top. */
+#content-top {
+}
+#content-aside {
+}
+#content-bottom {
+}
+/* Article aside appears only in articles (nodes). By default its placed at
+   the bottom of the node.tpl.php template. */
+#article-aside {
+}
+#main-content-header, #content {
+	padding:10px 10px 0px 10px;
+}
+/**********************************************************
+ *                      Sidebars
+ **********************************************************/
+/* Target both sidebars with this low specifity selector. */
+.sidebar {
+}
+/* Target a specific sidebar. */
+#sidebar-first {
+}
+#sidebar-last {
+}
+/**********************************************************
+ *                   Skip navigation
+ **********************************************************/
+/**
+ * DO NOT USE display:none as this hides it from screen readers!
+ */
+#skip-nav {
+}
+/* Override default pseudo class styles */
+#skip-nav a:link {
+}
+#skip-nav a:visited {
+}
+#skip-nav a:hover {
+}
+#skip-nav a:focus {
+}
+#skip-nav a:active {
+}
+/**********************************************************
+ *                 Header Elements
+ **********************************************************/
+/* #header wraps #branding, #search-box-top and #header-blocks. */
+#header {
+	margin-top: 6px;
+}
+/* #branding wraps #logo, #site-name and #site-slogan. */
+#branding {
+	padding:15px 4px 1px;
+	position: relative;
+    top: 1px;
+	float:none;
+}
+/* Logo and Site Name wrapper. */
+.logo-site-name {
+}
+/* Logo and Site Name wrapper h1 - normally applies only the homepage. */
+h1.logo-site-name {
+}
+/* Logo and Site Name wrapper DIV - normally applies to all internal pages,
+   or where no title is set. */
+div.logo-site-name {
+}
+/* DIV/strong combo when when title is set. */
+div.logo-site-name strong {
+}
+/* By default the span is set to display:block, you can display:inline
+   or float the elements to get them all on one line. */
+.logo-site-name span {
+}
+/* Logo and Site Name SPAN wrappers. */
+span#logo {
+}
+span#site-name {
+	display:block;
+	height:0;
+	overflow:hidden;
+}
+/* Override default pseudo class styles. */
+#site-name a:link {
+}
+#site-name a:visited {
+}
+#site-name a:hover {
+}
+#site-name a:focus {
+}
+#site-name a:active {
+}
+/* Site slogan. */
+#site-slogan {
+	color: #270F5C;
+	font-size: 1em;
+	font-weight: bold;
+	left: 271px;
+	position: absolute;
+	top: 4px;
+	font-family:Verdana, Geneva, sans-serif;
+}
+#leaderboard .leaderboard-banner-left {
+	height: 60px;
+	left: 8px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	width: 468px;
+}
+.leaderboard-banner-right {
+	height: 60px;
+	left: 484px;
+	overflow: hidden;
+	padding: 0px;
+	position: absolute;
+	width: 468px;
+}
+#leaderboard {
+	height:65px;
+}
+.newsletter-link {
+	position:absolute;
+	right: 0;
+	top: 5px;
+}
+/**********************************************************
+ *                 Header Region Elements
+ **********************************************************/
+#header-region .block {
+	padding:0;
+}
+#header-region .menu {
+	position: absolute;
+	right: 18.4em;
+	top: 2.7em;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+#header-region .menu {
+	right: 17.2em;
+}
+}
+#header-region .menu li {
+	float:right;
+	list-style:none outside none;
+	margin:0;
+	padding:0;
+}
+#header-region .menu li a {
+	background:none repeat scroll 0 0 #270F5C;
+	color:transparent;
+	padding:0.44em 1em;/*color:#FFFFFF;*/
+}
+#header-region .menu li a:link {
+}
+#header-region .menu li a:visited {
+}
+#header-region .menu li a:hover {
+	background:none repeat scroll 0 0 #FFF;
+	text-decoration:underline;/*color:#6792BF;*/
+}
+#header-region .menu li a:focus {
+}
+#header-region .menu li a:active {
+}
+/**********************************************************
+ *                 Members menu & Login menu
+ **********************************************************/
+ 
+#user-login-form {
+	text-align: center;
+	position: absolute;
+	right: 15px;
+	top: -30px;
+	z-index: 1;
+}
+div.toboggan-login-link-container a {
+	text-decoration: none;
+	color: white;
+	font-family: verdana;
+}
+div.user-login-block {
+	text-align: center;
+	background-color: #270F5C;
+	margin-top: 0px;
+	color: white;
+	padding: 14px;
+	right: -15px;
+	position: absolute;
+	width: 24em;
+}
+div.user-login-block a {
+	color: #A9CBE6;
+}
+div.user-login-block a:hover {
+	color: #FFFFFF;
+}
+#header-region li.expanded ul {
+	display:none;
+	visibility:hidden;
+}
+#header-region .menu li a {
+	height:2.55em;
+	display:block;
+}
+#header-region .menu li a.logout {
+	background:url("../../images/search-bar-sprite.png") repeat scroll -258px -1px transparent;
+	padding:0 1.8em;
+}
+#header-region .menu li a.addcontent {
+	background:url("../../images/search-bar-sprite.png") repeat scroll 718px -1px transparent;
+	padding:0 2em;
+}
+#header-region .menu li a.myaccount {
+	background:url("../../images/search-bar-sprite.png") repeat scroll -126px -1px transparent;
+	padding:0 1.9em;
+}
+#header-region .menu li a.login {
+	background:url("../../images/search-bar-sprite.png") repeat scroll -380px -1px transparent;
+	padding:0 1.8em;
+}
+#header-region .menu li a.joinin {
+	background:url("../../images/search-bar-sprite.png") repeat scroll -502px -1px transparent;
+	padding:0 1.8em;
+}
+#header-region .menu li a.logout:hover {
+	background:url("../../images/search-bar-sprite.png") repeat scroll -258px -34px transparent;
+	text-decoration:underline;
+}
+#header-region .menu li a.addcontent:hover {
+	background:url("../../images/search-bar-sprite.png") repeat scroll 718px -34px transparent;
+	text-decoration:underline;
+}
+#header-region .menu li a.myaccount:hover {
+	background:url("../../images/search-bar-sprite.png") repeat scroll -126px -34px transparent;
+	text-decoration:underline;
+}
+#header-region .menu li a.login:hover {
+	background:url("../../images/search-bar-sprite.png") repeat scroll -380px -34px transparent;
+	text-decoration:underline;
+}
+#header-region .menu li a.joinin:hover {
+	background:url("../../images/search-bar-sprite.png") repeat scroll -502px -34px transparent;
+	text-decoration:underline;
+}
+#header-region .menu li a.logout:active {
+	background:url("../../images/search-bar-sprite.png") repeat scroll -258px 31px transparent;
+}
+#header-region .menu li a.addcontent:active {
+	background:url("../../images/search-bar-sprite.png") repeat scroll 718px 31px transparent;
+}
+#header-region .menu li a.myaccount:active {
+	background:url("../../images/search-bar-sprite.png") repeat scroll -126px 31px transparent;
+}
+#header-region .menu li a.login:active {
+	background:url("../../images/search-bar-sprite.png") repeat scroll -380px 31px transparent;
+}
+#header-region .menu li a.joinin:active {
+	background:url("../../images/search-bar-sprite.png") repeat scroll -502px 31px transparent;
+}
+/**********************************************************
+ *    Search box, Advanced search form, Search results
+ *          For the search block see blocks.css
+ **********************************************************/
+/**
+ * Search box
+ */
+/* Float the serch box right. */
+#search-box {
+	padding: 0;
+	position: absolute;
+	right: 0;
+	top: -1px;
+}
+/* Reset form element margins. */
+#search-theme-form {
+	float:none;
+	margin: 0;
+}
+/* Wrapper DIVs */
+#search-theme-form > div {
+}
+#search-theme-form #search {
+}
+#edit-search-theme-form-1-wrapper {
+}
+#search-theme-form label {
+}
+#search-theme-form input {
+	margin:0 0.3em;
+}
+#search {
+	height:2.55em;
+}
+#search-theme-form .edit-submit input, #search-theme-form .edit-submit-1 input, #search-theme-form .edit-submit-2 input {
+	color:#270F5C;
+	cursor:pointer;
+	font-weight:bold;
+	margin:0;
+}
+#search-theme-form .edit-submit input:hover, #search-theme-form .edit-submit-1 input:hover, #search-theme-form .edit-submit-2 input:hover {
+}
+#search-theme-form .edit-submit input:active {
+}
+#edit-search-theme-form-1-wrapper {
+	margin-right:-0.208em;
+}
+.form-text:focus, .form-checkbox:focus, .form-radio:focus, .form-select:focus {
+	background: none repeat scroll 0 0 #CDE2F7;
+	border:1px solid #6792BF;
+}
+#search-theme-form .form-text {
+	border: 1px solid #270F5C;
+}
+#search-theme-form .form-submit {
+}
+/**
+ * Advanced search form
+ */
+/* Advanced search-form id. */
+#search-form {
+}
+/* Use the child selector because the inner div has no class. */
+#search-form > div {
+}
+#search-form .container-inline {
+}
+#search-form #edit-keys-wrapper {
+}
+#search-form label {
+}
+#search-form input {
+}
+#search-form .form-item {
+}
+#search-form .form-submit {
+}
+/* Textfield styles. */
+#search-form #edit-keys-wrapper input {
+}
+#search-form #edit-keys-wrapper input:hover, #search-form #edit-keys-wrapper input:focus {
+}
+/* Advanced search fieldset. */
+#search-form fieldset.search-advanced {
+}
+/**
+ * Search results
+ */
+/* Box styles for the results page. */
+.section-search .box {
+}
+.section-search .box-inner {
+}
+.section-search .box-title {
+}
+/* Style the no results messages. */
+.section-search .box ul {
+}
+.section-search .box ul li {
+}
+/* Search results document list. */
+dl.search-results {
+}
+dl.search-results dt {
+}
+dl.search-results dd {
+}
+dl.search-results dd p {
+}
+dl.search-results dd .search-snippet {
+}
+dl.search-results dd .search-info {
+}
+span.search-info-type {
+}
+span.search-info-user {
+}
+span.search-info-date {
+}
+span.search-info-comment {
+}
+span.search-info-upload {
+}
+/**********************************************************
+ *               Primary & Secondary Links
+ **********************************************************/
+.crm-menu {
+	margin:0;
+}
+.crm-menu li {
+	list-style:none;
+	display:inline;
+}
+/* Primary-links div wrapper */
+#primary {
+	height: 2.05em;
+	padding: 0;
+	position: absolute;
+	left: 270px;
+	top: 25px;
+	width: 690px;
+	background-color:#270F5C;
+}
+/* Class on the ul */
+#primary ul {
+	list-style:none outside none;
+	margin:0;
+	padding:0 0 0 6px;
+	text-decoration:none;
+}
+/* Modify the margin to set tab spacings. */
+#primary ul li {
+	color:#FFFFFF;
+	border: medium none;
+	background-color:#270F5C;
+}
+#primary ul li.menuparent a {
+	padding: 0.35em 1.6em;
+}
+#primary ul li a {
+	color: white;
+	display: block;
+	font-size: 0.95em;
+	font-weight: bold;
+	text-decoration: none;
+	font-family: Verdana, Geneva, "DejaVu Sans", sans-serif;
+	padding: 0.35em 1.28em;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+#primary ul li a {
+	padding: 0.4em 1.28em;
+}
+}
+/* Set pseudo class styles. */
+#primary ul li a:link {
+}
+#primary ul li a:visited {
+}
+#primary ul li a:hover {
+	background:none repeat scroll 0 0 #6792BF;
+	text-decoration:underline;
+}
+#primary ul li a:focus {
+}
+#primary ul li a:active {
+	background:none repeat scroll 0 0 #680D2A;
+}
+/* Primary first and last classes. */
+#primary ul li.first {
+	margin-left:7px;
+}
+#primary ul li.last {
+}
+/* Active trail classes. */
+#primary ul li a.active {
+	background:none repeat scroll 0 0 #601729;
+	color:#FFFFFF;
+}
+#primary ul li.active-trail {
+}
+#primary ul li.active-trail a {
+}
+#primary ul.nice-menu li.menuparent ul {
+	z-index: 1;
+	left: -5em;
+	top: 2.1em;
+	border:none;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+#primary ul.nice-menu li.menuparent ul {
+	left: -4.45em;
+	top: 2em;
+}
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+#primary ul li.menuparent a {
+padding: 0.4em 1.6em;
+}
+}
+#primary ul.nice-menu li.menuparent ul li {
+	margin-left: 0;
+	width: 14.5em;
+}
+/* Secondary-links div wrapper */
+.section-links-frontpage {
+	left: -48px;
+	margin-top: 54px;
+	position:absolute;
+}
+.section-links-frontpage .menu {
+	padding:0;
+	margin:0;
+}
+/* Class on the ul */
+.section-links-frontpage .menu li {
+	list-style:none outside none;
+	margin:0;
+	padding:0;
+	color:#FFFFFF;
+	font-size:12px;
+}
+.section-links-frontpage .menu li a {
+	color:#FFFFFF;
+	display:block;
+	font-family:Verdana, Geneva, "DejaVu Sans", sans-serif;
+	font-size:0.95em;
+	font-weight:bold;
+	padding:99px 0;
+	text-decoration:none;
+	color:transparent;
+	width:34px;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+.section-links-frontpage .menu li a {
+padding:101px 0;
+}
+}
+.section-links-frontpage .menu li a.investor-services {
+	background:url("../../images/subsite-rollovers.png") no-repeat scroll 0 0 transparent;
+	margin:0 0 2px 0;
+}
+.section-links-frontpage .menu li a.securities-lending {
+	background:url("../../images/subsite-rollovers.png") no-repeat scroll 0 -250px transparent;
+}
+/* Set pseudo class styles. */
+.section-links-frontpage .menu li a:link {
+}
+.section-links-frontpage .menu li a:visited {
+}
+.section-links-frontpage .menu li a.investor-services:hover {
+	background:url("../../images/subsite-rollovers.png") no-repeat scroll -33px 0px transparent;
+	text-decoration:underline;
+}
+.section-links-frontpage .menu li a.securities-lending:hover {
+	background:url("../../images/subsite-rollovers.png") no-repeat scroll -33px -250px transparent;
+	text-decoration:underline;
+}
+.section-links-frontpage .menu li a:focus {
+}
+.section-links-frontpage .menu li a.investor-services:active {
+	background:url("../../images/subsite-rollovers.png") no-repeat scroll -67px 0 transparent;
+}
+.section-links-frontpage .menu li a.securities-lending:active {
+	background:url("../../images/subsite-rollovers.png") no-repeat scroll -67px -250px transparent;
+}
+.section-links-frontpage .menu li a.investor-services.active {
+	background:url("../../images/subsite-rollovers.png") no-repeat scroll -67px 0 transparent;
+}
+.section-links-frontpage .menu li a.securities-lending.active {
+	background:url("../../images/subsite-rollovers.png") no-repeat scroll -67px -250px transparent;
+}
+/* Secondary first and last classes. */
+.section-links-frontpage .menu li.first {
+}
+.section-links-frontpage .menu li.last {
+}
+/* Active trail classes. */
+.section-links-frontpage .menu li.active {
+}
+.section-links-frontpage .menu li.active-trail {
+}
+.section-links-frontpage .menu li.active-trail a {
+}
+.section-links-block {
+	margin-top:7px;
+}
+#menu-bar {
+	height: 35px;
+    overflow: hidden;
+}
+/* Class on the ul */
+#menu-bar .block-inner {
+	padding:0;
+}
+#menu-bar .block {
+	padding:0;
+}
+#menu-bar .block-inner ul {
+	display: block;
+	background-color:#270F5C;
+	border-bottom:1px solid #FFFFFF;
+	list-style:none outside none;
+	margin:0;
+	padding:0 0 0 36px;
+	text-decoration:none;
+	height: 3em;
+}
+/* Modify the margin to set tab spacings. */
+#menu-bar .block-inner li {
+	display: inline;
+	float: left;
+	list-style: none outside none;
+	margin: 0;
+	padding: 0;
+}
+#menu-bar .block-inner li a {
+	color: white;
+	display: block;
+	font-size: 0.95em;
+	font-weight: bold;
+	text-decoration: none;
+	font-family: Verdana, Geneva, "DejaVu Sans", sans-serif;
+	padding: 0.82em 0.6em;
+}
+/* Set pseudo class styles. */
+#menu-bar .block-inner li a:link {
+}
+#menu-bar .block-inner li a:visited {
+}
+#menu-bar .block-inner li a:hover {
+	background:none repeat scroll 0 0 #6792BF;
+	text-decoration:underline;
+}
+#menu-bar .block-inner li a:focus {
+}
+#menu-bar .block-inner li a:active {
+	background:none repeat scroll 0 0 #680D2A;
+}
+/* Primary first and last classes. */
+#menu-bar .block-inner li.first {
+	margin-left:7px;
+}
+#menu-bar .block-inner li.last {
+}
+/* Active trail classes. */
+#menu-bar .block-inner li.active {
+	background:none repeat scroll 0 0 #FFFFFF;
+	color:#270F5C;
+}
+#menu-bar .block-inner li.active-trail {
+}
+#primary-menu {
+}
+/* Class on the ul */
+#primary-menu .pane-content ul {
+	background-color:#270F5C;
+	margin:0;
+	padding:0;
+	text-decoration:none;
+}
+/* Modify the margin to set tab spacings. */
+#primary-menu .pane-content ul li {
+	color:#FFFFFF;
+	list-style: none outside none;
+	float:left;
+	padding: 0;
+	margin: 0;
+	border: medium none;
+
+}
+#primary-menu .pane-content ul li a {
+	background-color:#270F5C;
+	color: white;
+	display: block;
+	font-size: 0.95em;
+	font-weight: bold;
+	text-decoration: none;
+	font-family: Verdana, Geneva, "DejaVu Sans", sans-serif;
+	padding: 0.45em 2.05em;
+}
+/* Set pseudo class styles. */
+#primary-menu .pane-content ul li a:link {
+}
+#primary-menu .pane-content ul li a:visited {
+}
+#primary-menu .pane-content ul li a:hover {
+	background:none repeat scroll 0 0 #6792BF;
+	text-decoration:underline;
+}
+#primary-menu .pane-content ul li a:focus {
+}
+#primary-menu .pane-content ul li a:active {
+	background:none repeat scroll 0 0 #680D2A;
+}
+/* Primary first and last classes. */
+#primary-menu .pane-content ul li.first {
+	margin-left:7px;
+}
+#primary-menu .pane-content ul li.last {
+}
+/* Active trail classes. */
+#primary-menu .pane-content ul li a.active {
+	background:none repeat scroll 0 0 #601729;
+	color:#FFF;
+}
+#primary-menu .pane-content ul li.active-trail {
+}
+#primary-menu .pane-content ul li.active-trail a {
+}
+#primary-menu .pane-content ul.nice-menu li.menuparent ul {
+	z-index: 1;
+	top: 2.25em;
+	border:none;
+}
+#primary-menu .pane-content ul.nice-menu li.menuparent ul li {
+	margin-left: 0;
+	width: 14.5em;
+}
+/**********************************************************
+ *                      Breadcrumb
+ **********************************************************/
+#breadcrumb {
+}
+#breadcrumb a {
+}
+#breadcrumb a:link {
+}
+#breadcrumb a:visited {
+}
+#breadcrumb a:hover {
+}
+#breadcrumb a:focus {
+}
+#breadcrumb a:active {
+}
+/**********************************************************
+ *                       Mission
+ **********************************************************/
+#mission {
+}
+/**********************************************************
+ *                    H1 Page Title
+ **********************************************************/
+h1#page-title {
+}
+/**********************************************************
+ *                     Pager 
+ **********************************************************/
+/* The first 2 classes provide the base pager styles. */
+ul.pager {
+}
+ul.pager li {
+}
+/* Theme the various states of pager links. */
+ul.pager li a:link {
+}
+ul.pager li a:visited {
+}
+ul.pager li a:hover {
+}
+/* Note: .pager-current is for the current page. */
+ul.pager li.pager-item {
+	font-size:1.2em;
+}
+ul.pager li.first {
+}
+ul.pager li.last {
+}
+ul.pager li.pager-current {
+	font-size:1.24em;
+}
+ul.pager li.pager-first {
+	font-family:"Times New Roman", Times, serif;
+	font-size:1.4em;
+}
+ul.pager li.pager-previous {
+	font-family:"Times New Roman", Times, serif;
+	font-size:1.4em;
+}
+ul.pager li.pager-next {
+	font-family:"Times New Roman", Times, serif;
+	font-size:1.4em;
+}
+ul.pager li.pager-last {
+	font-family:"Times New Roman", Times, serif;
+	font-size:1.4em;
+}
+/**********************************************************
+ *               Footer, Footer Message
+ **********************************************************/
+#footer {
+}
+#footer .menu li {
+	display:inline;
+	list-style:none outside none;
+}
+#footer .menu li a {
+	border-left:thin solid;
+	padding-left:1.2em;
+	padding-right:0;
+}
+#footer .menu li a.first {
+	border-left: none; /*use this for separation line*/
+}
+#footer .menu {
+	padding:20px 0 0;
+	text-align:center;
+}
+#footer-region {
+}
+#footer-region a {
+}
+#footer-region .block {
+	margin:0;
+}
+#footer-message {
+	text-align:center;
+}
+#footer-message a {
+}
+/**********************************************************
+ *                 RSS Feed Icon
+ **********************************************************/
+.feed-icon {
+	bottom:0.75em;
+	position:relative;
+	right:0;
+}
+#feed-icons .feed-icon {
+}
+#feed-icons .feed-icon img {
+}
+#feed-icons a.feed-icon {
+}
+/**********************************************************
+ *                  Generic Content Classes
+ **********************************************************/
+.title {
+}
+.submitted {
+}
+.submitted em {
+}
+.submitted a {
+}
+.content {
+}
+ul.links {
+}
+ul.links li {
+}
+ul.links li a {
+}
+/**********************************************************
+ *                      Articles (nodes)
+ **********************************************************/
+.article, .comment {
+	margin:0 0 0 0;
+}
+/* Teaser title (H2). */
+.article-title {
+}
+.pane-field-body-exclusive, .pane-field-body-standard {
+	display:inline;
+}
+.pane-field-thumbnail {
+	float:right;
+	margin:14px;
+}
+.article-title a:link, .article-title a:visited {
+}
+.article-title a:hover, .article-title a:focus, .article-title a:active {
+}
+/* User Picture. */
+.article .user-picture {
+}
+.article .user-picture img {
+}
+.pane-field-standfirst {
+	color:#6F6F6F;
+	font-weight:bold;
+	font-size:1.2em;
+	padding-bottom:10px;
+}
+/* Submitted */
+.article .submitted {
+}
+.submitted {
+	font-size: 1.1em;
+	margin: -0.6em 0px 0.75em;
+}
+.article .submitted em {
+}
+.article .submitted a {
+}
+.article .submitted a:hover {
+}
+.article .submitted .author {
+}
+.article .submitted .time {
+}
+/* Common links classes. */
+.article ul.links {
+}
+.article ul.links li {
+}
+.article ul.links li a {
+}
+/* Taxonomy terms. */
+/* Term list */
+ul.taxonomy {
+}
+ul.taxonomy li {
+}
+ul.taxonomy li a {
+}
+/* With vocab headers */
+ul.taxonomy li.vocab {
+}
+.vocab-name {
+}
+ul.vocab-list {
+}
+ul.vocab-list li {
+}
+ul.vocab-list li a {
+}
+/* Style module links. */
+ul.links li.node_read_more a {
+}
+ul.links li.comment_add a {
+}
+ul.links li.comment_comments a {
+}
+ul.links li.comment_new_comments a {
+}
+ul.links li.blog_usernames_blog a {
+}
+ul.links li.print_html a {
+}
+ul.links li.print_email a {
+}
+ul.links li.print_pdf a {
+}
+/* UL link first and last classes. */
+.article ul.links li.first {
+}
+.article ul.links li.last {
+}
+/* Workflow states. */
+.article-add {
+}
+.article-edit {
+}
+.article-delete {
+}
+.article-preview {
+}
+.article-sticky {
+}
+.article-promoted {
+}
+/* Status. */
+.article-unpublished {
+}
+/* Theme the teaser seperatly. */
+.article-teaser {
+}
+.article-tags {
+	margin-bottom:16px;
+}
+.article-useful-links {
+	margin-bottom:16px;
+}
+.article-comment-form {
+}
+/**********************************************************
+ *                     Content types
+ *              Style article types by type.
+ **********************************************************/
+.book-article {
+}
+.blog-article {
+}
+.forum-article {
+}
+.page-article {
+}
+.poll-article {
+}
+.story-article {
+}
+/**
+  * Custom Content Types
+  * Replace CONTENT_TYPE with the content type
+  * machine-readable name.
+  */
+.CONTENT_TYPE-article {
+}
+/**********************************************************
+ *                    CCK Fields
+ **********************************************************/
+/* Wrapper for any CCK field. */
+.field {
+}
+/* Use "datetime" when creating new CCK date fields. */
+.field-type-datetime {
+}
+/* Filefield field. */
+.field-type-filefield {
+}
+/* Node reference field. */
+.field-type-nodereference {
+}
+/* User reference field. */
+.field-type-userreference {
+}
+/* Number fields. */
+.field-type-number-decimal {
+}
+.field-type-number-float {
+}
+.field-type-number-integer {
+}
+/* Text field. */
+.field-type-text {
+}
+/**
+ * Specific field names.
+ */
+/* Underscores in field name are replaced with dashes. */
+.field-field-FIELDNAME {
+}
+.civicrm_cck {
+	display:inline;
+}
+/**********************************************************
+ *                    Views Fields
+ **********************************************************/
+
+.view-header a {
+	background:none repeat scroll 0 0 #270F5C;
+	color:#FFFFFF;
+	display:block;
+	font-size:0.9em;
+	padding-left:0.7em;
+	-webkit-border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-topright: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+.view-header a:hover {
+	background:none repeat scroll 0 0 #6792BF;
+	text-decoration:underline;
+}
+.view-header a:active {
+	background:none repeat scroll 0 0 #680D2A;
+}
+.content-type, .type {
+	color:#6792BF;
+	font-size:1.12em;
+}
+.post-date, .created {
+	color:#7F7F7F;
+	font-size:1.12em;
+}
+.article-title {
+	font-size:1.08em;
+	line-height:1.2;
+	margin:0.5em 0 0.3em 0;
+}
+.main-article-list-frontpage {
+	margin-bottom:20px;
+}
+.main-article-list-frontpage div.views-fluid-grid h3 {
+	text-align:left;
+}
+.main-article-list-frontpage ul.views-fluid-grid-items-h-margin-8px li.views-fluid-grid-item {
+	margin-left:0;
+	margin-right:0;
+}
+.main-article-list-frontpage ul.views-fluid-grid-items-v-margin-8px li.views-fluid-grid-item {
+	margin-bottom:0;
+	margin-top:0;
+}
+.main-article-list-frontpage li.views-fluid-grid-item {
+	background-color:#FFF;
+	border:none;
+	padding:1em 1.8em 1em 0;
+}
+
+.main-article-list-frontpage .views-exposed-form .views-exposed-widget {float:none;}
+
+.main-article-list-frontpage .form-item {float:left;}
+.main-article-list-frontpage .views-exposed-form .form-item, .views-exposed-form .form-submit {
+	background-color: #270F5C;
+    color: #FFFFFF;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding: 3px 6.4px;
+}
+.main-article-list-frontpage .form-checkboxes #edit-term-node-tid-depth-872-wrapper {
+	background: url("../../images/subsite-checkboxes.png") no-repeat scroll 0 -32px transparent;
+    height: 23px;
+    overflow: hidden;
+    padding: 4px 11px;
+    width: 235px;
+	margin-right:0px;
+}
+.main-article-list-frontpage .form-checkboxes #edit-term-node-tid-depth-872-wrapper .checkbox-label {
+	padding-left: 10000px;
+}
+.main-article-list-frontpage .form-checkboxes #edit-term-node-tid-depth-873-wrapper {
+	background: url("../../images/subsite-checkboxes.png") no-repeat scroll 0 0 transparent;
+    height: 23px;
+    overflow: hidden;
+    padding: 4px 11px;
+    width: 235px;
+	margin-right:0px;
+	margin-bottom:4px;
+}
+.main-article-list-frontpage .form-checkboxes #edit-term-node-tid-depth-873-wrapper .checkbox-label {
+		padding-left: 10000px;
+	}
+.main-article-list-frontpage .exposed_filter_label {clear:left;}
+.main-article-list-frontpage .views-exposed-widgets {
+    margin-bottom: 0;
+}
+.main-article-list-frontpage .views-exposed-form .views-exposed-widget {
+    padding: 0;
+}
+.main-article-list-frontpage .form-checkboxes {
+    margin: 0;
+}
+.article-title a {
+	font-size:1.2em;
+	font-weight:bold;
+}
+.article-title a:link {
+}
+.article-title a:visited {
+}
+.article-title a:hover {
+	text-decoration:underline;
+}
+.article-title a:active {
+}
+.article-title a.active {
+}
+.article-title a:focus {
+}
+.primary-article-frontpage .article-title, .primary-article-frontpage .title {
+	line-height:1.2;
+	font-size:1.5em;
+	margin:0;
+}
+.primary-article-frontpage .article-title, .primary-article-frontpage .title a {
+	color:#2A2463;
+	font-weight:bold;
+}
+.primary-article-frontpage .article-title, .primary-article-frontpage .title a:link {
+	color:#2A2463;
+}
+.primary-article-frontpage .article-title, .primary-article-frontpage .title a:visited {
+}
+.primary-article-frontpage .article-title, .primary-article-frontpage .title a:hover {
+	color:#6792BF;
+	text-decoration:underline;
+}
+.primary-article-frontpage .article-title, .primary-article-frontpage .title a:active {
+	color:#680D2A;
+}
+.primary-article-frontpage .article-title, .primary-article-frontpage .title a.active {
+	color:#680D2A;
+}
+.primary-article-frontpage .article-title, .primary-article-frontpage .title a:focus {
+}
+.primary-article-frontpage .article-standfirst, .primary-article-frontpage .field-standfirst-value {
+	font-size:1.2em;
+	margin:0 0 0.4em;
+	color:#6F6F6F;
+	font-size:1.05em;
+	font-weight:bold;
+	line-height:1.3;
+	margin:0 0 0.7em 0;
+}
+.article-standfirst {
+	color:#6F6F6F;
+	font-size:1.05em;
+	font-weight:bold;
+	line-height:1.3;
+	margin:0 0 0.7em 0;
+}
+/* Add field-item-(X) class to select specific row */
+.article-bulletpoints {
+	color:#6F6F6F;
+}
+/*.article-bulletpoints {
+	background:url("/gsl/sites/all/themes/adaptive_gsl/images/bulletpoint.png") no-repeat scroll 0 4px transparent;
+	padding-left:12px;
+}*/
+.article-bulletpoints-multivalue .multivalue-field-item, .article-bulletpoints {
+	background:url("../../images/bulletpoint-circle.png") no-repeat scroll 0 4px transparent;
+	margin-left:6px;
+	padding-left:12px;
+}
+.article-links-multivalue .multivalue-field-item, .article-links {
+	background:url("../../images/bulletpoint-chevron.png") no-repeat scroll 0 4px transparent;
+	margin-left:6px;
+	padding-left:12px;
+}
+.article-external-links-multivalue .multivalue-field-item, .article-external-links {
+	background:url("../../images/bulletpoint-double-chevron.png") no-repeat scroll 0 4px transparent;
+	padding-left:18px;
+}
+.primary-article-frontpage .article-bulletpoints-multivalue .multivalue-field-item, .primary-article-frontpage .article-bulletpoints {
+	background:url("../../images/bulletpoint-circle.png") no-repeat scroll 186px 4px transparent;
+	padding-left:1.1em;
+}
+.primary-article-frontpage .article-links-multivalue .multivalue-field-item, .primary-article-frontpage .article-links {
+	background:url("../../images/bulletpoint-chevron.png") no-repeat scroll 186px 4px transparent;
+	padding-left:1.1em;
+}
+.primary-article-frontpage .article-external-links-multivalue .multivalue-field-item, .primary-article-frontpage .article-external-links {
+	background:url("../../images/bulletpoint-double-chevron.png") no-repeat scroll 186px 4px transparent;
+	padding-left:1.1em;
+}
+.primary-article-frontpage .field-bullet-points-value-multivalue .multivalue-field-item, .primary-article-frontpage .field-bullet-points-value {
+	background:url("../../images/bulletpoint-circle.png") no-repeat scroll 7px 4px transparent;
+	padding-left:1.6em;
+}
+.primary-article-frontpage .field-article-reference-nid-multivalue .multivalue-field-item, .primary-article-frontpage .field-article-reference-nid {
+	background:url("../../images/bulletpoint-chevron.png") no-repeat scroll 6px 4px transparent;
+	padding-left:1.6em;
+}
+.primary-article-frontpage .field-external-link-url-multivalue .multivalue-field-item, .primary-article-frontpage .field-external-link-url {
+	background:url("../../images/bulletpoint-double-chevron.png") no-repeat scroll 0px 4px transparent;
+	padding-left:1.6em;
+}
+.article-thumbnails {
+	float:left;
+	margin-right:2em;
+}
+.pane-nodequeue-1-panel-pane-2 td {
+	vertical-align:top;
+}
+.primary-bulletpoints {
+}
+.views_slideshow_singleframe_slide {
+}
+.accordion-item-even .accordion-header {
+	background-color:#EBEBEB;
+}
+.accordion-item-odd .accordion-header {
+	background-color:#F5F5F5;
+}
+.item-list h3 {
+}
+ul.item-list {
+	margin:0;
+	padding:0;
+}
+ul.item-list li {
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+.views-list-item a {
+	background-color:#F5F5F5;
+	display:block;
+	border-bottom:1px solid #FFFFFF;
+	border-top:1px solid #FFFFFF;
+	padding:0.2em 0 0.2em 0.5em;
+}
+.views-list-item a:hover {
+	text-decoration:underline;
+	background-color:#EFEFEF;
+}
+.calendar-calendar div.calendar {
+	margin:0 0.25em 0.6em 0;
+}
+.calendar-calendar td .inner div.calendar div.view-data-node-data-field-event-logo-field-event-logo-fid a img {
+	padding-top:4px;
+}
+.calendar-calendar td .inner div.calendar div.view-data-node-title a {
+	font-size:1.1em;
+	font-weight:bold;
+}
+.calendar-calendar td .inner div.calendar div a {
+	color:#270F5C;
+	background:none repeat scroll 0 0 transparent;
+}
+.calendar-calendar td .inner div.calendar div {
+	color:#000;
+	background:none repeat scroll 0 0 transparent;
+}
+.calendar-calendar td .inner div.calendar div a:hover {
+	color:#6792BF;
+}
+.calendar-calendar td .inner div.calendar div a:active {
+	color:#680D2A;
+}
+.calendar-calendar td .inner div.calendar div a.active {
+	color:#680D2A;
+}
+.fundamentals_event {
+	background:url("/sites/all/themes/adaptive_gsl/images/gsl-logo-no-text-trans-bg.png") no-repeat scroll 0 2px transparent;
+	padding-left:17px;
+}
+.fundamentals_event-list-item {
+	border-top:#FFF solid 1px;
+	border-top:#FFF solid 1px;
+}
+.fundamentals_event-list-item a {
+	border:#270F5C solid 1px;
+}
+.fundamentals_event-list-item a:hover {
+	border:#6792BF solid 1px;
+}
+.fundamentals_event-list-item a:active {
+	border:#680D2A solid 1px;
+}
+.fundamentals_event-list-item a.active {
+	border:#680D2A solid 1px;
+}
+.event-listing-event-date {
+	color:#7F7F7F;
+	font-weight:normal;
+	font-size:1.2em;
+}
+.press-release-listing-press-release-date {
+	color:#7F7F7F;
+	font-weight:normal;
+	font-size:1.2em;
+}
+.blog-listing-blog-date {
+	color:#7F7F7F;
+	font-weight:normal;
+	font-size:1.2em;
+}
+.document-listing-document-type {
+	color:#7F7F7F;
+	font-weight:normal;
+	font-size:1.2em;
+}
+.quicktabs_main.quicktabs-style-basic {
+	border:none;
+	padding:0;
+}
+ul.quicktabs_tabs.quicktabs-style-basic li.active a {
+	color:#FFFFFF;
+	border:none;
+}
+ul.quicktabs_tabs.quicktabs-style-basic li.active {
+	background-color:#680D2A;
+	border:none;
+}
+ul.quicktabs_tabs.quicktabs-style-basic {
+	border:medium none;
+	margin:0 0 2px;
+}
+ul.quicktabs_tabs.quicktabs-style-basic li {
+	background:none repeat scroll 0 0 #270F5C;
+	margin:0 4px 0 0;
+	padding:4px 5px;
+	border-width:0;
+	-webkit-border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-topright: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+ul.quicktabs_tabs.quicktabs-style-basic li:hover {
+	border-width:0;
+	background:none repeat scroll 0 0 #6792BF;
+	text-decoration:underline;
+}
+ul.quicktabs_tabs.quicktabs-style-basic li.active:hover {
+	border-width:0;
+	background:none repeat scroll 0 0 #680D2A;
+}
+ul.quicktabs_tabs.quicktabs-style-basic a {
+	color:#FFFFFF;
+}
+ul.quicktabs_tabs.quicktabs-style-basic a:hover {
+	color:#FFFFFF !important;
+	text-decoration:underline;
+}
+ul.quicktabs_tabs.quicktabs-style-basic li.active a:hover {
+	text-decoration:none;
+}
+.more-link {
+}
+.more-link a {
+	-webkit-border-bottom-left-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	-moz-border-radius-bottomright: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	background:none repeat scroll 0 0 #270F5C;
+	height:1.7em;
+	padding-right:0.4em;
+	color:white;
+	display:block;
+}
+.more-link a:hover {
+	background:none repeat scroll 0 0 #6792BF;
+	text-decoration:underline;
+}
+.more-link a:active {
+	background:none repeat scroll 0 0 #680D2A;
+}
+#fintuition-course-listing .view-header a {
+	color:#51579B;
+	text-align:center;
+	background-color:white;
+	padding-top:5px;
+	-webkit-border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-topright: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+#fintuition-course-listing .views-list-item a:hover {
+	background:none repeat scroll 0 0 #EFEFEF;
+	text-decoration:underline;
+}
+#fintuition-course-listing .views-list-item a {
+	background-color:white;
+}
+#fintuition-course-listing .fintuition-listing-fintuition-title {
+	color:#51579B;
+}
+#fintuition-course-listing .fintuition-listing-fintuition-date {
+	color:#D37228;
+}
+.quicktabs_main.quicktabs-style-basic {
+	background-color:#FFF;
+}
+/**********************************************************
+ *                     Comments
+ **********************************************************/
+/* Comment wrapper: wraps all comments and the comment form. */
+ul.links li.comment_add {
+	display:none;
+}
+#comments {
+}
+#comments-title {
+}
+/* Wrapper class for each individual comment. */
+.comment {
+}
+/* Indentation */
+.comment .indented {
+}
+/* Comment Title (H3) */
+.comment-title {
+}
+.comment-title a:link, .comment-title a:visited {
+}
+.comment-title a:hover, .comment-title a:focus, .comment-title a:active {
+}
+/* Comment id (count with pound sign, see line 28 comment.tpl.php) 
+   and comment "new" notification. */
+.comment-id {
+}
+.comment-title .new {
+}
+/* User Picture */
+.comment .user-picture {
+}
+.comment .user-picture img {
+}
+/* Submitted */
+.comment .submitted {
+}
+.comment .submitted em {
+}
+.comment .submitted a {
+}
+.comment .submitted a:hover {
+}
+.comment .submitted .author {
+}
+.comment .submitted .time {
+}
+/* Links */
+.comment ul.links {
+}
+.comment ul.links li {
+}
+.comment ul.links li a {
+}
+/* Core comment link classes. */
+ul.links li.comment_reply a {
+}
+ul.links li.comment_edit a {
+}
+ul.links li.comment_delete a {
+}
+/* UL link first and last classes. */
+.comment ul.links li.first {
+}
+.comment ul.links li.last {
+}
+/* Author */
+.comment-by-anonymous {
+}
+.comment-by-article-author {
+}
+.comment-by-viewer {
+}
+/* New */
+.comment-new {
+}
+/* Zebra */
+.comment.odd {
+}
+.comment.even {
+}
+/* Status */
+.comment-unpublished {
+}
+/* Themes the "Unpublished" text. */
+.comment-unpublished .unpublished {
+}
+/* Comment box wrapper on a seperate page. */
+.section-comment .box {
+}
+.section-comment .box .box-title {
+}
+/* Comment box wrapper below content. */
+#comments .box {
+}
+#comments .box .box-title {
+}
+/* Sytle comments by article type. */
+.book-comments {
+}
+.blog-comments {
+}
+.forum-comments {
+}
+.page-comments {
+}
+.poll-comments {
+}
+.story-comments {
+}
+/**********************************************************
+ *                       Blocks
+ **********************************************************/
+/**
+ * Styles set for .block, .block-inner, block-title and 
+ * .block-content will be inherited by all blocks.
+ */
+.block {
+}
+.block-inner {
+} /* Block inner div */
+.block-title {
+} /* h2 block title */
+.modalframe-blocks-configure-button {
+	position:absolute;
+}
+/**********************************************************
+ *                   Sidebar blocks
+ **********************************************************/
+/**
+ * You can target blocks in one or more regions and 
+ * style them differently. 
+ */
+ 
+/* Low specifity selector to style blocks in all regions. */
+.aside .block {
+}
+.aside .block h2 {
+}
+.aside .block-inner {
+}
+/* Low specifity selector to style blocks in both sidebars. */
+.sidebar .block {
+}
+.sidebar .block h2 {
+}
+.sidebar .block-inner {
+}
+/* High specifity selectors to style blocks in one sidebar - be careful,
+   these are powerful selectors! */
+#sidebar-first .block {
+}
+#sidebar-first .block h2 {
+}
+#sidebar-first .block-inner {
+}
+#sidebar-last .block {
+}
+#sidebar-last .block h2 {
+}
+#sidebar-last .block-inner {
+}
+/**********************************************************
+ *                  Region blocks
+ **********************************************************/
+/* High specifity selectors to style blocks in one region. */
+# .block {
+}
+#header-region .block {
+	margin:0;
+}
+#header-region .block-inner {
+	padding:0;
+}
+#menu-bar {
+}
+.block {
+}
+#secondary-content .block {
+}
+#tertiary-content .block {
+}
+#content-top .block {
+}
+#content .block {
+}
+#content-bottom .block {
+}
+#footer-region .block {
+}
+/**********************************************************
+ *                   Module blocks
+ **********************************************************/
+/**
+ * Module Block ID's 
+ * For contributed module blocks the pattern is the same,
+ * i.e. #block-[module]-[delta]
+ */
+#block-book-0 {
+} /* Book navigation block   */
+#block-blog-0 {
+} /* Recent Blog posts       */
+#block-comment-0 {
+} /* Recent Comments block   */
+#block-forum-0 {
+} /* Active Forum topics     */
+#block-forum-1 {
+} /* New Forum topics        */
+#block-locale-0 {
+} /* Language Switcher block */
+#block-node-0 {
+} /* Syndicate block         */
+#block-poll-0 {
+} /* Most recent poll        */
+#block-profile-0 {
+} /* Author information      */
+#block-search-0 {
+} /* Search form block       */
+#block-statistics-0 {
+} /* Popular content         */
+#block-system-0 {
+} /* Powered by Drupal       */
+#block-user-0 {
+} /* Login block             */
+#block-user-1 {
+} /* Navigation Menu block   */
+#block-user-2 {
+} /* Who's New block         */
+#block-user-3 {
+} /* Who's Online block      */
+/* Primary and Secondary links blocks */
+#block-menu-primary-links {
+}
+#block-menu-secondary-links {
+}
+/* The class selector applies to all blocks of these types. */
+.block-user {
+}
+.block-book {
+}
+.block-aggregator {
+}
+/**********************************************************
+ *                 Search block form
+ **********************************************************/
+#search-block-form {
+}
+/* Wrapper DIVs. */
+#search-block-form > div {
+}
+#search-block-form .container-inline {
+}
+#edit-search-block-form-1-wrapper {
+}
+#search-block-form .form-submit {
+}
+#search-block-form label {
+}
+#search-block-form input {
+}
+#search-block-form .form-text {
+}
+/* Override forms.css focus style */
+#edit-search-block-form-1:hover, #edit-search-block-form-1:focus {
+}
+/**********************************************************
+ *                   Menu blocks
+ **********************************************************/
+/**
+ * Prefix these with the block id to style one menu only.
+ */
+ul.menu, ul.menu ul, ul.menu ul ul, ul.menu ul ul ul {
+}
+/* Menu li styles */
+ul.menu li {
+}
+ul.menu li.collapsed {
+}
+ul.menu li.expanded {
+}
+ul.menu li.leaf {
+}
+ul.menu li a:link, ul.menu li a:visited {
+}
+ul.menu li a:hover, ul.menu li a:focus, ul.menu li a:active {
+}
+ul.menu li.active a {
+}
+ul.menu li.active-trail a {
+}
+ul.menu li.first {
+}
+ul.menu li.last {
+}
+/**********************************************************
+ *                   Block item-list
+ **********************************************************/
+ 
+.panel-pane {
+	clear:both;
+}
+/**********************************************************
+ *                   Block item-list
+ **********************************************************/
+.block .item-list ul {
+}
+.block .item-list ul li {
+}
+/**********************************************************
+ *                  Panels
+ **********************************************************/
+
+.view-content {
+	margin-bottom:10px;
+}
+.directory-slideshow {
+	background-color:white;
+	-webkit-border-bottom-left-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	-moz-border-radius-bottomright: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+.directory-slideshow .view-content {
+/*border-color:#6792BF;
+	border-style:solid;
+	border-width:2px 15px 15px;
+	padding:6px 20px;*/
+}
+.directory-slideshow .views_slideshow_slide img {
+	padding:20px 21px;
+}
+body div.directory-slideshow div.view-content div.views_slideshow_main div.views_slideshow_singleframe_teaser_section {
+/*display:table-cell;
+vertical-align:middle;
+margin:auto;*/
+}
+.pane-blogs {
+	padding-bottom:20px;
+}
+.pane-node-created {
+	margin-bottom: 6px;
+}
+/**********************************************************
+ *                  Gpanel blocks
+ **********************************************************/
+/* Examples to get started. Add col specific selectors to style
+   blocks in different Gpanel columns, or element selectors to
+   style specific elements */
+   
+.two-col-2x50 .block {
+}
+.two-col-33-66 .block {
+}
+.two-col-66-33 .block {
+}
+.three-col-3x33 .block {
+}
+.three-col-25-25-50 .block {
+}
+.three-col-50-25-25 .block {
+}
+.four-col-4x25 .block {
+}
+.five-col-5x20 .block {
+}
+.six-col-6x16 .block {
+}
+/**********************************************************
+ *                  Gpanel Regions
+ **********************************************************/
+/**
+ * NOTE: If you are adding borders, padding or margin (anything
+ * that adds width) you should apply these to the INNER div or
+ * the contained element, such as a block or mini-panel.
+ */
+
+.gpanel {
+}
+.gpanel .region {
+}
+.gpanel .region .inner {
+}
+.gpanel .first .inner {
+}
+.gpanel .last .inner {
+}
+/* 2 column */
+.two-col-2x50 {
+}
+.two-col-2x50 .region {
+}
+.two-col-2x50 .region .inner {
+}
+.two-col-2x50 .col-1 {
+}
+.two-col-2x50 .col-2 {
+}
+.two-col-2x50 .col-1 .inner {
+}
+.two-col-2x50 .col-2 .inner {
+}
+.two-col-33-66 {
+}
+.two-col-33-66 .region {
+}
+.two-col-33-66 .region .inner {
+}
+.two-col-33-66 .col-1 {
+}
+.two-col-33-66 .col-2 {
+}
+.two-col-33-66 .col-1 .inner {
+}
+.two-col-33-66 .col-2 .inner {
+}
+.two-col-66-33 {
+}
+.two-col-66-33 .region {
+}
+.two-col-66-33 .region .inner {
+}
+.two-col-66-33 .col-1 {
+}
+.two-col-66-33 .col-2 {
+}
+.two-col-66-33 .col-1 .inner {
+}
+.two-col-66-33 .col-2 .inner {
+}
+/* 3 column */
+.three-col-3x33 {
+}
+.three-col-3x33 .region {
+}
+.three-col-3x33 .region .inner {
+}
+.three-col-3x33 .col-1 {
+}
+.three-col-3x33 .col-2 {
+}
+.three-col-3x33 .col-3 {
+}
+.three-col-3x33 .col-1 .inner {
+}
+.three-col-3x33 .col-2 .inner {
+}
+.three-col-3x33 .col-3 .inner {
+}
+.three-col-25-25-50 {
+}
+.three-col-25-25-50 .region {
+}
+.three-col-25-25-50 .region .inner {
+}
+.three-col-25-25-50 .col-1 {
+}
+.three-col-25-25-50 .col-2 {
+}
+.three-col-25-25-50 .col-3 {
+}
+.three-col-25-25-50 .col-1 .inner {
+}
+.three-col-25-25-50 .col-2 .inner {
+}
+.three-col-25-25-50 .col-3 .inner {
+}
+.three-col-50-25-25 {
+}
+.three-col-50-25-25 .region {
+}
+.three-col-50-25-25 .region .inner {
+}
+.three-col-50-25-25 .col-1 {
+}
+.three-col-50-25-25 .col-2 {
+}
+.three-col-50-25-25 .col-3 {
+}
+.three-col-50-25-25 .col-1 .inner {
+}
+.three-col-50-25-25 .col-2 .inner {
+}
+.three-col-50-25-25 .col-3 .inner {
+}
+/* 4 column */
+.four-col-4x25 {
+}
+.four-col-4x25 .region {
+}
+.four-col-4x25 .region .inner {
+}
+.four-col-4x25 .section-1 {
+}
+.four-col-4x25 .section-2 {
+}
+.four-col-4x25 .col-1 {
+}
+.four-col-4x25 .col-2 {
+}
+.four-col-4x25 .col-3 {
+}
+.four-col-4x25 .col-4 {
+}
+.four-col-4x25 .col-1 .inner {
+}
+.four-col-4x25 .col-2 .inner {
+}
+.four-col-4x25 .col-3 .inner {
+}
+.four-col-4x25 .col-4 .inner {
+}
+/* 5 column */
+.five-col-5x20 {
+}
+.five-col-5x20 .region {
+}
+.five-col-5x20 .region .inner {
+}
+.five-col-5x20 .col-1 {
+}
+.five-col-5x20 .col-2 {
+}
+.five-col-5x20 .col-3 {
+}
+.five-col-5x20 .col-4 {
+}
+.five-col-5x20 .col-5 {
+}
+.five-col-5x20 .col-1 .inner {
+}
+.five-col-5x20 .col-2 .inner {
+}
+.five-col-5x20 .col-3 .inner {
+}
+.five-col-5x20 .col-4 .inner {
+}
+.five-col-5x20 .col-5 .inner {
+}
+/* 6 column */
+.six-col-6x16 {
+}
+.six-col-6x16 .region {
+}
+.six-col-6x16 .region .inner {
+}
+.six-col-6x16 .col-1 {
+}
+.six-col-6x16 .col-2 {
+}
+.six-col-6x16 .col-3 {
+}
+.six-col-6x16 .col-4 {
+}
+.six-col-6x16 .col-5 {
+}
+.six-col-6x16 .col-6 {
+}
+.six-col-6x16 .col-1 .inner {
+}
+.six-col-6x16 .col-2 .inner {
+}
+.six-col-6x16 .col-3 .inner {
+}
+.six-col-6x16 .col-4 .inner {
+}
+.six-col-6x16 .col-5 .inner {
+}
+.six-col-6x16 .col-6 .inner {
+}
+/**********************************************************
+                      AT Panels
+    Classes for styling the built in Panels Layouts
+    You need the Panels 3 module installed to use the
+    built in panels and the Adaptivetheme base theme
+    must be enabled.
+ **********************************************************/
+.panel-col {
+}
+.panel-col .inside {
+}
+.panel-pane {
+}
+.sixcol-6x16 {
+}
+.fivecol-5x20 {
+}
+.fourcol-4x25 {
+}
+.threecol-at-25-25-50 {
+}
+.threecol-at-50-25-25 {
+}
+.twocol-at-33-66 {
+}
+.twocol-at-66-33 {
+}
+.threecol-at-stacked-inset {
+}
+.twocol-at-stacked-inset {
+}
+/**********************************************************
+ *                 AT Button Wrappers
+ **********************************************************/
+/**
+ * Adaptivetheme wraps input buttons with SPANs for
+ * easy theming.
+ */
+ span.button-wrapper {
+} /* Outer wrapper */
+span.button {
+} /* Inner wrapper */
+/**********************************************************
+ *                       Tables
+ **********************************************************/
+/**
+ * The selector groupings are from Garland which offers a
+ * sensible starting point for styling Drupal tables.
+ */
+table {
+}
+caption, th, td {
+}
+caption, th {
+}
+table, td, th {
+}
+tbody, tfoot, thead, tr {
+}
+thead th {
+}
+td, th {
+}
+tr.even, tr.odd, tbody th {
+}
+tr.odd, tr.info {
+}
+tr.even {
+}
+tr.drag {
+}
+tr.drag-previous {
+}
+tr.odd td.active {
+}
+tr.even td.active {
+}
+td.region, td.module, td.container td.category {
+}
+tr:first-child td.region, tr:first-child td.module, tr:first-child td.container {
+}
+/**********************************************************
+ *                   Forum Tables
+ **********************************************************/
+#forum table {
+}
+#forum tr td.forum {
+}
+#forum tr td.forum .name {
+}
+#forum div.indent {
+}
+/**********************************************************
+ *                   Panels
+ **********************************************************/
+.panels-flexible-row-1-19.panel-region-separator {
+	margin-bottom:-28px;
+}
+.panels-flexible-region-3-content_pane_-inside {
+	padding-right:20px;
+}
+.panels-flexible-row {
+	padding: 0;
+	margin: 0;
+}
+.panels-flexible-row-frontpage_layout-20 {
+	margin-bottom:20px;
+}
+/**********************************************************
+ *                   Kaltura
+ **********************************************************/
+
+
+
+/**********************************************************
+ *                   Tag cloud
+ **********************************************************/
+ 
+ .pane-cumulus-0 .more-link {
+	display:none;
+}
+#tags {
+	height:174px;
+	overflow:hidden;
+}
+/**********************************************************
+ *                   Publications
+ **********************************************************/
+
+img.ipaper-thumbnail {
+	border-style:solid;
+	border-width:1pt;
+	float:none;
+	height:150px;
+}
+.frontpage-publication {
+	width:140px;
+}
+.frontpage-publication h2 {
+	font-size:1.4em;
+}
+.frontpage-publication ul.views-fluid-grid-items-width-150 li.views-fluid-grid-item {
+	width:140px;
+}
+.frontpage-publication ul.views-fluid-grid-list {
+	margin:0;
+	padding:0;
+	text-align:center;
+}
+.frontpage-publication li.views-fluid-grid-item {
+	padding:0;
+	border:none;
+}
+.frontpage-publication .article {
+	margin:0;
+	background-color:#FFF;
+}
+.frontpage-publication .article ul.links {
+	display:none;
+}
+.publication-page ul.links {
+	display:none;
+}
+.publication-page h2 {
+	font-size:1.4em;
+	line-height:1.2em;
+	margin:0.2em 0;
+}
+/**********************************************************
+ *                   Closure
+ **********************************************************/
+ 
+
+/**********************************************************
+ *                  Front page accordion
+ **********************************************************/
+.views-accordion .views-field-title, .views-accordion .views-field-title-1 {
+	padding:0.5em 1em;
+	background-color:#FFFFFF;
+	border-bottom:1px solid #DDDDDD;
+	border-top:1px solid #DDDDDD;
+	cursor:pointer;
+	display:block;
+}
+.views-accordion .views-field-title a {
+	color:#000;
+	font-weight:bold;
+}
+.views-accordion .views-field-title a:hover {
+	text-decoration:underline;
+}
+.stop-accordion {
+	height:0;
+	overflow:hidden;
+}
+.accordion-item-odd .accordion-header {
+	background-color:#F5F5F5;
+}
+.views-accordion-item .accordion-content .views-field-body {
+	position:absolute;
+}
+.views-accordion-item .views-field-body {
+	display:none;
+}
+.accordion-active .views-accordion-item .views-field-body {
+	display:block;
+}
+.views-accordion-item .kaltura_thumb img {
+	display:none;
+}
+.accordion-item-0 .kaltura_thumb img {
+	display:block;
+}
+.accordion-active .views-accordion-item .kaltura_thumb img {
+	display:block;
+	margin-bottom:-5px;
+	width:363px;
+}
+.views-accordion-item .accordion-content .views-field-body a {
+	background:none repeat scroll 0 0 white;
+	opacity:0.8;
+	padding:6px;
+	width:351px;
+	display:block;
+	color:#000;
+	font-weight:normal;
+}
+.views-accordion-item .accordion-content .views-field-body a {
+	text-decoration:none;
+}
+/*.views-accordion-item .accordion-content .views-field-view-node {
+	background:url("/gsl/sites/all/themes/adaptive_gsl/images/play-button-40.png") no-repeat scroll 0 0 transparent;
+	height:40px;
+	margin-left:160px;
+	margin-top:80px;
+	position:absolute;
+	text-indent:-10000px;
+	width:40px;
+}*/
+.views-accordion-item .accordion-content div {
+	padding:0;
+}
+/*.views-accordion-item {
+	height:31px;
+	overflow:hidden;
+}
+.accordion-active .views-accordion-item {
+	height:100%;
+}*/
+.views-accordion-videos-block_4 {
+	height:398px;
+}
+.pane-videos {
+	padding-bottom:14px;
+}
+#group-id-0, #group-id-1 {
+	overflow:hidden;
+	margin-bottom:20px;
+	text-align:center;
+}
+.item-list ul {
+	margin:0;
+}
+.view-id-videos_page .item-list ul li {
+	list-style:none outside none;
+	margin:0;
+}
+.view-id-videos_page .views-list-item a {
+	background-color:#270F5C;
+	padding:0.4em 0.2em 0 0.4em;
+}
+.view-id-videos_page .views-list-item a:hover {
+	background-color:#6792BF;
+	text-decoration:underline;
+}
+.view-id-videos_page .views-list-item a.active {
+	background-color:#680D2A;
+}
+.view-id-videos_page .views-list-item a:active {
+	background-color:#680D2A;
+}
+#content .view-id-videos_page .kaltura_thumb img {
+	height:110px;
+	padding:5px 0 0;
+}
+.view-id-videos_page .title a .video-info {
+	color:#FFFFFF;
+	display:block;
+	height:114px;
+	left:216px;
+	margin-top:-116px;
+	overflow:hidden;
+	padding:0;
+	position:absolute;
+	width:730px;
+}
+.view-id-videos_page .title a:hover .video-info {
+	text-decoration:underline;
+}
+.view-id-videos_page .video-date-created {
+	color:#FFF;
+	font-size:11px;
+	padding:6px 4px 0 6px;
+}
+.view-id-videos_page .video-title {
+	font-size:14px;
+	font-weight:bold;
+	margin-bottom:0;
+	padding:2px 6px;
+}
+.view-id-videos_page .video-description {
+	padding:0 6px;
+}
+.view-videos-archive-page .item-list ul li {
+	list-style:none outside none;
+	margin:0;
+}
+.view-videos-archive-page .views-list-item a {
+	background-color:#270F5C;
+}
+.view-videos-archive-page .views-list-item a:hover {
+	background-color:#6792BF;
+	text-decoration:underline;
+}
+.view-videos-archive-page .views-list-item a.active {
+	background-color:#680D2A;
+}
+.view-videos-archive-page .views-list-item a:active {
+	background-color:#680D2A;
+}
+#content .view-videos-archive-page .kaltura_thumb img {
+	height:110px;
+	padding:5px 0 0;
+}
+.view-videos-archive-page .title a .video-info {
+	color:#FFFFFF;
+	display:block;
+	height:114px;
+	left:216px;
+	margin-top:-119px;
+	overflow:hidden;
+	padding:0;
+	position:absolute;
+	width:730px;
+}
+.view-videos-archive-page .title a .video-info {
+	background-color:#270F5C;
+}
+.view-videos-archive-page .title a:hover .video-info {
+	background-color:#6792BF;
+	text-decoration:underline;
+}
+.view-videos-archive-page .title a:active .video-info {
+	background-color:#680D2A;
+}
+.view-videos-archive-page .title a.active .video-info {
+	background-color:#680D2A;
+}
+.view-videos-archive-page .video-date-created {
+	color:#FFF;
+	font-size:11px;
+	padding:4px 4px 4px 6px;
+}
+.view-videos-archive-page .video-title {
+	font-size:14px;
+	font-weight:bold;
+	margin-bottom:0;
+	padding:6px;
+}
+.view-videos-archive-page .video-description {
+	padding:0 6px;
+}
+/********************************************************* jobs Pages ****************************************************************/
+
+body.section-jobs div.form-item input.form-text {
+	width:182px;
+}
+body.section-jobs div.form-item select.form-select {
+	width:190px;
+}
+body.section-jobs div.form-item select.location_auto_country, body.section-jobs #edit-field-job-compensation-value-many-to-one {
+	height:200px;
+}
+body.section-jobs th {
+	font-size:12px;
+	padding:6px 0 4px 7px;
+}
+body.section-jobs th a {
+	color:#FFF;
+}
+body.section-jobs th a:hover {
+	color:#F8F8F8;
+}
+body.section-jobs th a:active {
+	color:#F8F8F8;
+}
+body.section-jobs th.views-field-title {
+	width:363px;
+}
+body.section-jobs th.views-field-field-job-compensation-value {
+	width:84px;
+}
+body.section-jobs th.views-field-province {
+	width:100px;
+}
+body.section-jobs th.views-field-country {
+	width:100px;
+}
+body.section-jobs th.views-field-field-job-expiry-date-value {
+	width:88px;
+}
+body.section-jobs td {
+	height:42px;
+}
+.node-type-job-listing .field-label, .node-type-job-listing .field-items {
+	margin-bottom:6px;
+}
+.jobs-header-button {
+}
+.node-type-job-listing .field-field-job-description-textfield .field-label {
+	margin-bottom:-12px;
+}
+body.section-jobs .taxonomy-terms .links {
+	float:none;
+	margin:0;
+}
+body.section-jobs .taxonomy-terms .links li {
+	display:inline;
+	padding:0;
+	margin:0 1em 0 0;
+}
+body.section-jobs .links {
+	float:right;
+	margin:10px 10px 0 0;
+}
+body.section-jobs .links li {
+	display:list-item;
+	height:30px;
+	overflow:hidden;
+	padding:0;
+	width:67px;
+	margin:0 0 12px;
+}
+body.section-jobs .print_html, body.section-jobs .print_mail {
+	margin-left:0;
+}
+body.section-jobs .job_application_field_job_reference a {
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	background:transparent url("/sites/all/themes/efunds/images/jobs-buttons.png") no-repeat scroll 0 0;
+	color:#39A9D3;
+	display:inline-block;
+	height:30px;
+	padding-left:67px;
+	text-decoration:underline;
+	width:100%;
+}
+body.section-jobs .job_application_field_job_reference a:hover {
+	background:transparent url("/sites/all/themes/efunds/images/jobs-buttons.png") no-repeat scroll 0 -30px;
+}
+body.section-jobs .print_html a {
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	background:transparent url("/sites/all/themes/efunds/images/jobs-buttons.png") no-repeat scroll -67px 0;
+	color:#39A9D3;
+	display:inline-block;
+	height:30px;
+	padding-left:67px;
+	text-decoration:underline;
+	width:100%;
+}
+body.section-jobs .print_html a:hover {
+	background:transparent url("/sites/all/themes/efunds/images/jobs-buttons.png") no-repeat scroll -67px -31px;
+}
+body.section-jobs .print_mail a {
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	background:transparent url("/sites/all/themes/efunds/images/jobs-buttons.png") no-repeat scroll -133px 0;
+	color:#39A9D3;
+	display:inline-block;
+	height:30px;
+	padding-left:67px;
+	text-decoration:underline;
+	width:100%;
+}
+body.section-jobs .print_mail a:hover {
+	background:transparent url("/sites/all/themes/efunds/images/jobs-buttons.png") no-repeat scroll -133px -31px;
+}
+body.section-jobs .group-job-files {
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	background:#CCCCCC none repeat scroll 0 0;
+	border:1px solid #000000;
+	float:right;
+	margin: 6em 0 1.4em 1.4em;
+	padding: 10px;
+}
+body.section-jobs .field-field-job-description-textfield {
+	margin-top:10px;
+}
+#job-header-wrapper {
+	margin: 0 auto;
+	width: 71em;
+}
+#job-header-wrapper li {
+	display: inline-block;
+	list-style: none outside none;
+	padding: 0 1.2em;
+}
+.jobs-options {
+	-moz-background-inline-policy: continuous;
+	background: none repeat scroll 0 0 #F8F8F8;
+	border: 1px solid #DDDDDD;
+	float: left;
+	height: 100%;
+	margin-bottom: 14px;
+	margin-top: 1.1em;
+	padding: 0.6em 1.4em;
+}
+.jobs-options ul {
+	padding: 1em 0;
+}
+#node-area {
+	clear:left;
+}
+.job-seekers {
+	margin-right:24px;
+}
+body.section-jobs #views-exposed-form-Jobs-page-2 {
+	background-color: #F8F8F8;
+	border: 1px solid #DDDDDD;
+	padding: 1.3em;
+}
+body.section-jobs #views-exposed-form-Jobs-page-2 .form-submit {
+	margin-top: 0.7em;
+}
+th.views-field-field-venue-value {
+	width:183px;
+}
+.jobs-header-button {
+	padding: 1.2em;
+	text-align: center;
+	width: 9em;
+}
+#crm-container {
+	margin-bottom: 2em;
+}
+#crm-container .crm-section {
+	padding: 0.2em 0.5em;
+}
+#crm-container .crm-section .label {
+	float: left;
+	text-align: right;
+	width: 35%;
+}
+#crm-container .crm-section .content {
+	font-weight: bold;
+	margin-left: 14em;
+	margin-left: 38%;
+}
+/********************************************************* Membership ****************************************************************/
+
+.blue-table {
+	background-color: #2A2463;
+	color: #FFF;
+}
+.blue-table a {
+	color: #6792BF;
+}
+.blue-table a:hover {
+	color: #FFF;
+}
+.blue-table tr {
+	border:none;
+	border-color:#2A2463;
+}
+.blue-table th {
+	text-align: left;
+	border: none;
+	border-color:#2A2463;
+}
+.blue-table td, .blue-table td {
+	padding: 0.2em 1em;
+}
+.blue-table-footer {
+	background-color: #FFF;
+	color: #2A2463;
+	text-align: center;
+}
+.tickbox {
+	text-align: center;
+}
+.blue-table-internal td, .blue-table-internal th {
+	border-color: #FFF;
+	border-width: 3px;
+	border-style:solid;
+}
+table.blue-table-internal {
+	border-collapse: collapse;
+	background-color: #2A2463;
+}
+#ssl-seal {
+	bottom: 7px;
+	position: fixed;
+	right: 10px;
+}
+a.membership-button {
+	background: url("/sites/all/themes/efunds/images/membership-button-sprite.png") repeat scroll 0 0 transparent;
+	display: block;
+	height: 40px;
+	left: 30.5em;
+	position: absolute;
+	text-indent: -10000px;
+	width: 208px;
+}
+a.membership-button:hover {
+	background: url("/sites/all/themes/efunds/images/membership-button-sprite.png") repeat scroll 0 -40px transparent;
+}
+a.membership-button:active {
+	background: url("/sites/all/themes/efunds/images/membership-button-sprite.png") repeat scroll 0 -80px transparent;
+}
+#media-bliptv-flash-embed-1 {
+	width:546px;
+}
+#myExperience {
+	height: 274px;
+}
+#crm-container div.status {
+	padding: 0.25em 0.8em 1.4em 3em;
+}
+#crm-container #help, #crm-container .help {
+	padding: 8px 34px 4px;
+}
+.poll .votes {
+	display:none;
+}
+.poll .total {
+	display:none;
+}
+.awards-form {
+	background-color: #CFCFCF;
+	border: 4px solid #6792BF;
+	padding: 10px;
+	margin-bottom: 1.6em;
+}
+.awards-form h2 {
+	background-color: #6792BF;
+	color: white;
+	padding: 4px 14px;
+}
+.awards-form form {
+	margin: 0;
+	padding: 0;
+}
+div.panels-ipe-display-container .awards-form .pane-title {
+	padding: 4px 14px;
+	line-height: 1.3;
+}
+.awards-form fieldset {
+	background: none repeat scroll 0 0 #FFFFFF;
+	border: 4px solid #6792BF;
+	margin: 1.5em 0;
+	padding: 0 14px;
+}
+.awards-form fieldset legend {
+	background-color: #6792BF;
+	color: white;
+	display: block;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 4px 14px;
+}
+.awards-form fieldset legend a:hover {
+	color: white;
+}

@@ -1,0 +1,13 @@
+; $Id: uc_ogone_payment.info,v 1.6 2009/08/08 05:55:24 keesje76 Exp $
+name = Ogone Payment
+description = Receive payments through checkout via Ogone.
+package = Ubercart - payment
+dependencies[] = uc_payment
+core = 6.x
+
+; Information added by drupal.org packaging script on January 1, 1970 - 00:00
+version = "6.x-1.9"
+core = "6.x"
+project = "uc_ogone"
+datestamp = "1296891194"
+

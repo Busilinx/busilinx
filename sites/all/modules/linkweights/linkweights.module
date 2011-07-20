@@ -1,0 +1,95 @@
+<?php
+// $Id: linkweights.module,v 1.1 2009/07/22 16:57:37 dustincurrie Exp $
+
+/**
+ * @file
+ *  linkweights Module
+ *
+ * This module allows users with permission to re-order the links in $links for each node type.
+ */
+
+/**
+ * Implementation of hook_menu().
+ *
+ * @return $menu array
+ */
+function linkweights_menu() {
+  $items = array();
+
+  $items['admin/settings/linkweights'] = array(
+    'title' => 'Link Weights',
+    'page callback' => 'linkweights_settings_overview',
+    'access callback' => 'user_access',
+    'access arguments' => array('administer link weights'),
+    'description' => 'Set the order of links by node type.',
+    'file' => 'linkweights.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  $items['admin/settings/linkweights/%linkweights_nodetype'] = array(
+    'title' => 'Link Weights',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('linkweights_settings_form', 3),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer link weights'),
+    'description' => 'Set the order of links by node type.',
+    'file' => 'linkweights.admin.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implementation of hook_help().
+ */
+function linkweights_help($path, $arg) {
+  switch ($path) {
+    case 'admin/settings/linkweights':
+      return '<p>'. t('Rearrange the order in which links in the $links section of a node are displayed on a per content type basis. Each content type must have at least one node of that type created in order to edit links.') .'</p>';
+    case 'admin/settings/linkweights/%':
+      return '<p>'. t('These are the links available for this content type. You may organize the weights for each link by using the handles on the left side of the table. ') .'</p>';
+  }
+
+  
+}
+
+/**
+ * Implementation of hook_perm().
+ *
+ * @return $perms array
+ */
+function linkweights_perm() {
+  $perms =  array('administer link weights');
+  return $perms;
+}
+
+/**
+ * Implementation of hook_link_alter().
+ *
+ */
+function linkweights_link_alter(&$links, $node) {
+  $lweights = db_query("SELECT * FROM {linkweights} WHERE nodetype='%s'", $node->type);
+  //set default to 0
+  foreach ($links as $link) {
+    $link['weight'] = 0;
+  }
+  while ($val = db_fetch_array($lweights)) {
+    $links[$val['link']]['weight'] = $val['weight'];
+  }
+  uasort($links, '_linkweights_link_cmp');
+}
+
+/**
+ * Helper function to compare arrays.
+ */
+function _linkweights_link_cmp($a, $b) {
+    if ($a['weight'] == $b['weight']) {
+        return 0;
+    }
+    return ($a['weight'] < $b['weight']) ? -1 : 1;
+}
+
+function linkweights_nodetype_load($nodetype) {
+  return $nodetype;
+}

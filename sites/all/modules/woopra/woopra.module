@@ -1,0 +1,240 @@
+<?php
+// $Id: woopra.module,v 1.1.2.8 2009/04/20 23:10:41 tomdeb Exp $
+
+/**
+ * @file
+ * Adds support to woopra web analytics system
+ *
+ *
+ *
+ */
+
+/**
+ * Implementation of hook_help
+ */
+function woopra_help($path, $arg) {
+  switch ($path) {
+    case 'admin/settings/woopra':
+      return t('Woopra is a realtime tracking and statistics system.');
+  }
+}
+
+/**
+ * Implementation of hook_menu
+ */
+function woopra_menu($may_cache = TRUE) {
+  $items = array();
+  if ($may_cache) {
+    $items['admin/settings/woopra'] = array(
+      'title' => t('Woopra'),
+      'description' => t('Change Woopra integration settings'),
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('woopra_settings_form'),
+      'access arguments' => array('administer site configuration'),
+    );
+  }
+  return $items;
+}
+
+/**
+ * admin/settings/woopra form
+ */
+function woopra_settings_form() {
+
+  $form['info'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('User Information'),
+    '#description' => t('Woopra can display all sorts of information for real-time tracking of users.'), 
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+  $form['info']['woopra_email'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Email address'),
+    '#default_value' => variable_get('woopra_email', FALSE),
+  ); 
+  $form['info']['woopra_avatar'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Avatar'),
+    '#default_value' => variable_get('woopra_avatar', FALSE),
+  ); 
+
+  if (module_exists('profile')) {
+    foreach (profile_categories() as $category) {
+      $fields = _profile_get_fields($category['name']);
+      while ($field = db_fetch_object($fields)) {
+        $form['info']['woopra_'. $field->name] = array(
+          '#type' => 'checkbox',
+          '#title' => $field->title,
+          '#default_value' => variable_get('woopra_'. $field->name, FALSE),
+         ); 
+      }
+    }
+  }
+
+  $form['roles'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Tracking by role'),
+    '#description' => t('Only Track the following roles. Leave empty for all roles. Admin pages are never tracked.'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+  
+  $admin = user_load(array('uid' => '1'));
+  
+  $form['roles']['woopra_track_user1'] = array(
+    '#type' => 'checkbox',
+    '#TITLE' => t("%admin (user #1)", array('%admin' => $admin->name)),
+    '#default_value' => variable_get('woopra_track_user1', FALSE),
+  ); 
+  
+  $roles = user_roles();
+  foreach (array_keys($roles) as $rid) {
+    $form['roles']['woopra_track_rid_'. $rid] = array(
+      '#type' => 'checkbox',
+      '#title' => $roles[$rid],
+      '#default_value' => variable_get('woopra_track_rid_'. $rid, TRUE),
+    );
+  }
+
+  $form['advanced'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Advanced'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $form['advanced']['woopra_cache'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Cache woopra.js locally'),
+    '#default_value' => variable_get('woopra_cache', FALSE),
+    '#description' => t("If checked, the tracking code file is received from Woopra and cached locally. It is updated daily from Woopra's servers to ensure updates to tracking code are reflected in the local copy."),
+  );
+  if (variable_get('file_downloads', FILE_DOWNLOADS_PUBLIC) == FILE_DOWNLOADS_PRIVATE) {
+    $form['advanced']['woopra_cache']['#disabled'] = TRUE;
+    $form['advanced']['woopra_cache']['#description'] .= ' '. t('<a href="!url">Public file transfers</a> must be enabled to allow local caching.', array('!url' => url('admin/settings/file-system', array('query' => drupal_get_destination()))));
+  }
+
+  return system_settings_form($form);
+}
+
+/**
+ * Implementation of hook_footer
+ */
+function woopra_footer($main = 0) {
+  global $user;
+  global $base_url;
+  $script = '';
+  if (arg(0) != 'admin') {
+    if ((_woopra_track($user))) {
+      $script = '<script type="text/javascript">';
+      if ($user->uid) {
+        $script .= _woopra_user($user);
+      }
+      if (variable_get('woopra_cache', FALSE)) {
+        $woopra_js = '/'. _woopra_cache('http://static.woopra.com/js/woopra.js');
+      }
+      elseif ( preg_match('/^https:\/\//', $base_url) ) {  
+        $woopra_js = 'https://sec1.woopra.com/js/woopra.js';
+      }
+      else {
+        $woopra_js = 'http://static.woopra.com/js/woopra.js';
+      }
+      $script .= "</script>\n";
+      $script .= "<script src=\"$woopra_js\" type=\"text/javascript\"></script>\n";
+    }
+  }
+  return $script;
+}
+
+/**
+ * Implementation of hook_cron
+ */
+function woopra_cron() {
+  // Regenerate the woopra.js file
+  if (time() - variable_get('woopra_last_cache', 0) >= 86400) {
+    file_delete(file_directory_path() .'/woopra/woopra.js');
+    variable_set('woopra_last_cache', time());
+  }
+}
+
+/**
+ * Build the user tracking variable 
+ * @param $user
+ *   The user object
+ * @return string
+ *   The javascript string for this user
+ */
+function _woopra_user($user) {
+  $script = "var woopra_array = new Array();\n";
+  $script .= "woopra_array['name'] = '$user->name';\n";
+
+  // email support
+  if (variable_get('woopra_email', FALSE)) {
+    $script .= "woopra_array['Email'] = '$user->mail';\n";
+  }
+  // avatar support
+  if ((variable_get('user_pictures', FALSE)) && ($user->picture)) {
+    global $base_url;
+    $script .= "woopra_array['avatar'] = '$base_url/$user->picture';\n";
+  }
+  // profile fields support
+  if (module_exists('profile')) {
+    profile_load_profile($user);
+    $fields = db_query('SELECT * FROM {profile_fields}');
+    while ($field = db_fetch_array($fields)) {
+      if (variable_get('woopra_'. $field['name'], FALSE)) { 
+        $script .= "woopra_array['". $field['title'] ."'] = '". $user->$field['name'] ."';\n";
+      }
+    }
+  }
+
+  return $script;
+}
+
+/**
+ * Download and cache the woopra.js file locally.
+ * @param $location
+ *   The full URL to the external javascript file.
+ * @return mixed
+ *   The path to the local javascript file on success, boolean FALSE on failure.
+ */
+function _woopra_cache($location = 'http://static.woopra.com/js/woopra.js') {
+  $directory = file_directory_path() .'/woopra';
+  $file_destination = $directory .'/'. basename($location);
+  if (!file_exists($file_destination)) {
+    $result = drupal_http_request($location);
+    if ($result->code == 200) {
+      // Check that the files directory is writable
+      if (file_check_directory($directory, FILE_CREATE_DIRECTORY)) {
+        return file_save_data($result->data, $directory .'/'. basename($location), FILE_EXISTS_REPLACE);
+      }
+    }
+  }
+  else {
+    return $file_destination;
+  }
+}
+
+/**
+ * Determine if page should be tracked based on the current user
+ * @param $user
+ *   The user object
+ * @return boolean
+ *   TRUE if page should be tracked, FALSE if not
+ */
+function _woopra_track($user) {
+  $track = TRUE; 
+
+  foreach (array_keys($user->roles) as $rid) {
+    if (!variable_get('woopra_track_rid_'. $rid, TRUE)) {
+      $track = FALSE;
+    }
+  }
+  
+  if ($user->uid == '1') {
+    $track = variable_get('woopra_track_user1', FALSE);
+  }
+
+  return $track;
+}
+

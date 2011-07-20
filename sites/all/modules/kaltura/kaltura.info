@@ -1,0 +1,13 @@
+name = Kaltura
+package = Kaltura Media Management
+project = Kaltura
+core = 6.x
+description = Infrastructure for managing video, audio and photos - allows to upload and import media files, manage them, and even allow users to collaboratively add and remix media 
+
+
+; Information added by drupal.org packaging script on 2011-03-03
+version = "6.x-2.0-beta1"
+core = "6.x"
+project = "kaltura"
+datestamp = "1299123068"
+

@@ -1,0 +1,232 @@
+<?php
+// $Id: reinvigorate.module,v 1.1.2.3 2010/10/28 15:17:36 devkinetic Exp $
+
+/**
+ * @file
+ * Reinvigorate tracking module.
+ */
+
+function reinvigorate_perm() {
+  return array('administer reinvigorate', 'execute PHP');
+}
+
+function reinvigorate_menu() {
+  $items = array();
+  $items['admin/settings/reinvigorate'] = array(
+    'title' => 'Reinvigorate',
+    'description' => 'Configure the settings used to generate your Reinvigorate code.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('reinvigorate_admin_settings_form'),
+    'access arguments' => array('administer reinvigorate'),
+    'file' => 'reinvigorate.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  return $items;
+}
+
+/*
+ * Implimentation of hook_action_info()
+ * 
+ * Actions for Snoop - not done (patches welcome)
+ * 
+ */
+/*
+function reinvigorate_action_info() {
+  return array(
+    'reinvigorate_new_user_action' => array(
+      'description' => t('Snoop New User'),
+      'type' => 'user',
+      'configurable' => FALSE,
+      'hooks' => array(
+        'user' => array('register'),
+      ),
+    ),
+  );
+}
+
+function reinvigorate_new_user_action(&$object, $context = array()) {
+  $script = 'var re_new_user_tag = true;';
+  drupal_add_js($script, 'inline', 'footer');
+}
+*/
+
+function reinvigorate_requirements($phase) {
+  $requirements = array();
+  if ($phase == 'runtime') {
+    // Raise warning if Reinvigorate user account has not been set yet.
+    if (variable_get('reinvigorate_account', '') == '') {
+      $requirements['reinvigorate'] = array(
+        'title' => t('Reinvigorate module'),
+        'description' => t('Reinvigorate module has not been configured yet. Please configure its settings from the <a href="@url">Reinvigorate settings page</a>.', array('@url' => url('admin/settings/reinvigorate'))),
+        'severity' => REQUIREMENT_ERROR,
+        'value' => t('Not configured'),
+      );
+    }
+  }
+  return $requirements;
+}
+
+function reinvigorate_footer($main = 0) {
+  global $user;
+  $id = variable_get('reinvigorate_account', '');
+  $ssl = variable_get('reinvigorate_ssl', 0);
+  $name_tags = variable_get('reinvigorate_name_tags', 0);
+  if (!empty($id) && _reinvigorate_visibility_pages() && _reinvigorate_visibility_user($user)) {
+    // Should a local cached copy of re_.js be used?
+    $js_file = 're_.js';
+    $url = 'http://include.reinvigorate.net/'. $js_file;
+    if (variable_get('reinvigorate_cache', 0) && (variable_get('file_downloads', FILE_DOWNLOADS_PUBLIC) == FILE_DOWNLOADS_PUBLIC) && $source = _reinvigorate_cache($url)) {
+      drupal_add_js($source, 'module', 'footer');
+    }
+    else {
+      $tracking_script = 'document.write(unescape("%3Cscript src=\'" + (("https:" == document.location.protocol) ? "https://ssl-" : "http://") + "include.reinvigorate.net/re_.js\' type=\'text/javascript\'%3E%3C/script%3E"));';
+      drupal_add_js($tracking_script, 'inline', 'footer');
+    }
+    $script = 'try {';
+    // pull in name tags
+    if ($name_tags == 1 && $user->uid) {
+      $script .= _reinvigorate_name_tags($user);
+    }
+    $script .= 'reinvigorate.track("' . $id . '");} catch(err) {}';
+    // write name tags to page
+    drupal_add_js($script, 'inline', 'footer');
+  }
+}
+
+function _reinvigorate_name_tags($user) {
+  $name_tag = variable_get('reinvigorate_name_tags_name_tag', 0);
+  $context_tag = variable_get('reinvigorate_name_tags_context_tag', 0);
+  $script = '';
+  switch ($name_tag) {
+    case 0:
+      $script .= 'var re_name_tag = "' . $user->uid . '";';
+      break;
+    case 1:
+      $script .= 'var re_name_tag = "' . $user->name . '";';
+      break;
+    case 2:
+      $script .= 'var re_name_tag = "' . 'mailto:' . $user->mail . '";';
+      break;
+    case 3:
+      $script .= 'var re_name_tag = "' . $user->sid . '";';
+      break;
+    case 4:
+      $script .= 'var re_name_tag = "' . $user->hostname . '";';
+      break;
+  }
+  switch ($context_tag) {
+    case 1:
+      $script .= 'var re_context_tag = "' . $user->uid . '";';
+      break;
+    case 2:
+      $script .= 'var re_context_tag = "' . $user->name . '";';
+      break;
+    case 3:
+      $script .= 'var re_context_tag = "' . 'mailto:' . $user->mail . '";';
+      break;
+    case 4:
+      $script .= 'var re_context_tag = "' . $user->sid . '";';
+      break;
+    case 5:
+      $script .= 'var re_context_tag = "' . $user->hostname . '";';
+      break;
+  }
+  return $script;
+}
+
+function _reinvigorate_visibility_pages() {
+  static $page_match;
+  // Cache visibility setting in hook_init for hook_footer.
+  if (!isset($page_match)) {
+    $visibility = variable_get('reinvigorate_visibility', 0);
+    $pages = variable_get('reinvigorate_pages', '');
+    // Match path if necessary.
+    if (!empty($pages)) {
+      if ($visibility < 2) {
+        $path = drupal_get_path_alias($_GET['q']);
+        // Compare with the internal and path alias (if any).
+        $page_match = drupal_match_path($path, $pages);
+        if ($path != $_GET['q']) {
+          $page_match = $page_match || drupal_match_path($_GET['q'], $pages);
+        }
+        // When $visibility has a value of 0, the block is displayed on
+        // all pages except those listed in $pages. When set to 1, it
+        // is displayed only on those pages listed in $pages.
+        $page_match = !($visibility xor $page_match);
+      }
+      else {
+        $page_match = drupal_eval($pages);
+      }
+    }
+    else {
+      $page_match = TRUE;
+    }
+  }
+  return $page_match;
+}
+
+function _reinvigorate_visibility_user($account) {
+  $enabled = FALSE;
+  // Is current user a member of a role that should be tracked?
+  if (_reinvigorate_visibility_roles($account)) {
+    $enabled = TRUE;
+  }
+  return $enabled;
+}
+
+function _reinvigorate_visibility_roles($account) {
+  $enabled = TRUE;
+  $roles = variable_get('reinvigorate_roles', array());
+  if (array_sum($roles) > 0) {
+    // One or more roles are selected for tracking.
+    foreach (array_keys($account->roles) as $rid) {
+      // Is the current user a member of one role selected in admin settings?
+      if (isset($roles[$rid]) && $rid == $roles[$rid]) {
+        // Current user is a member of a role that is selected in admin settings.
+        $enabled = FALSE;
+        break;
+      }
+    }
+  }
+  return $enabled;
+}
+
+/**
+ * Implementation of hook_cron().
+ */
+function reinvigorate_cron() {
+  // Regenerate the tracking script re_.js every day.
+  if (time() - variable_get('reinvigorate_last_cache', 0) >= 86400) {
+    // New reinvigorate version.
+    file_delete(file_directory_path() .'/reinvigorate/re_.js');
+    // Clear aggregated JS files.
+    if (variable_get('preprocess_js', 0)) {
+      drupal_clear_js_cache();
+    }
+    variable_set('reinvigorate_last_cache', time());
+  }
+}
+
+/**
+ * Download and cache the re_.js file locally.
+ * @param $location
+ *   The full URL to the external javascript file.
+ * @return mixed
+ *   The path to the local javascript file on success, boolean FALSE on failure.
+ */
+function _reinvigorate_cache($location) {
+  $directory = file_directory_path() .'/reinvigorate';
+  $file_destination = $directory .'/'. basename($location);
+  if (!file_exists($file_destination)) {
+    $result = drupal_http_request($location);
+    if ($result->code == 200) {
+      // Check that the files directory is writable
+      if (file_check_directory($directory, FILE_CREATE_DIRECTORY)) {
+        return file_save_data($result->data, $directory .'/'. basename($location), FILE_EXISTS_REPLACE);
+      }
+    }
+  }
+  else {
+    return $file_destination;
+  }
+}

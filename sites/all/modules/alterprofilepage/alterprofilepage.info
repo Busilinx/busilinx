@@ -1,0 +1,11 @@
+; $Id: alterprofilepage.info,v 1.2.2.1 2010/01/09 03:52:40 jerdiggity Exp $
+name = Alter profile page
+description = Makes a few changes to the way the user profile page looks.
+core = 6.x
+
+; Information added by drupal.org packaging script on 2010-04-04
+version = "6.x-2.6"
+core = "6.x"
+project = "alterprofilepage"
+datestamp = "1270371004"
+

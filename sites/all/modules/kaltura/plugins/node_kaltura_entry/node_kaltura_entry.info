@@ -1,0 +1,11 @@
+name = Kaltura Media Node
+package = Kaltura Media Management
+core = 6.x
+dependencies[] = kaltura
+description = Upload and view video audio and images, storing each media item as a node.
+; Information added by drupal.org packaging script on 2011-03-03
+version = "6.x-2.0-beta1"
+core = "6.x"
+project = "kaltura"
+datestamp = "1299123068"
+

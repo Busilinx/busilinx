@@ -1,0 +1,194 @@
+<?php
+
+/**
+ * Implementation of hook_help()
+ */
+function regcode_og_help($path, $arg) {
+  $output = '';
+
+  switch ($path) {
+    case 'admin/user/regcode/og':
+      $output = '<p>'.  t('Automate organic group assignment based on regcode. Create a list of rules which are applied when users register.') .'</p>';
+      break;
+  }
+  
+  return $output;
+}
+
+
+/**
+ * Implementation of hook_menu()
+ */
+function regcode_og_menu() {
+
+  $items = array();
+
+  $items['admin/user/regcode/og'] = array (
+    'title'               => t('Organic Groups'),
+    'description'         => t('Automate organic group assignment'),
+    'page callback'       => 'drupal_get_form',
+    'page arguments'      => array('regcode_og_admin'),
+    'type'                => MENU_LOCAL_TASK,
+    'access arguments'    => array('administer registration codes'),
+    'weight'              => 101,
+  );  
+  
+  $items['admin/user/regcode/og/delete/%'] = array (
+    'page callback'       => 'regcode_og_delete_rule',
+    'page arguments'      => array(5),
+    'type'                => MENU_CALLBACK,
+    'access arguments'    => array('administer registration codes'),
+  );  
+
+  return $items;
+}
+
+
+/**
+ * Delete a rule
+ */
+function regcode_og_delete_rule($rid) {
+  db_query('DELETE FROM {regcode_og} WHERE id = %d', $rid);
+  drupal_set_message(t('Rule was deleted (Rule ##rule)', array('#rule' => $rid)));
+  drupal_goto('admin/user/regcode/og');
+}
+
+
+/**
+ * Admin page for role assignment
+ */
+function regcode_og_admin() {
+  $form = array();
+  
+  $form['regcode_og']['new'] = array(
+    '#type'    => 'fieldset',
+    '#title'   => t('Create a new rule')  ,
+  );
+  
+  $form['regcode_og']['new']['ogs'] = array(
+    '#type'    => 'checkboxes',
+    '#title'   => t('Assign organic group(s)'),
+    '#options' => og_all_groups_options(),
+  );
+  
+  $form['regcode_og']['new']['tid'] = array(
+    '#type'    => 'select',
+    '#title'   => t('When a user uses a regcode tagged with'),
+    '#options' => regcode_get_vocab_terms(),
+  );
+  
+  $form['regcode_og']['new']['submit'] = array(
+    '#type'    => 'submit',
+    '#value'   => t('Create rule'),
+  );
+  
+  
+  $form['regcode_og']['list'] = array(
+    '#type'    => 'markup',
+    '#value'   => regcode_og_rules_list_markup(),
+  );
+  
+  return $form;
+}
+
+
+/** 
+ * Return the formatted HTML list
+ */
+function regcode_og_rules_list_markup() {
+  $headings = array(
+    t('Rule ID'),
+    t('Term'),
+    t('Group ID'),
+    t('Group Name'),
+    t('Actions'));
+
+  $rows = regcode_og_get_rules(array(), TRUE);
+
+  $group_name_mapping = og_all_groups_options();
+  
+  // Add actions
+  foreach ($rows as &$row) {
+    $row['group_name'] = $group_name_mapping[$row['ogid']];
+    $row['action'] = l(t('Remove'), 'admin/user/regcode/og/delete/' . $row['id']);
+  }
+  
+  return theme('table', $headings, $rows);
+}
+
+
+/**
+ * Create the roles
+ */
+function regcode_og_admin_submit($form, $form_state) {  
+  $ogs = array_filter($form_state['values']['ogs']);
+  $tid = $form_state['values']['tid'];
+  
+  regcode_og_create_rule($tid, $ogs);
+  drupal_set_message(t('New registration code rule created.'));
+}
+
+
+/**
+ * List all of the regcode rules
+ *
+ * @param array $tags A key => value array of tids and terms
+ * @param bool $list_all Return all rules
+ */
+function regcode_og_get_rules($tags = array(), $list_all = FALSE) {
+
+  // Sanity check
+  if (!count($tags) && !$list_all) {
+    return array();
+  }
+   
+  // Query
+  $tid_string = implode(',', array_keys($tags));
+  $query = 'SELECT id, term_data.name AS term, regcode_og.og AS ogid
+            FROM {regcode_og} AS regcode_og
+            LEFT JOIN {term_data} AS term_data ON {regcode_og.tid = term_data.tid}';
+  if ($list_all) {
+    $res = db_query($query);
+  } else {
+    $res = db_query($query . ' WHERE term_data.tid IN (%s)', $tid_string);
+  }
+  
+  // Build array
+  $rules = array();
+  while ($row = db_fetch_array($res)) {
+    $rules[] = $row;
+  }
+  
+  return $rules;
+}
+
+
+/**
+ * Create a new regcode rule
+ */
+function regcode_og_create_rule($tid, $ogs) {
+  foreach ($ogs as $og) {
+    db_query("INSERT INTO {regcode_og} (tid, og) VALUES (%d, %d)", $tid, $og);
+  }
+}
+
+
+/**
+ * Implements hook_regcode_used()
+ *
+ * Add the new role to the user
+ */
+function regcode_og_regcode_used(&$edit, &$account, $regcode) {
+  // Do nothing if the regcode is not valid
+  if (!is_object($regcode)) {
+    return;
+  }
+
+  // Grab applicable roles for tags used
+  $rules = regcode_og_get_rules($regcode->tags);
+  
+  // Apply the rules
+  foreach ($rules as $rule) {
+    og_save_subscription($rule['ogid'], $account->uid, array('is_active' => 1));
+  }
+}

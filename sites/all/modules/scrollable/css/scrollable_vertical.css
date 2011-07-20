@@ -1,0 +1,105 @@
+
+/** source: http://www.flowplayer.org/tools/demos/scrollable/index.html **/
+
+/*********** scrollable container ***********/
+
+/**  
+ * root element for the scrollable.  
+ * when scrolling occurs this element stays still.  
+ */ 
+div.scrollable { 
+  /* required settings */ 
+  position: relative; 
+  overflow: hidden;              
+  float: left;    
+  width: 300px;
+  height: 660px;
+}
+ 
+/** 
+ * root element for scrollable items. Must be absolutely positioned 
+ * and it should have a super large width to accomodate scrollable items. 
+ * it's enough that you set width and height for the root element and 
+ * not for this element. 
+ */ 
+div.scrollable div.items {     
+  /* this cannot be too large */   
+  position: absolute;         
+  height: 2000em;
+}
+
+/**  
+ * a single item. must be floated on horizontal scrolling 
+ * typically this element is the one that *you* will style 
+ * the most. 
+ */ 
+div.scrollable div.items div.item { 
+  float: left;
+  height: 220px;
+} 
+ 
+/* you may want to setup some decorations to active item */ 
+div.items div.active { 
+    border: 1px inset #ccc;         
+    background-color: #fff; 
+}
+
+/*********** navigator ***********/
+
+/* position and dimensions of the navigator */
+div.navi {
+	margin-left: 148px;
+	width: 200px;
+	height: 20px;
+}
+
+
+/* items inside navigator */
+div.navi a {
+	width: 8px;
+	height: 8px;
+	float: left;
+	margin: 3px;
+	background: url(../img/navigator.png) 0 0 no-repeat;     
+	cursor: pointer;	
+}
+
+/* mouseover state */
+div.navi a:hover {
+	background-position: 0 -8px;      
+}
+
+/* active state (current page state) */
+div.navi a.active {
+	background-position: 0 -16px;     
+} 	
+
+/*********** left/right buttons ***********/
+
+/* prev, next, prevPage and nextPage buttons */
+a.prev, a.next, a.prevPage, a.nextPage {
+	display: block;
+	width: 18px;
+	height: 18px;
+	background: url(../img/left.png) no-repeat;
+	float: left;
+	margin: 0px 10px;
+	cursor: pointer;
+}
+
+/* mouseover state */
+a.prev:hover, a.next:hover, a.prevPage:hover, a.nextPage:hover {
+	background-position: 0px -18px;		
+}
+
+/* disabled navigational button */
+a.disabled {
+	visibility: hidden !important;		
+}
+
+/* next button uses another background image */
+a.next, a.nextPage {
+	background-image: url(../img/right.png);
+	clear: right;	
+}
+

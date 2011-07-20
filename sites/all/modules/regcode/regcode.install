@@ -1,0 +1,210 @@
+<?php
+// $Id: regcode.install,v 1.4.2.5 2010/03/25 04:56:05 aidan Exp $
+
+
+/**
+ * @file
+ * Install, uninstall and scheme functions for the regcode module.
+ */
+
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function regcode_uninstall() {
+  drupal_uninstall_schema('regcode');
+}
+
+
+/**
+ * Implementation of hook_install().
+ */
+function regcode_install() {
+  drupal_install_schema('regcode');
+  _regcode_install_vocabulary();
+}
+
+
+/**
+ * Create a vocabulary
+ */
+function _regcode_install_vocabulary() {
+  $vocabulary = array(
+    'name'      => t('Registration codes'),
+    'multiple'  => '1',
+    'required'  => '1',
+    'hierarchy' => '0',
+    'relations' => '0',
+    'module'    => 'regcode',
+    'nodes'     => FALSE,
+  );
+
+  taxonomy_save_vocabulary($vocabulary);
+  variable_set('regcode_vocabulary', $vocabulary['vid']);
+}
+
+
+/**
+ * Implementation of hook_update_N()
+ */
+function regcode_update_6200() {
+  $sql = array();
+
+  // Update our core columns
+  $datetime = array('type' => 'int','not null' => FALSE);
+  db_add_field($sql, 'regcode', 'created2', $datetime);
+  db_add_field($sql, 'regcode', 'lastused2', $datetime);
+  db_add_field($sql, 'regcode', 'begins2', $datetime);
+  db_add_field($sql, 'regcode', 'expires2', $datetime);
+
+  $sql[] = update_sql("UPDATE {regcode} SET created2 = UNIX_TIMESTAMP(created), lastused2 = UNIX_TIMESTAMP(lastused), begins2 = UNIX_TIMESTAMP(begins), expires2 = UNIX_TIMESTAMP(expires)");
+  
+  db_drop_field($sql, 'regcode', 'created');
+  db_drop_field($sql, 'regcode', 'lastused');
+  db_drop_field($sql, 'regcode', 'begins');
+  db_drop_field($sql, 'regcode', 'expires');
+
+  db_change_field($sql, 'regcode', 'created2', 'created', $datetime);
+  db_change_field($sql, 'regcode', 'lastused2', 'lastused', $datetime);
+  db_change_field($sql, 'regcode', 'begins2', 'begins', $datetime);
+  db_change_field($sql, 'regcode', 'expires2', 'expires', $datetime);
+  
+  // Install the new taxonomy table
+  $schema = regcode_schema();
+  db_create_table($sql, 'regcode_term', $schema['regcode_term']);
+  _regcode_install_vocabulary();
+  $vid = variable_get('regcode_vocabulary', 1);
+
+  // Create and assign taxonomy terms for each category
+  $res = db_query('SELECT DISTINCT(category) FROM {regcode}');
+  
+  while ($row = db_fetch_array($res)) {
+    // Create a term for the category
+    $form_values = array(
+      'name' => $row['category'],
+      'vid' => $vid,
+      'weight' => 0,
+    );
+    taxonomy_save_term($form_values);
+    $terms[$row['category']] = (int) $form_values['tid'];
+  }
+  
+  $res = db_query('SELECT rid, category FROM {regcode}');
+  while ($row = db_fetch_array($res)) {
+    $sql[] = update_sql(sprintf('INSERT INTO {regcode_term} (rid, tid) VALUES (%d, %d)', $row['rid'], $terms[$row['category']]));
+  }
+
+  // Drop the category field
+  db_drop_field($sql, 'regcode', 'category');
+  
+  return $sql;
+}
+
+
+/**
+ * Implementation of hook_schema().
+ */
+function regcode_schema() {
+
+  // Definition for the regcode table
+  $schema['regcode'] = array(
+    'description' => t('Hold registration codes'),
+    'fields' => array(
+      'rid' => array(
+        'description' => t('RID'),
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => t('User ID'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+      ),
+      'created' => array(
+        'description' => t('Code creation time'),
+        'type' => 'int',
+        'not null' => FALSE,
+      ),
+      'lastused' => array(
+        'description' => t('Code last used time'),
+        'type' => 'int',
+        'not null' => FALSE,
+      ),
+      'begins' => array(
+        'description' => t('Code activation date'),
+        'type' => 'int',
+        'not null' => FALSE,
+      ),
+      'expires' => array(
+        'description' => t('Code expiry date'),
+        'type' => 'int',
+        'not null' => FALSE,
+      ),
+      'code' => array(
+        'description' => t('The registration code'),
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'is_active' => array(
+        'description' => t('Whether the code is active'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 1,
+      ),
+      'maxuses' => array(
+        'description' => t('Maximum times a code can be used'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 1,
+      ),
+      'uses' => array(
+        'description' => t('Number of times the code has been used'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('rid'),
+    'unique keys' => array(
+      'code' => array('code')
+    ),
+  );
+
+  // Definition for the regcode_term table
+  $schema['regcode_term'] = array(
+    'description' => t('Map registration codes and taxonomy'),
+    'fields' => array(
+      'id' => array(
+        'description' => t('ID'),
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'rid' => array(
+        'description' => t('Regcode ID'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+      ),
+      'tid' => array(
+        'description' => t('Term ID'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+      ),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'regcode_term' => array('rid', 'tid'),
+    ),
+  );
+
+  return $schema;
+}

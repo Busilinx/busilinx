@@ -1,0 +1,26 @@
+<?php
+// $Id: webform_private_upload.install,v 1.1 2009/09/10 15:47:46 jcfiala Exp $
+
+/**
+ * @file
+ * This file includes the install information for the webform private upload module.
+ *
+ * This install is mostly used to set the weight of the module.
+ */
+
+/**
+* Implementation of hook_install().
+*
+* Ensures webform_private_upload runs after module upload
+*/
+function webform_private_upload_install() {
+  $weight = (int)db_result(db_query("SELECT weight FROM {system} WHERE name = 'upload'"));
+  db_query("UPDATE {system} SET weight = %d WHERE name = 'webform_private_upload'", $weight+1);
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function webform_private_upload_uninstall() {
+  variable_del('webform_private_upload_path');
+}

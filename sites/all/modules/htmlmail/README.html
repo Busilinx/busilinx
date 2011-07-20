@@ -1,0 +1,112 @@
+<h2>HTML Mail</h2>
+<p><a href="http://drupal.org/project/htmlmail">HTML Mail</a> lets you theme your outgoing messages the same way you theme the rest of your website.</p>
+<h2>Requirements</h2>
+<ul>
+  <li>
+    <p><a href="http://drupal.org/project/echo">Echo</a></p>
+  </li>
+  <li>
+    <p><a href="http://drupal.org/project/mailmime">Mail MIME</a></p>
+  </li>
+  <li>
+    <p><a href="http://drupal.org/project/mailsystem">Mail System</a></p>
+  </li>
+</ul>
+<h2>Installation</h2>
+<p><a href="http://drupal.org/documentation/install/modules-themes/modules-5-6">Install as usual.</a></p>
+<p>The following additional modules, while not required, are highly recommended:</p>
+<ul>
+  <li>
+    <p><a href="http://drupal.org/project/emogrifier">Emogrifier</a></p>
+  </li>
+  <li>
+    <p><a href="http://drupal.org/project/pathologic">Pathologic</a></p>
+  </li>
+  <li>
+    <p><a href="http://drupal.org/project/filter_transliteration">Filter transliteration</a></p>
+    <p><em>Also available as a <a href="http://drupal.org/node/1095278#comment-4219530">patch</a>.</em></p>
+  </li>
+</ul>
+<h2>Configuration</h2>
+<p>Visit the <a href="http://drupal.org/project/mailsystem">Mail System</a> settings page at <u>admin/settings/mailsystem</u> to select which parts of Drupal will use <a href="http://drupal.org/project/htmlmail">HTML Mail</a> instead of the <a href="http://api.drupal.org/api/drupal/modules--system--system.mail.inc/class/DefaultMailSystem/7">default</a> <a href="http://api.drupal.org/api/drupal/includes--mail.inc/function/drupal_mail_system/7">mail system</a>.</p>
+<p>Visit the <a href="http://drupal.org/project/htmlmail">HTML Mail</a> settings page at <u>admin/settings/htmlmail</u> to select a theme, pre-filter, and post-filter for your messages.</p>
+<h2>Theming</h2>
+<p>The email message text goes through four transformations before sending:</p>
+<ol style="list-style-type: decimal;">
+  <li>
+    <p>The <em>Text format pre-filter</em> from the module settings page is applied. This should be the same text format that your website uses for contributed content such as comments or blog postings. For consistency and security, it should include the the <a href="http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_htmlcorrector/6">Correct faulty and chopped off HTML</a> from <a href="http://api.drupal.org/api/drupal/modules--filter--filter.module/6">filter.module</a>, or a better replacement such as <a href="http://drupal.org/project/htmlpurifier">HTML Purifier</a> or <a href="http://drupal.org/project/htmlawed">htmLawed</a>.</p>
+  </li>
+  <li>
+    <p>A theme template is applied. The default template is the included <code>htmlmail.tpl.php</code> file. You may copy this file to your theme directory and use it to customize the contents and formatting of your messages. The comments within the file contain complete documentation on its usage.</p>
+  </li>
+  <li>
+    <p>The message may be wrapped in a website theme selected on the module settings page. Creating an email-specific sub-theme lets you use the full power of the <a href="http://drupal.org/documentation/theme">drupal theme system</a> to format your messages.</p>
+  </li>
+  <li>
+    <p>The <em>Text format post-filter</em> from the module settings page is applied. For best results, this should be an email-specific input format containing the following text format filters:</p>
+    <ul>
+      <li><a href="http://drupal.org/project/filter_transliteration">Transliteration</a></li>
+      <li><a href="http://drupal.org/project/emogrifier">Emogrifier</a></li>
+      <li><a href="http://drupal.org/project/pathologic">Pathologic</a></li>
+      <li><a href="http://api.drupal.org/api/drupal/modules--filter--filter.module/function/_filter_htmlcorrector/6">Correct faulty and chopped off HTML</a></li>
+    </ul>
+  </li>
+</ol>
+<h2>Troubleshooting</h2>
+<p>Visit the <a href="http://drupal.org/project/issues/htmlmail">issue queue</a> for support and feature requests.</p>
+<h2>Related Modules</h2>
+<dl>
+  <dt><strong>Emogrifier</strong></dt>
+  <dd>
+    <p>http://drupal.org/project/emogrifier</p>
+  </dd>
+  <dt><strong>HTML Purifier</strong></dt>
+  <dd>
+    <p>http://drupal.org/project/htmlpurifier</p>
+  </dd>
+  <dt><strong>htmLawed</strong></dt>
+  <dd>
+    <p>http://drupal.org/project/htmlawed</p>
+  </dd>
+  <dt><strong>Mail MIME</strong></dt>
+  <dd>
+    <p>http://drupal.org/project/mailmime</p>
+  </dd>
+  <dt><strong>Mail System</strong></dt>
+  <dd>
+    <p>http://drupal.org/project/mailsystem</p>
+  </dd>
+  <dt><strong>Pathologic</strong></dt>
+  <dd>
+    <p>http://drupal.org/project/pathologic</p>
+  </dd>
+  <dt><strong>Transliteration</strong></dt>
+  <dd>
+    <p>http://drupal.org/project/transliteration</p>
+  </dd>
+</dl>
+<h2>Documentation</h2>
+<dl>
+  <dt><strong>filter.module</strong></dt>
+  <dd>D6: http://api.drupal.org/api/drupal/modules--filter--filter.module/6</dd>
+  <dd>
+    <p>D7: http://api.drupal.org/api/drupal/modules--filter--filter.module/7</p>
+  </dd>
+  <dt><strong>Installing contributed modules</strong></dt>
+  <dd>D6: http://drupal.org/documentation/install/modules-themes/modules-5-6</dd>
+  <dd>
+    <p>D7: http://drupal.org/documentation/install/modules-themes/modules-7</p>
+  </dd>
+  <dt><strong>Theming guide</strong></dt>
+  <dd>
+    <p>http://drupal.org/documentation/theme</p>
+  </dd>
+</dl>
+<h2>Original Author</h2>
+<ul>
+  <li><a href="http://drupal.org/user/1171">Chris Herberte</a></li>
+</ul>
+<h2>Current Maintainer</h2>
+<ul>
+  <li><a href="http://drupal.org/user/36148">Bob Vincent</a></li>
+</ul>

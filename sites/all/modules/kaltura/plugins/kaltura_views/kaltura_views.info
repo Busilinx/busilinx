@@ -1,0 +1,12 @@
+name = Kaltura Media Views
+package = Kaltura Media Management
+core = 6.x
+dependencies[] = kaltura
+dependencies[] = views
+description = View your top videos, most viewed, users videos, etc'.
+; Information added by drupal.org packaging script on 2011-03-03
+version = "6.x-2.0-beta1"
+core = "6.x"
+project = "kaltura"
+datestamp = "1299123068"
+

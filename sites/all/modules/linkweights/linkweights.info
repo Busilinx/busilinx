@@ -1,0 +1,11 @@
+name = Link Weights
+project = Link Weights
+core = 6.x
+description = Place weights on node links
+
+; Information added by drupal.org packaging script on 2009-07-22
+version = "6.x-1.0-beta1"
+core = "6.x"
+project = "linkweights"
+datestamp = "1248290453"
+

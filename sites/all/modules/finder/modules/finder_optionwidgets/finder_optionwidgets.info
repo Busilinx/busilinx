@@ -1,0 +1,12 @@
+; $Id: finder_optionwidgets.info,v 1.1.2.11 2009/05/02 07:49:17 danielb Exp $
+name = Finder Option Widgets
+description = "Enables selects, radios, and checkboxes for finder."
+core = 6.x
+package = "Finder"
+dependencies[] = finder
+; Information added by drupal.org packaging script on 2010-06-13
+version = "6.x-1.8"
+core = "6.x"
+project = "finder"
+datestamp = "1276397106"
+

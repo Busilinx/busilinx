@@ -1,0 +1,14 @@
+; $Id: regcode_ie.info,v 1.1.2.1 2010/03/06 11:42:17 aidan Exp $
+name = Import and export
+description = Adds import and export functionality
+core = 6.x
+package = Registration
+dependencies[] = regcode
+dependencies[] = views_bonus_export
+
+; Information added by drupal.org packaging script on 2011-02-18
+version = "6.x-2.7"
+core = "6.x"
+project = "regcode"
+datestamp = "1298049136"
+

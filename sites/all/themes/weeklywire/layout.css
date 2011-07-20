@@ -1,0 +1,9 @@
+table{border-spacing:0;}
+td {padding:0;}
+
+.views-admin-links {
+	background: none repeat scroll 0 0 #EEEEEE;
+    font-size: 10px;
+    position: absolute;
+}
+

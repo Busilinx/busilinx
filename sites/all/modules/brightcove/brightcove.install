@@ -1,0 +1,43 @@
+<?php
+// $Id: brightcove.install,v 1.1.2.1 2010/05/25 17:39:24 meba Exp $
+
+/**
+  * @file
+  * Installation file for Brightcove module.
+  */
+
+/**
+  * Implementation of hook_requirements().
+  */
+function brightcove_requirements($phase) {
+  global $base_url;
+  $requirements = array();
+  $t = get_t();
+
+  if (!($path = variable_get('brightcove_echove_path', FALSe)) || $reset) {
+    $files = drupal_system_listing('^echove\.php$', 'libraries', 'basename', 0);
+    if (isset($files['echove.php'])) {
+      $path = dirname($files['echove.php']->filename);
+      variable_set('brightcove_echove_path', $path);
+    }
+  }
+
+  if (!function_exists('curl_init')) {
+    $requirements['curl']['title'] = $t('cURL');
+    $requirements['curl']['description'] = $t('Echove SDK requires a cURL library. You should install it on your server.');
+    $requirements['curl']['severity'] = REQUIREMENT_ERROR;
+    $requirements['curl']['value'] = $t(': missing');
+  }
+
+  if (!$path) {
+    $requirements['echove']['title'] = $t('Echove SDK');
+    $requirements['echove']['description'] = $t('Echove SDK is missing. Please install it from !url.', array('!url' => l('Echove.net', 'http://www.echove.net')));
+    $requirements['echove']['severity'] = REQUIREMENT_ERROR;
+    $requirements['echove']['value'] = $t('Missing');
+  } else {
+    $requirements['echove']['title'] = $t('Echove SDK');
+    $requirements['echove']['severity'] = REQUIREMENT_OK;
+    $requirements['echove']['value'] = $t('Installed');
+  }
+  return $requirements;
+}

@@ -1,0 +1,94 @@
+/**
+ * $Id: ie-lte-7.css,v 1.1.2.1 2009/12/06 00:45:43 jmburnz Exp $
+ * adaptivethemes.com
+ *
+ * @file ie-lte-7.css
+ *
+ * Support for the Conditional Styles module. This module allows themes 
+ * to specify conditional stylesheets in their .info file and the conditional 
+ * comments will be automatically included at the end of the standard $styles variable. 
+ * 
+ * http://drupal.org/project/conditional_styles
+ *
+ * The module is not included in the base theme, you must download and install it.
+ */
+/*
+.section-links-frontpage .menu li a {
+color:transparent;
+display:block;
+font-family:Verdana,Geneva,"DejaVu Sans",sans-serif;
+font-size:0.95em;
+font-weight:bold;
+overflow:hidden;
+text-decoration:none;
+text-indent:-10000px;
+text-transform:capitalize;
+}
+
+#header-region{
+	position:static;
+	clear:left;
+	width:35.1em;
+}
+#header-region .menu {
+margin-top:-2.75em;
+}
+
+#header-region .menu li a {
+background:none repeat scroll 0 0 #2A2463;
+color:transparent;
+padding:0.44em 1em;
+text-indent:-10000px;
+text-transform:capitalize;
+}
+#header-region .menu li a.logout {
+background:url("../../images/search-bar-sprite.png") repeat scroll -258px -1px transparent;
+padding:0 4.2em 0 1.8em;
+}
+
+#header-region .menu li a.addcontent {
+background:url("../../images/search-bar-sprite.png") repeat scroll 718px -1px  transparent;
+padding:0 4.8em 0 2.0em;
+}
+
+#header-region .menu li a.myaccount {
+background:url("../../images/search-bar-sprite.png") repeat scroll -126px -1px transparent;
+padding:0 4.4em 0 1.9em;
+}
+
+#header-region .menu li a.login {
+	background:url("../../images/search-bar-sprite.png") repeat scroll -380px -1px transparent;
+	padding:0 4.2em 0 1.8em;
+}
+
+#header-region .menu li a.joinin {
+	background:url("../../images/search-bar-sprite.png") repeat scroll -502px -1px transparent;
+	padding:0 4.2em 0 1.8em;
+}
+#primary {margin-top:10px;}
+
+
+
+#search-theme-form .edit-submit input, #search-theme-form .edit-submit-1 input {
+background:url("../../images/search-bar-sprite.png") repeat scroll -605px 0 transparent;
+border:medium none;
+color:#2A2463;
+cursor:pointer;
+font-weight:bold;
+height:2.15em;
+margin:0;
+width: 8.7em;
+text-indent:-10000px;
+text-transform:capitalize;
+color:transparent;
+}
+
+#search {height:2.6em;}*/
+
+#user-login-form {
+    position: absolute;
+    right: 15px;
+    text-align: center;
+    top: -34px;
+    z-index: 1;
+}

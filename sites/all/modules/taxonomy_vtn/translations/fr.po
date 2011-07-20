@@ -1,0 +1,720 @@
+# $Id: fr.po,v 1.1.2.2 2009/08/18 08:06:32 alexiswilke Exp $
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  taxonomy_vtn.admin.inc,v 1.1.2.7 2009/07/18 19:06:45 alexiswilke
+#  taxonomy_vtn_blocks.module,v 1.1.2.8 2009/07/26 21:39:07 alexiswilke
+#  taxonomy_vtn.pages.inc,v 1.1.2.53 2009/07/26 21:39:07 alexiswilke
+#  taxonomy_vtn_terms_blocks.module,v 1.1.2.1 2009/05/09 10:27:59 alexiswilke
+#  taxonomy_vtn.module,v 1.1.2.31 2009/07/26 21:39:07 alexiswilke
+#  taxonomy_vtn.install,v 1.1.2.8 2008/12/13 01:56:12 alexiswilke
+#  taxonomy_vtn.info,v 1.1.2.3 2008/12/13 01:56:12 alexiswilke
+#  taxonomy_vtn_blocks.info,v 1.1.2.4 2009/07/26 21:39:07 alexiswilke
+#  taxonomy_vtn_terms_blocks.info,v 1.1.2.1 2009/05/09 10:27:59 alexiswilke
+#  taxonomy_vtn_blocks.install,v 1.1.2.4 2009/07/26 21:39:07 alexiswilke
+#  taxonomy_vtn_terms_blocks.install,v 1.1.2.1 2009/05/09 10:27:59 alexiswilke
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.3\n"
+"POT-Creation-Date: 2009-08-10 18:07-0700\n"
+"PO-Revision-Date: 2009-08-11 00:53-0700\n"
+"Last-Translator: Alexis Wilke <alexis@m2osw.com>\n"
+"Language-Team: <>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n>1);\n"
+
+#: taxonomy_vtn.admin.inc:34
+msgid "Global"
+msgstr "Global"
+
+#: taxonomy_vtn.admin.inc:40
+msgid "When Caching is on, entire index pages are being cached and changes on terms, nodes or vocabularies may not always have an effect until the cache gets rebuilt."
+msgstr "Quand le cache est utilisé, les pages d'index sont sauvées dans le cache. Changer un terme, un nœud ou un vocabulaire ne sera pas toujours suffisent pour affecter le cache jusqu'au moment ou vous l'effacez."
+
+#: taxonomy_vtn.admin.inc:40
+msgid "Note"
+msgstr "Note"
+
+#: taxonomy_vtn.admin.inc:40
+msgid "Now this module supports operations"
+msgstr "Maintenant ce module supporte les opérations"
+
+#: taxonomy_vtn.admin.inc:40
+msgid "insert, update, delete"
+msgstr "insérer, mise à jour, effacer"
+
+#: taxonomy_vtn.admin.inc:40
+msgid "for nodes, terms and vocabularies and is expected to automaticaly rebuild its cache. In most cases this is a safe choice. However you can !link now."
+msgstr "pour les nœuds et vocabulaires et le cache est supposé être effacé de façon automatique. Dans la plupart des cas, c'est un bon choix. Néanmoins, il est possible d'!link maintenant."
+
+#: taxonomy_vtn.admin.inc:40
+msgid "clear your Taxonomy VTN cache"
+msgstr "effacer votre cache Taxonomy VTN"
+
+#: taxonomy_vtn.admin.inc:44
+msgid "Caching"
+msgstr "Utiliser le cache"
+
+#: taxonomy_vtn.admin.inc:51
+msgid "!setlocale is supported.!newline In other words, the alphabetical index with letters such as !letters can be properly sorted in your language."
+msgstr "!setlocale est supporté.!newline En d'autres termes, l'index alphabètique avec des lettres tel que !letters seront correctement ordonnées dans votre langue."
+
+#: taxonomy_vtn.admin.inc:54
+msgid "Your server does not support !setlocale or your version of php is too old (use >= 4.4.0 or >= 5.0.2).!newline In other words, the alphabetical index sorting with letters such as !letters cannot be properly sorted in your language."
+msgstr "Votre serveur ne supporte pas !setlocale ou votre version PHP est trop vieille (utilisez >= 4.4.0 ou >= 5.0.2).!newline En d'autre termes, l'index alphabètique avec des lettres telque !letters ne seront pas correctement ordonnées dans votre langue."
+
+#: taxonomy_vtn.admin.inc:59
+msgid "Use setlocale"
+msgstr "Utiliser setlocale"
+
+#: taxonomy_vtn.admin.inc:60
+msgid "If you have some trouble with your indexes, try turning off this option."
+msgstr "Si vous avez des problèmes avec vos index, essayez de ne pas utiliser cette option."
+
+#: taxonomy_vtn.admin.inc:68
+msgid "List of locales supported by your server"
+msgstr "Liste des locales supportées par votre serveur"
+
+#: taxonomy_vtn.admin.inc:69
+msgid "Select your language code for proper sorting."
+msgstr "Sélectionnez le code de votre langue pour ordonner correctement."
+
+#: taxonomy_vtn.admin.inc:83
+msgid "User friendly titles"
+msgstr "Titre amicaux"
+
+#: taxonomy_vtn.admin.inc:89
+msgid "Overwrite links"
+msgstr "Changer les liens"
+
+#: taxonomy_vtn.admin.inc:95
+msgid "Quick link to edit terms"
+msgstr "Liens rapide pour éditer les termes"
+
+#: taxonomy_vtn.admin.inc:96
+msgid "When selected, users who have administrative rights for the Taxonomy and Taxonomy VTN modules (BOTH RIGHTS REQUIRED) will see an <em>edit</em> link in the site index."
+msgstr "Quand sélectionné, les utilisateurs qui ont l'autorisation administrative d'éditer les termes de cette taxonomie et de Taxonomy VTN (LES DEUX AUTORISATIONS SONT REQUISES) pourront voir un lien <em>éditer</em> dans leur index."
+
+#: taxonomy_vtn.admin.inc:106 taxonomy_vtn_blocks/taxonomy_vtn_blocks.module:172
+msgid "Vocabularies"
+msgstr "Vocabulaires"
+
+#: taxonomy_vtn.admin.inc:107
+msgid "Set how the vocabularies index is displayed"
+msgstr "Définir comment les index de vocabulaires sont affichés"
+
+#: taxonomy_vtn.admin.inc:113
+msgid "Master index name (default to \"Master index\")"
+msgstr "Nom de l'index primaire (défaut: \"Index primaire\")"
+
+#: taxonomy_vtn.admin.inc:114 taxonomy_vtn.pages.inc:57;1215
+msgid "Master index"
+msgstr "Index primaire"
+
+#: taxonomy_vtn.admin.inc:118
+msgid "Hide master index title"
+msgstr "Cacher le titre de l'index primaire"
+
+#: taxonomy_vtn.admin.inc:120
+msgid "If checked, do not add an extra title in the master index page (especially useful when your title and first group have the same name.)"
+msgstr "Quand sélectionné, ne montre pas le titre de l'index primaire sur la page d'index (particulièrement utile quand votre titre et votre premier group ont le même nom)."
+
+#: taxonomy_vtn.admin.inc:124
+msgid "Default groups"
+msgstr "Groupes par défaut"
+
+#: taxonomy_vtn.admin.inc:126
+msgid "List of comma separated groups. Used when accessing the master index as taxonomy_vtn. If empty, ignore the groups (i.e. same display as before.)"
+msgstr "Liste les noms de groupes séparés par des virgules. Utilisé quand l'utilisateur accède l'index primaire de Taxonomy VTN. Quand c'est vide, ignore tous les groupes (même affichage que sans groupe)."
+
+#: taxonomy_vtn.admin.inc:130;316
+msgid "Show descriptions"
+msgstr "Montrer les descriptions"
+
+#: taxonomy_vtn.admin.inc:135;219;306;311;436
+msgid "Show"
+msgstr "Montrer"
+
+#: taxonomy_vtn.admin.inc:135
+msgid "Hide / Show descriptions"
+msgstr "Cacher / Montrer les descriptions"
+
+#: taxonomy_vtn.admin.inc:140 taxonomy_vtn_blocks/taxonomy_vtn_blocks.module:57
+msgid "Show count of terms"
+msgstr "Montrer le nombre de termes"
+
+#: taxonomy_vtn.admin.inc:145 taxonomy_vtn_blocks/taxonomy_vtn_blocks.module:46
+msgid "Show empty vocabularies"
+msgstr "Montrer les vocabulaires vides"
+
+#: taxonomy_vtn.admin.inc:150;331;451
+msgid "Show index letters"
+msgstr "Montrer un index avec les lettres"
+
+#: taxonomy_vtn.admin.inc:155;168;361;374;456
+msgid "One"
+msgstr "Un"
+
+#: taxonomy_vtn.admin.inc:156;169;362;375;457
+msgid "Two"
+msgstr "Deux"
+
+#: taxonomy_vtn.admin.inc:157;170;363;376
+msgid "Three"
+msgstr "Trois"
+
+#: taxonomy_vtn.admin.inc:161;367
+msgid "Letters to group"
+msgstr "Lettres à grouper"
+
+#: taxonomy_vtn.admin.inc:162
+msgid "Group vocabulary letters together. Example:"
+msgstr "Grouper les lettres d'un vocabulaire ensemble. Exemple:"
+
+#: taxonomy_vtn.admin.inc:162;368
+msgid "or"
+msgstr "ou"
+
+#: taxonomy_vtn.admin.inc:174;380;461
+msgid "Number of columns"
+msgstr "Nombre de colonnes"
+
+#: taxonomy_vtn.admin.inc:181
+msgid "Directly go to the terms if there is only one vocabulary"
+msgstr "Directement montrer les termes s'il n'y a qu'un seul vocabulaire"
+
+#: taxonomy_vtn.admin.inc:187 taxonomy_vtn_blocks/taxonomy_vtn_blocks.module:69
+msgid "Exclude vocabularies by identifiers"
+msgstr "Exclure les vocabulaires par identifieurs"
+
+#: taxonomy_vtn.admin.inc:188;195;225;231;404;411 taxonomy_vtn_blocks/taxonomy_vtn_blocks.module:70;76 taxonomy_vtn_terms_blocks/taxonomy_vtn_terms_blocks.module:78;84
+msgid "Example: 1, 3, 11, 5"
+msgstr "Exemple: 1, 3, 11, 5"
+
+#: taxonomy_vtn.admin.inc:194
+msgid "Include vocabularies by identifiers, leave empty to include all"
+msgstr "Inclure les vocabulaires par identifieurs, laisser vide pour inclure tous les vocabulaires"
+
+#: taxonomy_vtn.admin.inc:202;417
+msgid "Input format"
+msgstr "Format d'entrée"
+
+#: taxonomy_vtn.admin.inc:203
+msgid "Select a format to use to write out the descriptions."
+msgstr "Selectionner le format à utiliser pour écrire les descriptions"
+
+#: taxonomy_vtn.admin.inc:212 taxonomy_vtn.module:146;155;164;173;182
+msgid "Terms"
+msgstr "Termes"
+
+#: taxonomy_vtn.admin.inc:213;258
+msgid "Set how the terms index is displayed"
+msgstr "Définir l'affichage de l'index des termes"
+
+#: taxonomy_vtn.admin.inc:219;306 taxonomy_vtn.pages.inc:1079
+msgid "Back to vocabularies"
+msgstr "Retourner aux vocabulaires"
+
+#: taxonomy_vtn.admin.inc:219
+msgid "on errors."
+msgstr "quand une erreur est détecté."
+
+#: taxonomy_vtn.admin.inc:224
+msgid "Exclude terms id from all tables"
+msgstr "Exclure les terms par identifier de toutes les tables"
+
+#: taxonomy_vtn.admin.inc:230
+msgid "Identifiers of terms to include from all tables, leave empty to include all"
+msgstr "Identifieurs des termes à inclure dans toutes les tables, laisser vide pour tous les inclure"
+
+#: taxonomy_vtn.admin.inc:257
+msgid "VTN Terms"
+msgstr "Termes VTN"
+
+#: taxonomy_vtn.admin.inc:264
+msgid "Taxonomy VTN Group"
+msgstr "Groupe de Taxonomy VTN"
+
+#: taxonomy_vtn.admin.inc:266
+msgid "Taxonomies with a group name appear under http://www.example.com/taxonomy_vtn/group/&lt;group name&gt;, do not use the name 'all' since that is a reserved name."
+msgstr "Les taxonomies avec un groupe apparaissent sous http://www.example.com/taxonomy_vtn/group/&lt;nom du groupe&gt;, n'utilisez pas le nom 'all' qui est réservé."
+
+#: taxonomy_vtn.admin.inc:270
+msgid "Long description"
+msgstr "Description longue"
+
+#: taxonomy_vtn.admin.inc:272
+msgid "Describes this vocabulary in details. This text appears at the top of the terms page. If you use the parent/child scheme, then this description only appears at the top of the page showing the top-most (root) terms. The description of the vocabulary will be used as a teaser in the vocabulary listing page."
+msgstr "Décrivez ce vocabulaire en détail. Ce texte apparait en haut de la page des termes. Si vous utilisez le système parent/enfant, alors cette description n'apparaîtra qu'en haut de la page affichant le terme racine (root). La description du vocabulaire sera utilisée comme un résumé sur page avec la liste de tous les vocabulaires."
+
+#: taxonomy_vtn.admin.inc:276
+msgid "Unwanted characters in sort"
+msgstr "Caractères non voulus dans la fonction d'ordre"
+
+#: taxonomy_vtn.admin.inc:278
+msgid "List a set of characters to ignore in your terms. Useful if you have terms that start with a (, @, $, ., etc. but do not want to have such an entry in your term index. <span style=\"color: red;\">WARNING:</span> removing the period (.) means removing the decimal point in numbers."
+msgstr "Liste de caractères à ignorer dans vos termes. Très utile pour les vocabulaires qui ont des termes commançant par (, @, $, ., etc. qui ne doivent pas utiliser ces caractères dans leur index. <span style=\"color: red;\">ATTENTION:</span> enlever le point (.) signifie enlever le point decimal des nombres en anglais ou dans un language de programmation."
+
+#: taxonomy_vtn.admin.inc:282
+msgid "Word to sort numerically"
+msgstr "Mot à ordonner de façon numérique"
+
+#: taxonomy_vtn.admin.inc:284
+msgid "Enter the word to be sorted numerically. Use 0 to only sort alphabetically."
+msgstr "Entrer le numéro du mot à ordonner numériquement. Utilisez 0 pour n'ordonner qu'alphabétiquement."
+
+#: taxonomy_vtn.admin.inc:288
+msgid "Parent/child links"
+msgstr "Liens parent/enfant"
+
+#: taxonomy_vtn.admin.inc:290
+msgid "Handle the parent/child relationships of this vocabulary so links of a parent points to a child instead of the list of nodes."
+msgstr "Utilise les relations parent/enfant de ce vocabulaire de sort à ce que les parents soient liés envers leurs enfants plutôt que la liste des nœuds attachés à ce terme."
+
+#: taxonomy_vtn.admin.inc:294
+msgid "Show parent in children's list"
+msgstr "Montrer les parent dans la liste des enfants"
+
+#: taxonomy_vtn.admin.inc:296
+msgid "The parent/child links prevent you from actually accessing the list of nodes of a parent term. This flag asks the system to add a link at the top to the list of nodes of the parent term being displayed."
+msgstr "Par défaut, les liens des parents aux enfants vous empêche d'acceder au nœuds des termes parents. Ce drapeau demande au système d'ajouter un lien dans la liste des nœuds de l'enfant qui pointe aux nœuds du terme parent."
+
+#: taxonomy_vtn.admin.inc:300
+msgid "Show parent nodes after the terms if any"
+msgstr "Afficher les nœuds du terme parent après les termes enfants"
+
+#: taxonomy_vtn.admin.inc:302
+msgid "When displaying a parent term, if it has nodes, list them right after the list of children terms. (Note: you probably want to hide the parent term from the list of terms, i.e. previous checkbox.)"
+msgstr "Quand les termes d'un parent sont affichés, et si ce terme parent à des nœuds, alors liste ces nœuds juste après la liste des termes enfants. (Note: vous voudrez certainement cacher le terme parent de la liste des termes, ç.a.d le drapeau précédent)."
+
+#: taxonomy_vtn.admin.inc:311 taxonomy_vtn.pages.inc:290;944
+msgid "Show / Hide descriptions"
+msgstr "Montrer / Cacher les descriptions"
+
+#: taxonomy_vtn.admin.inc:321 taxonomy_vtn_blocks/taxonomy_vtn_blocks.module:63 taxonomy_vtn_terms_blocks/taxonomy_vtn_terms_blocks.module:71
+msgid "Show count of nodes"
+msgstr "Montrer le nombre de nœuds"
+
+#: taxonomy_vtn.admin.inc:326
+msgid "Show empty"
+msgstr "Montrer les entrées vides"
+
+#: taxonomy_vtn.admin.inc:336
+msgid "Show synonyms"
+msgstr "Montrer les synonymes"
+
+#: taxonomy_vtn.admin.inc:341
+msgid "Show related terms"
+msgstr "Montrer les termes en relation"
+
+#: taxonomy_vtn.admin.inc:346
+msgid "Show a list of links at the top of all the letters"
+msgstr "Montrer la liste de liens en haut de toutes les lettres"
+
+#: taxonomy_vtn.admin.inc:351
+msgid "Break the quick index on two lines"
+msgstr "Mettre la liste des lettres sur deux lignes"
+
+#: taxonomy_vtn.admin.inc:356
+msgid "Show statistics at the bottom of the page"
+msgstr "Montrer les statistiques en bas de page"
+
+#: taxonomy_vtn.admin.inc:368
+msgid "Group terms letters together. Example:"
+msgstr "Grouper les lettres des termes ensemble. Exemple"
+
+#: taxonomy_vtn.admin.inc:386
+msgid "List of nodes"
+msgstr "Liste des nœuds"
+
+#: taxonomy_vtn.admin.inc:396
+msgid "Where people are sent clicking a term"
+msgstr "Où les utilisateurs sont envoyés quand ils cliquent un terme"
+
+#: taxonomy_vtn.admin.inc:403
+msgid "Exclude terms id from the terms table of this vocabulary"
+msgstr "Exclure les termes par leur identifieurs de la teable des termes de ce vocabulaire"
+
+#: taxonomy_vtn.admin.inc:410
+msgid "Include terms id from the terms table of this vocabulary, leave empty to include all"
+msgstr "Inclure ces termes, défini par leur identifieurs, dans la table des termes de ce vocabulaire, laissez vide pour inclure tous les termes"
+
+#: taxonomy_vtn.admin.inc:418
+msgid "Select the format for this taxonomy terms"
+msgstr "Sélectionné le format à utiliser pour les termes de cette taxonomie"
+
+#: taxonomy_vtn.admin.inc:429
+msgid "VTN Nodes"
+msgstr "Nœuds VTN"
+
+#: taxonomy_vtn.admin.inc:430
+msgid "Set how the nodes index is displayed"
+msgstr "Définir l'affichage de l'index des nœuds"
+
+#: taxonomy_vtn.admin.inc:436
+msgid "Back to terms"
+msgstr "Retourner aux termes"
+
+#: taxonomy_vtn.admin.inc:441
+msgid "Show count of comments"
+msgstr "Montrer le nombre de commentaires"
+
+#: taxonomy_vtn.admin.inc:446
+msgid "Show count for nodes without comments"
+msgstr "Montrer le nombre de commentaires même pour les nœuds sans commentaires"
+
+#: taxonomy_vtn.admin.inc:469
+msgid "Links per page"
+msgstr "Nœuds par page"
+
+#: taxonomy_vtn.admin.inc:470
+msgid "How many links should be displayed per page"
+msgstr "Combien de liens doivent être affichés par page"
+
+#: taxonomy_vtn.admin.inc:475
+msgid "Use pager for nodes"
+msgstr "Utiliseur le pageur pour les nœuds"
+
+#: taxonomy_vtn.admin.inc:495
+msgid "Long description (Taxonomy VTN)"
+msgstr "Description longue (Taxonomy VTN)"
+
+#: taxonomy_vtn.admin.inc:497
+msgid "Describes this term in details. This text appears at the top of the terms page showing the children of this term. You need to use the parent/child scheme of the Taxonomy VTN module, then this description will appear at the top of the page showing the children of this term. The usual Description of the term will be used as a teaser in the page where this term is listed."
+msgstr "Descrire ce term en détail. Ce texte apparaît en haut de la page de ce terme quand le module affiche les enfants de ce terme. Vous avez besoin d'utiliser le système avec les parents et enfants du module Taxonomy VTN pour voir l'utilisateur de cette description. La description habituelle du terme sera utilisée comme un résumé dans la page d'index ou ce terme est listé."
+
+#: taxonomy_vtn.pages.inc:58;1214
+msgid "Home"
+msgstr "Accueil"
+
+#: taxonomy_vtn.pages.inc:298
+msgid "No data to display. The option to not show empty vocabularies is certainly selected."
+msgstr "Aucune donnée à afficher. L'option demandant de ne pas afficher les vocabulaires vides est certainement sélectionnée."
+
+#: taxonomy_vtn.pages.inc:305
+msgid "No data to display. There is no vocabularies or they all are excluded from display."
+msgstr "Aucune donnée à afficher. Il n'y a pas de vocabulaires ou ils sont tous exclus de l'affichage."
+
+#: taxonomy_vtn.pages.inc:403;1061
+msgid "Please select a vocabulary first"
+msgstr "Merci de sélectionner un vocabulaire"
+
+#: taxonomy_vtn.pages.inc:413
+msgid "Bad vocabulary identifier (!voc_id)"
+msgstr "Identifieur de vocabulaire invalid (!voc_id)"
+
+#: taxonomy_vtn.pages.inc:415
+msgid "No data to display. You probably have no vocabulary with vid = !voc_id"
+msgstr "Aucune donnée à afficher. Vous n'avez certainement pas de vocabulaire avec vid = !voc_id"
+
+#: taxonomy_vtn.pages.inc:419;982;997;1036
+msgid "vocabularies"
+msgstr "vocabulaires"
+
+#: taxonomy_vtn.pages.inc:421;984;999;1038;1231;1266
+msgid "master index"
+msgstr "index primaire"
+
+#: taxonomy_vtn.pages.inc:423;986;1001;1040;1233;1268
+msgid "Back to"
+msgstr "Returner à"
+
+#: taxonomy_vtn.pages.inc:438
+msgid "Terms in @vocabulary"
+msgstr "Termes dans @vocabulary"
+
+#: taxonomy_vtn.pages.inc:736 taxonomy_vtn_terms_blocks/taxonomy_vtn_terms_blocks.module:180
+msgid "edit"
+msgstr "éditer"
+
+#: taxonomy_vtn.pages.inc:848
+msgid "Related terms"
+msgstr "Termes en relation"
+
+#: taxonomy_vtn.pages.inc:858
+msgid "Synonyms"
+msgstr "Synonymes"
+
+#: taxonomy_vtn.pages.inc:958
+msgid "!lc letters, !tc terms, !sc synonyms, !rc related terms, !nc references to nodes, !cc references to children"
+msgstr "!lc lettres, !tc termes, !sc synonymes, !rc termes en relation, !nc references à des nœuds, !cc références à des enfants"
+
+#: taxonomy_vtn.pages.inc:967
+msgid "!lc letters, !tc terms, !sc synonyms, !rc related terms, !nc references to nodes"
+msgstr "!lc lettres, !tc termes, !sc synonymes, !rc termes en relation, !nc references à des nœuds"
+
+#: taxonomy_vtn.pages.inc:978
+msgid "No data to display. You probably selected the option to avoid empty terms."
+msgstr "Aucune donnée à afficher. Vous avez probablement sélectionné l'option de sorte à éviter les termes vides."
+
+#: taxonomy_vtn.pages.inc:993
+msgid "No data to display. This vocabulary is probably empty."
+msgstr "Aucune donnée à afficher. Le vocabulaire est probablement vide."
+
+#: taxonomy_vtn.pages.inc:1032
+msgid "Unknown vocabulary (\"%voc_name\")."
+msgstr "Vocabulaire inconnu (\"%voc_name\")."
+
+#: taxonomy_vtn.pages.inc:1072
+msgid "Bad term id"
+msgstr "Identifieur de terme invalid"
+
+#: taxonomy_vtn.pages.inc:1074
+msgid "No data to display. You probably don't have a term with tid = !term_id."
+msgstr "Aucun donnée à afficher. Vous n'avez probablement pas de terme avec tid = !term_id."
+
+#: taxonomy_vtn.pages.inc:1081
+msgid "Back to master index"
+msgstr "Retourner à l'index primaire"
+
+#: taxonomy_vtn.pages.inc:1090
+msgid "Nodes of term @term_name"
+msgstr "Nœuds du terme @term_name"
+
+#: taxonomy_vtn.pages.inc:1225
+msgid "No data to display. This term is probably not used by any node."
+msgstr "Aucune donnée à afficher. Ce terme n'est probablement pas utilisé par aucun nœud."
+
+#: taxonomy_vtn.pages.inc:1229;1264
+msgid "terms"
+msgstr "termes"
+
+#: taxonomy_vtn.pages.inc:1260
+msgid "No data to display. This term (\"%term_name\") does not exist."
+msgstr "Aucune données à afficher. Ce terme (\"%term_name\") n'existe pas."
+
+#: taxonomy_vtn.pages.inc:1161
+msgid "1 comment"
+msgid_plural "@count comments"
+msgstr[0] "1 commentaire"
+msgstr[1] "@count commentaires"
+
+#: taxonomy_vtn.module:36
+msgid "Screenshots"
+msgstr "Capture d'écran"
+
+#: taxonomy_vtn.module:40
+msgid "Screenshot of vocabulary."
+msgstr "Capture décran du vocabulaire"
+
+#: taxonomy_vtn.module:40
+msgid "Sample vocabulary index"
+msgstr "Exemple d'index du vocabulaire"
+
+#: taxonomy_vtn.module:45
+msgid "Screenshot of terms."
+msgstr "Capture d'écran de termes"
+
+#: taxonomy_vtn.module:45
+msgid "Sample terms index"
+msgstr "Exemple d'index de termes"
+
+#: taxonomy_vtn.module:50
+msgid "Screenshot of nodes."
+msgstr "Capture d'écran de nœuds."
+
+#: taxonomy_vtn.module:50
+msgid "Sample nodes index"
+msgstr "Exemple d'index de nœuds"
+
+#: taxonomy_vtn.module:55
+msgid "Settings"
+msgstr "Préférences"
+
+#: taxonomy_vtn.module:56
+msgid "As mentioned below, the Taxonomy VTN has its own !settings. Also, each !taxonomy has detailed settings on how to present the terms and nodes."
+msgstr "Comme mentionné plus bas, le module Taxonomy VTN a ces propos !settings. Chaque !taxonomy a ces propres préférences décrivant comment afficher leur termes."
+
+#: taxonomy_vtn.module:58
+msgid "settings page"
+msgstr "page de préférences"
+
+#: taxonomy_vtn.module:59
+msgid "Taxonomy"
+msgstr "Taxonomies"
+
+#: taxonomy_vtn.module:63
+msgid "Features"
+msgstr "Options"
+
+#: taxonomy_vtn.module:64
+msgid "I'm open to sugestions."
+msgstr "Je suis ouvert à vos suggestions."
+
+#: taxonomy_vtn.module:68
+msgid "Define the global settings of the Taxonomy VTN module."
+msgstr "Définir les préférences globales du module Taxonomy VTN."
+
+#: taxonomy_vtn.module:69
+msgid "Please, check your !taxonomies to refine your term & node settings."
+msgstr "Merci de vérifier vos !taxonomies pour rafiner vos préférences d'affichage des termes et nœuds."
+
+#: taxonomy_vtn.module:70
+msgid "Taxonomies"
+msgstr "Taxonomies"
+
+#: taxonomy_vtn.module:90
+msgid "administer taxonomy_vtn"
+msgstr "administrer taxonomy_vtn"
+
+#: taxonomy_vtn.module:90
+msgid "access taxonomy_vtn"
+msgstr "accéder à taxonomy_vtn"
+
+#: taxonomy_vtn.module:102 taxonomy_vtn.install:75 taxonomy_vtn.info:0;0 taxonomy_vtn_blocks/taxonomy_vtn_blocks.module:38 taxonomy_vtn_blocks/taxonomy_vtn_blocks.info:0 taxonomy_vtn_terms_blocks/taxonomy_vtn_terms_blocks.info:0
+msgid "Taxonomy VTN"
+msgstr "Taxonomy VTN"
+
+#: taxonomy_vtn.module:103
+msgid "Customize Taxonomy VTN settings"
+msgstr "Personaliser les préférences de Taxonomy VTN"
+
+#: taxonomy_vtn.module:111;119;128
+msgid "Site index"
+msgstr "Index du site"
+
+#: taxonomy_vtn.module:137
+msgid "Terms by letter"
+msgstr "Termes par lettre"
+
+#: taxonomy_vtn.module:191
+msgid "Term Nodes"
+msgstr "Nœuds d'un terme"
+
+#: taxonomy_vtn.module:199
+msgid "Clear Taxonomy VTN Cache"
+msgstr "Effacer le cache de Taxonomy VTN"
+
+#: taxonomy_vtn.install:62
+msgid "The Taxonomy VTN module has been enabled. You may wish to go to <a href=\"!url\">the settings page</a>."
+msgstr "Le module Taxonomy VTN a été activé. Vous voulez peut-être aller à la <a href=\"!url\">page des préférences</a>."
+
+#: taxonomy_vtn.install:76
+msgid "The Taxonomy VTN module has been uninstalled."
+msgstr "Le module Taxonomy VTN a été desinstallé."
+
+#: taxonomy_vtn.install:75
+msgid "Taxonomy VTN module uninstalled by @user."
+msgstr "Le module Taxonomy VTN desinstallé par @user."
+
+#: taxonomy_vtn.info:0
+msgid "Taxonomy VTN - vocabularies, terms and nodes"
+msgstr "Taxonomy VTN - vocabulaires, termes et nœuds"
+
+#: taxonomy_vtn_blocks/taxonomy_vtn_blocks.module:51
+msgid "Show vocabulary description"
+msgstr "Afficher la description des vocabulaires"
+
+#: taxonomy_vtn_blocks/taxonomy_vtn_blocks.module:58;64
+msgid "This may slow your site"
+msgstr "Ceci peut ralentir votre site"
+
+#: taxonomy_vtn_blocks/taxonomy_vtn_blocks.module:75
+msgid "Include vocabularies by identifiers"
+msgstr "Include les  vocabulaires par identifieurs"
+
+#: taxonomy_vtn_blocks/taxonomy_vtn_blocks.install:15
+msgid "The Taxonomy VTN Block module has been enabled. You may wish to go to <a href=\"!url\">the block settings page</a>."
+msgstr "Le module Taxonomy VTN Block a été activé. Vous voulez surment aller à <a href=\"!url\">la page de préférence du bloc</a>."
+
+#: taxonomy_vtn_blocks/taxonomy_vtn_blocks.install:31
+msgid "The Taxonomy VTN Block module has been uninstalled."
+msgstr "Le module Taxonomy VTN Block a été desinstallé."
+
+#: taxonomy_vtn_blocks/taxonomy_vtn_blocks.install:30
+msgid "Taxonomy VTN Block"
+msgstr "Taxonomy VTN Block"
+
+#: taxonomy_vtn_blocks/taxonomy_vtn_blocks.install:30
+msgid "Taxonomy VTN Block module uninstalled by @user."
+msgstr "Le module Taxonomy VTN Block a été desinstallé par @user."
+
+#: taxonomy_vtn_blocks/taxonomy_vtn_blocks.info:0
+msgid "Taxonomy VTN Vocabulary Block"
+msgstr "Taxonomy VTN Vocabulary Block"
+
+#: taxonomy_vtn_blocks/taxonomy_vtn_blocks.info:0
+msgid "Vocabulary block for Taxonomy VTN."
+msgstr "Bloc de vocabulaire pour Taxonomy VTN"
+
+#: taxonomy_vtn_terms_blocks/taxonomy_vtn_terms_blocks.module:43
+msgid "Show the vocabulary description"
+msgstr "Montrer la description du vocabulaire"
+
+#: taxonomy_vtn_terms_blocks/taxonomy_vtn_terms_blocks.module:48
+msgid "Number of terms to show"
+msgstr "Nombre de termes à montrer"
+
+#: taxonomy_vtn_terms_blocks/taxonomy_vtn_terms_blocks.module:49
+msgid "If you have that many terms or less, show all of them. Otherwise randomly select that number of terms. Use 0 to show all the terms."
+msgstr "Si vous avez ce nombre de termes ou moins, montre les tous. Sinon, sélectionne de façon aléatoire ce nombre de termes. Utilisez 0 pour montrer tous les termes."
+
+#: taxonomy_vtn_terms_blocks/taxonomy_vtn_terms_blocks.module:54
+msgid "Show unused terms"
+msgstr "Montrer les termes inutilisés"
+
+#: taxonomy_vtn_terms_blocks/taxonomy_vtn_terms_blocks.module:55
+msgid "<span style=\"color: red;\">IMPORTANT NOTE:</a> This flag is ignored if the nodes are not counted since when we do not count the nodes we cannot know whether a term is in use or not."
+msgstr "<span style=\"color: red;\">NOTE IMPORTANTE:</a> Ce drapeau est ignoré si les nœuds ne sont pas compté car sans compter on ne peut pas savoir se le terme est utilisé ou non."
+
+#: taxonomy_vtn_terms_blocks/taxonomy_vtn_terms_blocks.module:60
+msgid "Show term description"
+msgstr "Afficher la description des termes"
+
+#: taxonomy_vtn_terms_blocks/taxonomy_vtn_terms_blocks.module:65
+msgid "Show the total number of terms"
+msgstr "Afficher le nombre total des termes"
+
+#: taxonomy_vtn_terms_blocks/taxonomy_vtn_terms_blocks.module:66
+msgid "The number of terms is known and can be shown at the bottom of the block. Does not work well with <em>Number of terms to show</em>."
+msgstr "Le nombre de termes est connu et peut-être montrer en bas du bloc. Ne fonctionne pas très bien avec <em>Nombre de termes à montrer</em>."
+
+#: taxonomy_vtn_terms_blocks/taxonomy_vtn_terms_blocks.module:72
+msgid "<span style=\"color: red;\">IMPORTANT NOTE:</a> This may slow your site since the taxonomy blocks are not cached and a heavy SQL command is required to count all the nodes."
+msgstr "<span style=\"color: red;\">NOTE IMPORTANTE:</a> Ce drapeau peut ralentir votre site car le bloc de taxonomy n'est pas sauvé dans le cache et une commande SQL lourde est nécessaire pour compter tous les nœuds."
+
+#: taxonomy_vtn_terms_blocks/taxonomy_vtn_terms_blocks.module:77
+msgid "Exclude terms by identifiers"
+msgstr "Exclure les termes par identifieurs"
+
+#: taxonomy_vtn_terms_blocks/taxonomy_vtn_terms_blocks.module:83
+msgid "Include terms by identifiers"
+msgstr "Include les termes par identifieurs"
+
+#: taxonomy_vtn_terms_blocks/taxonomy_vtn_terms_blocks.module:219
+msgid "Found !count terms."
+msgstr "!count termes ont été trouvés."
+
+#: taxonomy_vtn_terms_blocks/taxonomy_vtn_terms_blocks.module:223
+msgid "Terms of !name"
+msgstr "Termes de !name"
+
+#: taxonomy_vtn_terms_blocks/taxonomy_vtn_terms_blocks.module:241
+msgid "Taxonomy Terms: !name"
+msgstr "Termes de taxonomy: !name"
+
+#: taxonomy_vtn_terms_blocks/taxonomy_vtn_terms_blocks.install:15
+msgid "The Taxonomy VTN Terms Blocks module has been enabled. Setup blocks in the <a href=\"!url\">block settings page</a>."
+msgstr "Le module Taxonomy VTN Terms Blocks a été activé. Voir la page des <a href=\"!url\">préférences du bloc</a>."
+
+#: taxonomy_vtn_terms_blocks/taxonomy_vtn_terms_blocks.install:26
+msgid "The Taxonomy VTN Terms Blocks module has been uninstalled."
+msgstr "Le module Taxonomy VTN Terms Blocks a été desinstallé."
+
+#: taxonomy_vtn_terms_blocks/taxonomy_vtn_terms_blocks.install:25 taxonomy_vtn_terms_blocks/taxonomy_vtn_terms_blocks.info:0
+msgid "Taxonomy VTN Terms Blocks"
+msgstr "Taxonomy VTN Terms Blocks"
+
+#: taxonomy_vtn_terms_blocks/taxonomy_vtn_terms_blocks.install:25
+msgid "Taxonomy VTN Terms Blocks module uninstalled by @user."
+msgstr "Module Taxonomy VTN Terms Blocks desinstallé par @user."
+
+#: taxonomy_vtn_terms_blocks/taxonomy_vtn_terms_blocks.info:0
+msgid "Terms blocks for Taxonomy VTN."
+msgstr "Bloc de termes pour Taxonomy VTN."
+

@@ -1,0 +1,19 @@
+; $Id: nodeaccess_autoreference.info,v 1.1.2.4 2009/07/16 12:08:41 kenorb Exp $
+name = Node Access Auto Reference
+description = Give auto permissions for a node for the user which is referenced in some way to that node.
+package = Node Access
+core = 6.x
+version = VERSION
+dependencies[] = content
+dependencies[] = nodereference
+dependencies[] = userreference
+enhances[] = view_own
+enhances[] = content_profile
+
+
+; Information added by drupal.org packaging script on 2009-07-28
+version = "6.x-1.0"
+core = "6.x"
+project = "nodeaccess_autoreference"
+datestamp = "1248780975"
+

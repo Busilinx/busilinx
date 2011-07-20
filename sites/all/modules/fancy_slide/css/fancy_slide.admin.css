@@ -1,0 +1,4 @@
+#edit-nid-wrapper,
+#edit-nodequeue-wrapper {
+  display: none; /* Display with jQuery */
+}

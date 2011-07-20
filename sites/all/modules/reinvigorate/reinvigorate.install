@@ -1,0 +1,41 @@
+<?php
+// $Id: reinvigorate.install,v 1.1.2.1 2010/10/20 17:09:59 devkinetic Exp $
+
+/**
+ * @file
+ * Installation file for Reinvigorate module.
+ */
+
+function reinvigorate_install() {
+  variable_set('reinvigorate_visibility', 0);
+  $pages = array(
+    'admin',
+    'admin/*',
+    'user/*/*',
+    'node/add*',
+    'node/*/*',
+  );
+  variable_set('reinvigorate_pages', implode("\n", $pages));
+}
+
+function reinvigorate_uninstall() {
+  variable_del('reinvigorate_account');
+  variable_del('reinvigorate_ssl');
+  variable_del('reinvigorate_name_tags');
+  variable_del('reinvigorate_name_tags_name_tag');
+  variable_del('reinvigorate_name_tags_context_tag');
+  variable_del('reinvigorate_visibility');
+  variable_del('reinvigorate_pages');
+  variable_del('reinvigorate_roles');
+  variable_del('reinvigorate_cache');
+  variable_del('reinvigorate_last_cache');
+}
+
+function reinvigorate_disable() {
+  // borrowed from GA module
+  $path = file_directory_path() .'/reinvigorate';
+  if (file_exists($path)) {
+    file_delete($path .'/re_.js');
+    rmdir($path);
+  }
+}

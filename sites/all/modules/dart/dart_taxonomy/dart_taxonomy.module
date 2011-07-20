@@ -1,0 +1,366 @@
+<?php
+// $Id: dart_taxonomy.module,v 1.10 2010/11/11 01:03:46 bleen18 Exp $
+
+/**
+ * Implementation of hook_taxonomy().
+ */
+function dart_taxonomy_taxonomy($op, $type, $array) {
+  switch ($op) {
+    case 'update':
+      if ($type == 'term' && isset($_POST['term_data']['dart'])) {
+        dart_taxonomy_save_map($_POST['term_data']['tid'], $_POST['term_data']['dart']);
+      }
+      break;
+  }
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function dart_taxonomy_theme() {
+  return array( 
+    'dart_taxonomy_manager_tree_elements' => array( 
+      'arguments' => array('element'), 
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_theme_registry_alter().
+ * Takes over the theme_taxonomy_manager_tree_elements function.
+ */
+function dart_taxonomy_theme_registry_alter(&$theme_registry) {
+  $theme_registry['taxonomy_manager_tree_elements']['function'] = 'theme_dart_taxonomy_tree_elements';
+}
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function dart_taxonomy_form_taxonomy_manager_form_alter(&$form, &$form_state) {
+  // Include css for the dart-bulk buttons.
+  drupal_add_css(drupal_get_path('module', 'dart_taxonomy') . '/css/dart.css');
+
+  // Edit the taxonomy manager toolbar.
+  if (isset($form['toolbar'])) {
+    $form['toolbar']['dart_bulk_show'] = array(
+      '#type'       => 'button',
+      '#value'      => t('Dart Bulk Edit'),
+      '#attributes' => array('class' => 'taxonomy-manager-buttons dart-bulk'),
+      '#theme'      => 'no_submit_button',
+    );
+  }
+
+  // Create the DART Bulk Edit form.
+  drupal_add_js(array('hideForm' => array(
+    'show_button' => 'edit-dart-bulk-show',
+    'hide_button' => 'edit-dart-bulk-cancel',
+    'div' => 'dart-bulk-form')), 'setting');
+  $form['dart_bulk'] = array(
+    '#type' => 'fieldset',
+    '#tree' => TRUE,
+    '#attributes' => array('id' => 'dart-bulk-form', 'style' => 'display:none;'),
+    '#title' => t('Bulk Edit DART Settings'),
+    '#description' => t('Use the form below to edit the DART settings for all of the taxonomy terms that have been checked below. This will overwrite any settings previously entered for these terms individually.'),
+  );
+  $form['dart_bulk']['key'] = array(
+    '#type'           => 'textfield',
+    '#default_value'  => '',
+    '#title'          => 'key',
+    '#maxlength'      => 32,
+    '#description'    => t('If this field is left blank, the default value will be used.'),
+  );
+  $form['dart_bulk']['val'] = array(
+    '#type'           => 'textfield',
+    '#default_value'  => '',
+    '#title'          => 'val',
+    '#maxlength'      => 32,
+    '#description'    => t('If this field is left blank, the default value will be used.'),
+  );
+  $form['dart_bulk']['exclude'] = array(
+    '#type'           => 'checkbox',
+    '#title'          => 'exclude these terms from DART ad tags',
+    '#default_value'  => 0,
+  );
+  $form['dart_bulk']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Bulk Save'),
+    '#attributes' => array('class' => 'taxonomy-manager-buttons dart-bulk'),
+    '#submit' => array('dart_taxonomy_dart_bulk_submit'),
+  );
+
+  $form['dart_bulk']['cancel'] = array(
+    '#type' => 'button',
+    '#value' => t('Cancel'),
+    '#attributes' => array('class' => 'taxonomy-manager-buttons cancel'),
+    '#theme' => 'no_submit_button',
+  );
+
+  if (empty($form_state)) {
+    // Edit the "term-data" form.
+    // Set some variables.
+    $term             = taxonomy_get_term($form['term_data']['tid']['#value']);
+    $map              = _dart_taxonomy_get_map($term->tid);
+    $default_key      = variable_get('dart_taxonomy_default_key', 'term');
+    $default_val_func = variable_get('dart_taxonomy_default_value_callback', '_dart_taxonomy_callback_tid');
+    $default_val      = $default_val_func($term);
+
+    // Add form elements.
+    $form['term_data']['dart'] = array(
+      '#type'           => 'fieldset',
+      '#title'          => 'DART ad tag settings',
+      '#weight'         => 15,
+      '#description'    => t('Use the fields below to indicate how this term should be displayed if it is included in a DART ad tag.'),
+      '#collapsible'    => TRUE,
+      '#collapsed'      => FALSE,
+    );
+    $form['term_data']['dart']['key'] = array(
+      '#type'           => 'textfield',
+      '#default_value'  => isset($map['key']) ? $map['key'] : '',
+      '#title'          => 'key',
+      '#maxlength'      => 32,
+      '#description'    => t('If this field is left blank, the default value will be used: %default', array('%default' => $default_key)),
+    );
+    $form['term_data']['dart']['val'] = array(
+      '#type'           => 'textfield',
+      '#default_value'  => isset($map['val']) ? $map['val'] : '',
+      '#title'          => 'val',
+      '#maxlength'      => 32,
+      '#description'    => t('If this field is left blank, the default value will be used: %default', array('%default' => $default_val)),
+    );
+    $form['term_data']['dart']['exclude'] = array(
+      '#type'           => 'checkbox',
+      '#title'          => 'exclude this term from DART ad tags',
+      '#default_value'  => isset($map['exclude']) ? $map['exclude'] : 0,
+    );
+  }
+}
+
+/**
+ * Form submit function.
+ */
+function dart_taxonomy_dart_bulk_submit($form, $form_state) {
+  // Create a new map for each selected term.
+  foreach ($form_state['values']['taxonomy']['manager']['tree']['selected_terms'] as $tid) {
+    dart_taxonomy_save_map($tid, $form_state['values']['dart_bulk']);
+  }
+  drupal_set_message(t('@count terms have had their DART settings updated.', array('@count' => count($form_state['values']['taxonomy']['manager']['tree']['selected_terms']))));
+}
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function dart_taxonomy_form_dart_admin_tag_alter(&$form, &$form_state) {
+  $tag = new DartTag($form['dtid']['#value']);
+
+  $form['display_options']['terms'] = array(
+    '#type'           => 'checkbox',
+    '#title'          => t('Include taxonomy terms in this tag'),
+    '#description'    => t('Check this to include taxonomy terms in this tag according to the settings found at /admin/settings/dart.'),
+    '#default_value'  => isset($tag->options['terms']) ? $tag->options['terms'] : '',
+  );
+}
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function dart_taxonomy_form_dart_admin_settings_alter(&$form, &$form_state) {
+  // Add form elements for default DART taxonomy settings.
+  $form['default_taxonomy_settings'] = array(
+    '#type'         => 'fieldset',
+    '#title'        => t('Default Taxonomy Term Settings'),
+    '#description'  => t('These settings define how taxonomy terms should look when added to a DART tag. You can change settings for individual terms at /admin/content/taxonomy_manager.'),
+    '#weight'       => -10,
+    '#collapsible'  => TRUE,
+    '#collapsed'    => FALSE,
+  );
+  $form['default_taxonomy_settings']['dart_taxonomy_default_key'] = array(
+    '#type'           => 'textfield',
+    '#title'          => t('Default taxonomy term key'),
+    '#default_value'  => variable_get('dart_taxonomy_default_key', 'term'),
+    '#required'       => TRUE,
+    '#description'    => t('The "key" that should be used if taxonomy terms are included in a DART tag.<br/>(ex. if you want "term=sports;term=baseball;" in your DART tags then enter "term")'),
+    '#maxlength'      => 32,
+  );
+  $options = array();
+  $options = array_merge($options, module_invoke_all('dart_taxonomy_value_callback'));
+  $form['default_taxonomy_settings']['dart_taxonomy_default_value_callback'] = array(
+    '#type'           => 'select',
+    '#options'        => $options,
+    '#title'          => t('Default taxonomy value'),
+    '#default_value'  => variable_get('dart_taxonomy_default_value_callback', ''),
+    '#required'       => TRUE,
+    '#description'    => t('Select how the actual taxonomy terms should be displayed when included in a DART tag.'),
+  );
+}
+
+/**
+ * Implementation of hook_dart_settings().
+ */
+function dart_taxonomy_dart_settings_alter(&$settings, $values) {
+  if (isset($values['terms'])) {
+    $settings['options']['terms'] = $values['terms'];
+  }
+}
+
+/**
+ * Implementation of hook_dart_get_vars().
+ */
+function dart_taxonomy_dart_get_vars($tag) {
+  // Set up some variables.
+  $keyvals          = array();
+  $default_key      = variable_get('dart_taxonomy_default_key', 'term');
+  $default_val_func = variable_get('dart_taxonomy_default_value_callback', '_dart_taxonomy_callback_tid');
+
+  // First check if this tag should have terms at all.
+  if ($tag->obj->settings['options']['terms']) {
+    $terms = array();
+
+    // If this is a node, grab the taxonomy terms.
+    if (arg(0) == 'node' && is_numeric(arg(1))) {
+      $node = node_load(arg(1));
+      $terms = $node->taxonomy;
+    }
+    // If this is a term page, grab the term.
+    if (arg(0) == 'taxonomy' && is_numeric(arg(2))) {
+      $terms[] = taxonomy_get_term(arg(2));
+    }
+    // Check each term for overrides & exclusions.
+    foreach ($terms as $term) {
+      $map = _dart_taxonomy_get_map($term->tid);
+      if ($map && !$map['exclude']) {
+        $key = !empty($map['key']) ? $map['key'] : $default_key;
+        $val = !empty($map['val']) ? $map['val'] : $default_val_func($term);
+      }
+      else {
+        $key = $default_key;
+        $val = $default_val_func($term);
+      }
+      // Add term as a keyval
+      $keyvals[$key][] = array('val' => $val, 'eval' => FALSE);
+    }
+
+  }
+  return $keyvals;
+}
+
+/**
+ * Implementation of hook_dart_taxonomy_value_callback().
+ */
+function dart_taxonomy_dart_taxonomy_value_callback() {
+  $options = array();
+  $options['_dart_taxonomy_callback_tid'] = 'Term ID';
+  $options['_dart_taxonomy_callback_truncated'] = 'Truncated Term Name (6 chars)';
+  $options['_dart_taxonomy_callback_full'] = 'Full Term Name';
+  return $options;
+}
+
+/**
+ * Save a dart taxonomy map in the database.
+ *
+ * @param $tid
+ *   The term id for the term being mapped.
+ *
+ * @param $data
+ *   An array of all the elements needed to build the map.
+ *   - key
+ *   - val
+ *   - exclude
+ */
+function dart_taxonomy_save_map($tid, $data) {
+  // Set some variables.
+  $key      = $data['key'];
+  $val      = $data['val'];
+  $exclude  = $data['exclude'] == 1 ? 1 : 0;
+
+  $map        = _dart_taxonomy_get_map($tid);
+  $empty_map  = empty($key) && empty($val) && empty($exclude);
+
+  if (empty($map) && !$empty_map) {
+    // This is a new mapping;
+    db_query("INSERT INTO {dart_taxonomy_map} VALUES (%d,'%s', '%s',%d)", $tid, $key, $val, $exclude);
+  }
+  else {
+    // This is an existing mapping;
+    if (empty($key) && empty($val) && empty($exclude)) {
+      // This mapping should be deleted.
+      db_query("DELETE FROM {dart_taxonomy_map} WHERE tid = %d", $tid);
+    }
+    else {
+      // This mapping should be updated.
+      db_query("UPDATE {dart_taxonomy_map} AS dtm SET dtm.key='%s', dtm.val='%s', dtm.exclude=%d WHERE dtm.tid=%d", $key, $val, $exclude, $tid);
+    }
+  }
+}
+
+/**
+ * Theme function. Effectively this function is a preprocess 
+ * function for theme_taxonomy_manager_tree_elements.
+ */
+function theme_dart_taxonomy_tree_elements($elements) {
+  foreach ($elements as $elem) {
+    $tid = $elem['tid']['#value'];
+    if (db_result(db_query('SELECT tid FROM {dart_taxonomy_map} WHERE tid=%d', $tid))) {
+      $elements[$tid]['checkbox']['#suffix'] = theme('image', drupal_get_path('module', 'dart_taxonomy') . '/images/dart-altered.png', '(' . t('Altered by DART') . ')', t('Altered by DART'), array('class' => 'dart-altered'));
+    }
+  }
+
+  return theme_taxonomy_manager_tree_elements($elements);
+}
+
+/**
+ * Returns the tid to be used for displaying the
+ * term's value within a DART ad tag.
+ *
+ * @param $term
+ *   term object
+ *
+ * @return
+ *   tid
+ */
+function _dart_taxonomy_callback_tid($term) {
+  return $term->tid;
+}
+
+/**
+ * Returns the first six characters (lowercase) of the term name
+ * without spaces or punctuation to be used for displaying the
+ * term's value within a DART ad tag.
+ *
+ * @param $term
+ *   term object
+ *
+ * @return
+ *   truncated term name
+ */
+function _dart_taxonomy_callback_truncated($term, $char_count=6) {
+  return drupal_substr(drupal_strtolower(preg_replace("/[^A-Za-z0-9]/", "", $term->name )), 0, $char_count);
+}
+
+/**
+ * Returns the full (lowercase) term name
+ * without spaces or punctuation to be used for displaying the
+ * term's value within a DART ad tag.
+ *
+ * @param $term
+ *   term object
+ *
+ * @return
+ *   term name
+ */
+function _dart_taxonomy_callback_full($term) {
+  return drupal_strtolower(preg_replace("/[^A-Za-z0-9_\-]/", "", str_replace(' ', '_', $term->name) ));
+}
+
+/**
+ * Gets a DART taxonomy map from the database.
+ *
+ * @param $tid
+ *   term id
+ *
+ * @returns
+ *   array of dart map information
+ */
+function _dart_taxonomy_get_map($tid) {
+  $map = db_fetch_array(db_query('SELECT * FROM {dart_taxonomy_map} WHERE tid = %d', $tid));
+  return $map;
+}

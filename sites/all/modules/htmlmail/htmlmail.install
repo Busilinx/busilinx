@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * @file
+ * Installation for HTML Mail module.
+ */
+
+/**
+ * Removes variables that are no longer used.
+ */
+function htmlmail_update_6200() {
+  variable_del('htmlmail_header');
+  variable_del('htmlmail_footer');
+  variable_del('htmlmail_css');
+  return array();
+}
+
+/**
+ * Implements hook_enable().
+ */
+function htmlmail_enable() {
+  mailsystem_set(array('htmlmail' => 'HTMLMailSystem'));
+}
+
+/**
+ * Implements hook_disable().
+ */
+function htmlmail_disable() {
+  // Check is necessary because a 6.x-1.x to 6.x-2.x upgrade
+  // may not have mailsystem installed.
+  if (function_exists('mailsystem_clear')) {
+    mailsystem_clear(array('htmlmail' => 'HTMLMailSystem'));
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function htmlmail_uninstall() {
+  db_query("DELETE FROM {variable} WHERE name LIKE 'htmlmail_%'");
+  cache_clear_all('variables', 'cache');
+}

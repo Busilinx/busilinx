@@ -1,0 +1,484 @@
+# $Id: de.po,v 1.1.4.2 2010/03/06 05:21:58 aidan Exp $
+#
+# German translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  regcode.admin.php,v 1.1.2.9 2009/07/22 20:44:36 aidan
+#  regcode.install,v 1.3.2.3 2009/06/28 02:44:56 aidan
+#  regcode.module,v 1.3.2.6 2009/07/22 21:36:21 aidan
+#  regcode.api.php,v 1.1.2.5 2009/07/22 21:36:20 aidan
+#  regcode.rules.inc,v 1.1.2.1 2009/07/22 21:40:21 aidan
+#  regcode.info,v 1.3.2.2 2009/06/17 09:32:21 aidan
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Drupal Registration Code V6.x-1.2\n"
+"POT-Creation-Date: 2009-07-26 18:35+0200\n"
+"PO-Revision-Date: 2009-07-26 18:36+0100\n"
+"Last-Translator: Frank Tartler <frank.tartler@googlemail.com>\n"
+"Language-Team: Frank Tartler <frank.tartler@googlemail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: regcode.admin.php:17
+msgid "Make registration code optional"
+msgstr "Registrierungscode optional machen"
+
+#: regcode.admin.php:19
+msgid "If checked, users can register without a registration code. "
+msgstr "Wenn aktiviert kann sich ein Benutzer ohne Registrierungscode registrieren. "
+
+#: regcode.admin.php:20
+msgid "Alternatively, there is also a permission to allow certain roles (e.g. admins) to bypass´registration code entry for administratively added users."
+msgstr "Alternativ gibt es auch eine Berechtigung, um bestimmten Rollen (z.B. Administratoren)  zu erlauben, die Eingabe eines Registrierungscodes für administrativ hinzugefügte Benutzer zu umgehen."
+
+#: regcode.admin.php:25
+msgid "Field set title"
+msgstr "Feldset-Titel"
+
+#: regcode.admin.php:26
+msgid "The title of the registration code fieldset"
+msgstr "Der Titel des Feldsets für den Registrierungscode"
+
+#: regcode.admin.php:32
+msgid "Field label"
+msgstr "Feld-Beschriftung"
+
+#: regcode.admin.php:33
+msgid "The label of the registration code textfield"
+msgstr "Die Beschriftung des Textfeldes für den Registrierungscode"
+
+#: regcode.admin.php:39
+msgid "Field description"
+msgstr "Feldbeschreibung"
+
+#: regcode.admin.php:40
+msgid "The description under the registration code textfield"
+msgstr "Die Beschreibung unter dem Textfeld für den Registrierungscode"
+
+#: regcode.admin.php:60
+msgid "Basics"
+msgstr "Grundlegendes"
+
+#: regcode.admin.php:61
+msgid "Basic options for the new registration code"
+msgstr "Grundlegende Optionen für den neuen Registrierungscodes"
+
+#: regcode.admin.php:66;223
+#: regcode.install:79
+msgid "Category"
+msgstr "Kategorie"
+
+#: regcode.admin.php:69
+msgid "Assign a category for administration purposes, to aid code management."
+msgstr "Zuweisen einer Kategorie für Verwaltungszwecke, zur Unterstützung der Codeverwaltung."
+
+#: regcode.admin.php:74
+msgid "Registration code"
+msgstr "Registrierungscode"
+
+#: regcode.admin.php:75
+msgid "Leave blank to have code generated. Used as prefix when <em>Number of codes</em> is greater than 1."
+msgstr "Leer lassen um Code generieren zu lassen. Wird als Vorspann verwendet, wenn <em>Anzahl Codes</em> größer als 1 ist."
+
+#: regcode.admin.php:80
+msgid "Maximum uses"
+msgstr "Maximale Verwendungen"
+
+#: regcode.admin.php:83
+msgid "How many times this code can be used to register (leave blank for unlimited)."
+msgstr "Wie oft dieser Code zum Registrieren verwendet werden kann (leer bedeutet unbegrenzt)."
+
+#: regcode.admin.php:88
+msgid "Active from"
+msgstr "Aktiv ab"
+
+#: regcode.admin.php:89
+msgid "When this code should activate (leave blank to activate immediately). Accepts any date format that strtotime can handle."
+msgstr "Wann dieser Code aktiv werden soll (leer lassen zum sofortigen Aktivieren). Akzeptiert jedes Datumsformat, mit dem strtotime umgehen kann."
+
+#: regcode.admin.php:95
+msgid "Expires on"
+msgstr "Läuft ab"
+
+#: regcode.admin.php:96
+msgid "When this code should expire (leave blank for no expiry). Accepts any date format that strtotime can handle."
+msgstr "Wann dieser Code ablaufen soll (leer lassen für kein Ablaufdatum). Akzeptiert jedes Datumsformat, mit dem strtotime umgehen kann."
+
+#: regcode.admin.php:103
+msgid "Code generation"
+msgstr "Code-Erzeugung"
+
+#: regcode.admin.php:104
+msgid "Settings used when generating codes"
+msgstr "Beim Generieren der Code verwendete Einstellungen"
+
+#: regcode.admin.php:109
+msgid "Number of codes to generate"
+msgstr "Anzahl zu erzeugender Codes"
+
+#: regcode.admin.php:112
+msgid "The number of codes to generate"
+msgstr "Die Anzahl Codes, die erzeugt werden soll"
+
+#: regcode.admin.php:117
+msgid "Code size"
+msgstr "Codegröße"
+
+#: regcode.admin.php:120
+msgid "The length of the codes created"
+msgstr "Die Länge der erstellten Codes"
+
+#: regcode.admin.php:126
+msgid "Format of the generated codes"
+msgstr "Format der erzeugten Codes"
+
+#: regcode.admin.php:127
+msgid "Letters"
+msgstr "Buchstaben"
+
+#: regcode.admin.php:127
+msgid "Numbers"
+msgstr "Ziffern"
+
+#: regcode.admin.php:127
+msgid "Numbers & Letters"
+msgstr "Ziffern und Buchstaben"
+
+#: regcode.admin.php:127
+msgid "Hexadecimal"
+msgstr "Hexadezimal"
+
+#: regcode.admin.php:132
+msgid "Uppercase generated codes"
+msgstr "Generierte Codes in Großbuchstaben"
+
+#: regcode.admin.php:138
+msgid "Create codes"
+msgstr "Codes erstellen"
+
+#: regcode.admin.php:193
+msgid "Created registration code (@code)"
+msgstr "Registrierungscode (@code) erzeugt"
+
+#: regcode.admin.php:195
+msgid "Unable to create code (@code) as code already exists"
+msgstr "Registrierungscode (@code) konnte nicht erzeugt werden, da der Code bereits existiert"
+
+#: regcode.admin.php:209
+msgid "Yes"
+msgstr "Ja"
+
+#: regcode.admin.php:209
+msgid "No"
+msgstr "Nein"
+
+#: regcode.admin.php:218
+msgid "Filter results:"
+msgstr "Ergebnisse filtern:"
+
+#: regcode.admin.php:224;233
+msgid "-- All --"
+msgstr "-- Alle --"
+
+#: regcode.admin.php:231
+#: regcode.install:98
+msgid "Enabled"
+msgstr "Aktiviert"
+
+#: regcode.admin.php:238
+msgid "Filter list"
+msgstr "Liste filtern"
+
+#: regcode.admin.php:244
+msgid "Export to CSV"
+msgstr "In CSV exportieren"
+
+#: regcode.admin.php:287
+msgid "Paging @visible records out of @total."
+msgstr "@visible Datensätzen von @total werden angezeigt."
+
+#: regcode.admin.php:292
+msgid "&raquo; No codes found."
+msgstr "&raquo; Keine Codes gefunden"
+
+#: regcode.admin.php:376
+msgid "@count records exported."
+msgstr "@count Datensätze exportiert."
+
+#: regcode.admin.php:390
+msgid "Action to perform when importing the data."
+msgstr "Durchzuführende Aktion beim Importieren von Daten."
+
+#: regcode.admin.php:391
+msgid "<strong>Skip</strong>: Add new codes skipping those which already exists."
+msgstr "<strong>Überspringen</strong>. Neue Codes hinzufügen, existierende werden übersprungen."
+
+#: regcode.admin.php:392
+msgid "<strong>Overwrite</strong>: Add new codes overwriting those which already exist."
+msgstr "<strong>Überschreiben</strong>. Neue Codes hinzufügen, existierende werden überschrieben."
+
+#: regcode.admin.php:393
+msgid "<strong>Clean</strong>: Erases *all* existing codes before importing new codes."
+msgstr "<strong>Sauber</strong>: Löscht *ALLE* existierenden Codes vor dem Importieren neuer Codes."
+
+#: regcode.admin.php:395
+msgid "Comma separated list mapping regcode fields to CSV fields, e.g. \"IGNORE, code, rid, info\"."
+msgstr "Eine durch Kommata getrennte Liste, die regcode-Felder den CSV-Feldern zuordnet, z.B. „IGNORE, code, rid, info“."
+
+#: regcode.admin.php:396
+msgid "If you leave this field blank, the titles from the first row will be used."
+msgstr "Wenn dieses Feld leer gelassen wird, werden die Titel der ersten Zeile verwendet."
+
+#: regcode.admin.php:411
+msgid "File"
+msgstr "Datei"
+
+#: regcode.admin.php:412
+msgid "File upload with data to add/import (plaintext list or CSV format)"
+msgstr "Hochgeladene Datei mit Daten zum Hinzufügen/Importieren (Textliste im CSV-Format)"
+
+#: regcode.admin.php:417
+msgid "Action"
+msgstr "Aktion"
+
+#: regcode.admin.php:419
+msgid "Skip"
+msgstr "Überspringen"
+
+#: regcode.admin.php:419
+msgid "Overwrite"
+msgstr "Überschreiben"
+
+#: regcode.admin.php:419
+msgid "Clean"
+msgstr "Sauber"
+
+#: regcode.admin.php:426
+msgid "Field delimiter"
+msgstr "Feldtrennzeichen"
+
+#: regcode.admin.php:427
+msgid "Character used as delimiter in csv import of registration codes"
+msgstr "Zeichen das beim CSV-Import als Trennzeichen verwendet wird"
+
+#: regcode.admin.php:434
+msgid "Text enclosure"
+msgstr "Textbegrenzung"
+
+#: regcode.admin.php:436
+msgid "Character used as enclosure around text content fields on CSV import."
+msgstr "Zeichen das beim CSV-Import als Begrenzung um Felder mit Textinhalt verwendet wird."
+
+#: regcode.admin.php:441
+msgid "Field order"
+msgstr "Feldreihenfolge"
+
+#: regcode.admin.php:448
+#: regcode.module:100
+msgid "Import"
+msgstr "Importieren"
+
+#: regcode.admin.php:520
+msgid "Successfully inserted @rows rows out of @total"
+msgstr "@rows von @total Zeilen erfolgreich eingefügt"
+
+#: regcode.api.php:60
+#: regcode.module:159
+msgid "regcode"
+msgstr ""
+
+#: regcode.api.php:60
+msgid "The registration code (@code) was used by UID #uid"
+msgstr "Der Registrierungscode (@code) wurde verwendet von UID #uid"
+
+#: regcode.rules.inc:10
+msgid "User has used a registration code"
+msgstr "Benutzer hat einen Registrierungscode verwendet."
+
+#: regcode.rules.inc:13
+msgid "The user using the code"
+msgstr "Der Benutzer der den Code verwendet hat"
+
+#: regcode.rules.inc:14
+msgid "The regcode which was used"
+msgstr "Der verwendete Code"
+
+#: regcode.rules.inc:26
+msgid "Regcode"
+msgstr ""
+
+#: regcode.module:19
+msgid "Provides user registration code functionality."
+msgstr "Stellt Registrierungscode-Funktionalität bereit."
+
+#: regcode.module:22
+msgid "Change global settings for registration codes."
+msgstr "Globale Einstellungen für Registrierungscodes ändern."
+
+#: regcode.module:25
+msgid "Create a registration code."
+msgstr "Einen Registrierungscode erstellen"
+
+#: regcode.module:28
+msgid "List and filter all registration codes."
+msgstr "Alle Registrierungscodes anzeigen und filtern"
+
+#: regcode.module:29
+msgid "Note: The UID indicates the last user to use a registration code."
+msgstr "Hinweis: Die Benutzer-ID zeigt den letzten Benutzer an, der einen Registrierungscode verwendet hat."
+
+#: regcode.module:32
+msgid "Generate registration codes."
+msgstr "Registrierungscodes erzeugen."
+
+#: regcode.module:35
+msgid "Import registration codes from a CSV file."
+msgstr "Registrierungscodes aus einer CSV-Datei importieren."
+
+#: regcode.module:61
+#: regcode.info:0
+msgid "Registration codes"
+msgstr "Registrierungscodes"
+
+#: regcode.module:66;71
+msgid "Settings for registration code functionality."
+msgstr "Einstellungen für die Registrierungscode-Funktionalität"
+
+#: regcode.module:70
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: regcode.module:78
+msgid "Create"
+msgstr "Erstellen"
+
+#: regcode.module:79
+msgid "Create a registration code"
+msgstr "Registrierungscode erstellen"
+
+#: regcode.module:89
+msgid "List"
+msgstr "Alle anzeigen"
+
+#: regcode.module:90
+msgid "List of registration codes"
+msgstr "Liste der Registrierungscodes"
+
+#: regcode.module:101
+msgid "Import registration codes"
+msgstr "Registrierungscodes importieren"
+
+#: regcode.module:111
+msgid "Export"
+msgstr "Exportieren"
+
+#: regcode.module:112
+msgid "Export registration codes"
+msgstr "Registrierungscodes exportieren"
+
+#: regcode.module:159
+msgid "User entered invalid registration code (@code)"
+msgstr "Benutzer hat ungültigen Registrierungscode (@code) verwendet."
+
+#: regcode.module:49
+msgid "administer registration codes"
+msgstr "Registrierungscodes verwalten"
+
+#: regcode.module:49
+msgid "bypass registration code entry"
+msgstr "Die Eingabe eines Registrierungscodes umgehen."
+
+#: regcode.install:25
+msgid "Hold registration codes"
+msgstr "Enthält Registrierungscodes"
+
+#: regcode.install:28
+msgid "RID"
+msgstr ""
+
+#: regcode.install:34
+msgid "ID"
+msgstr ""
+
+#: regcode.install:37
+msgid "User ID"
+msgstr "Benutzer-ID"
+
+#: regcode.install:43
+msgid "UID"
+msgstr "Benutzer-ID"
+
+#: regcode.install:46
+msgid "Time code was created"
+msgstr "Erstellungs-Zeitpunkt des Codes"
+
+#: regcode.install:50
+msgid "Created"
+msgstr "Erstellt"
+
+#: regcode.install:53
+msgid "Last time this code was used"
+msgstr "letzte Verwendung des Codes"
+
+#: regcode.install:57
+msgid "Used"
+msgstr "Verwendet"
+
+#: regcode.install:60
+msgid "When code should be active from"
+msgstr "Ab wann der Code aktiv sein soll"
+
+#: regcode.install:64
+msgid "Active"
+msgstr "Aktiv"
+
+#: regcode.install:67
+msgid "When code should expire"
+msgstr "Wann der Code ablaufen soll"
+
+#: regcode.install:71
+msgid "Expires"
+msgstr "Läuft ab"
+
+#: regcode.install:74
+msgid "A grouping category to help management"
+msgstr "Eine gruppierende Kategorie zur Unterstützung bei der Verwaltung"
+
+#: regcode.install:82
+msgid "The registration code"
+msgstr "Der Registrierungscode"
+
+#: regcode.install:88
+msgid "Code"
+msgstr ""
+
+#: regcode.install:91
+msgid "Whether the code is active"
+msgstr "Ob der Code aktiv ist"
+
+#: regcode.install:101
+msgid "Maximum times the code can be used"
+msgstr "Wie oft der Code verwendet werden kann"
+
+#: regcode.install:108
+msgid "Max"
+msgstr ""
+
+#: regcode.install:111
+msgid "Number of times the code has been used"
+msgstr "Wie oft der Code verwendet wurde"
+
+#: regcode.install:118
+msgid "Uses"
+msgstr "Verwendungen"
+
+#: regcode.info:0
+msgid "Provides functionality for using/enabling/requiring registration codes upon user registration"
+msgstr "Stellt Funktionalität zum Verwenden/Aktivieren/Erzwingen von Registrierungscodes bei der Registrierung von Benutzern bereit"
+

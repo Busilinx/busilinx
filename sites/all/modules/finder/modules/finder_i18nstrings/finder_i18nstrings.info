@@ -1,0 +1,13 @@
+; $Id: finder_i18nstrings.info,v 1.1.2.13 2010/05/30 11:14:15 danielb Exp $
+name = Finder String Translation
+description = "Allows admins to localize user-defined values in Finder settings."
+core = 6.x
+package = "Finder"
+dependencies[] = finder
+dependencies[] = i18nstrings
+; Information added by drupal.org packaging script on 2010-06-13
+version = "6.x-1.8"
+core = "6.x"
+project = "finder"
+datestamp = "1276397106"
+

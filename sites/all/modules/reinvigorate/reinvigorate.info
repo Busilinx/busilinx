@@ -1,0 +1,12 @@
+; $Id: reinvigorate.info,v 1.1 2010/09/02 17:23:28 devkinetic Exp $
+name = Reinvigorate
+description = Adds Reinvigorate javascript tracking to your sites pages. 
+package = Statistics 
+core = 6.x
+
+; Information added by drupal.org packaging script on 2010-10-28
+version = "6.x-1.1"
+core = "6.x"
+project = "reinvigorate"
+datestamp = "1288285534"
+

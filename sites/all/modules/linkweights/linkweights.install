@@ -1,0 +1,46 @@
+<?php
+// $Id: linkweights.install,v 1.1 2009/07/22 16:57:37 dustincurrie Exp $
+
+/**
+ * @file
+ * Install, update and uninstall functions for the linkweights module.
+ */
+
+
+function linkweights_install() {
+    drupal_install_schema('linkweights');
+}
+
+function linkweights_uninstall() {
+  db_query("DROP TABLE {linkweights}");
+}
+
+function linkweights_schema() {
+  $schema['linkweights'] = array(
+  'fields' => array(
+      'nodetype' => array(
+        'description' => 'Nodetype which to apply weights',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => ''
+      ),
+      'link' => array(
+        'description' => 'link name',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => ''
+      ),
+      'weight' => array(
+        'description' => 'weight',
+        'type' => 'int',
+        'unsigned' => FALSE,
+        'not null' => TRUE,
+        'default' => 0
+      ),
+    ),
+  );
+  return $schema;
+
+}

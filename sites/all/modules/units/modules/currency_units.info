@@ -1,0 +1,14 @@
+; $Id: currency_units.info,v 1.1 2009/07/27 23:44:38 crea Exp $
+name = Currency Units
+description = Implementation of Units API for currencies with the help of Currency API.
+dependencies[] = units
+dependencies[] = currency_api
+package = Units
+core = 6.x
+
+; Information added by drupal.org packaging script on 2010-05-23
+version = "6.x-1.0"
+core = "6.x"
+project = "units"
+datestamp = "1274613613"
+
