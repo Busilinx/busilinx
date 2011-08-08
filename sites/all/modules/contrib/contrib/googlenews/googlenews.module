@@ -1,0 +1,89 @@
+<?php
+// $Id: googlenews.module,v 1.1.2.6 2009/11/13 17:19:27 davereid Exp $
+
+/**
+ * @file
+ * Provides a Google News sitemap within your site using the url:
+ * http://www.yoursite.com/googlenews.xml
+ *
+ * Webopius Ltd, www.webopius.com, info@webopius.com
+ */
+
+/**
+ * PHP 5.2 backport to define DATE_W3C.
+ */
+if (!defined('DATE_W3C')) {
+  define('DATE_W3C', 'Y-m-d\TH:i:s+00:00');
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function googlenews_menu() {
+  $items['googlenews.xml'] = array(
+    'page callback' => '_googlenews_getgooglenews',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/settings/googlenews'] = array(
+    'title' => 'Google News sitemap',
+    'description' => 'Specify category types for the Google News sitemap.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('googlenews_admin_settings'),
+    'access arguments' => array('administer site configuration'),
+  );
+  return $items;
+}
+
+/**
+ * Generate the news feed.
+ */
+function _googlenews_getgooglenews() {
+  global $language;
+
+  $content = '<?xml version="1.0" encoding="UTF-8"?>';
+  $content .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"';
+  $content .= '  xmlns:n="http://www.google.com/schemas/sitemap-news/0.9">';
+
+  $node_types = variable_get('googlenews_node_types', array_keys(node_get_types()));
+  $args = array_merge($node_types, array(time() - 172800));
+  $sql = "SELECT n.nid, n.created, n.title FROM {node} n WHERE n.type IN (" . db_placeholders($node_types, 'varchar') . ") AND n.status = 1 AND n.created >= %d ORDER BY n.created DESC";
+  $query = db_query_range(db_rewrite_sql($sql), $args, 0, 1000);
+
+  while ($node = db_fetch_object($query)) {
+    $content .= '<url>';
+    $content .= '<loc>' . url('node/' . $node->nid, array('absolute' => TRUE)) . '</loc>';
+    $content .= '<n:news>';
+    $content .= '<n:publication>';
+      $content .= '<n:name>' . variable_get('site_name', 'Drupal') . '</n:name>';
+      $content .= '<n:language>' . check_plain($language->language) . '</n:language>';
+    $content .= '</n:publication>';
+    $content .= '<n:title>' . check_plain($node->title) . '</n:title>';
+    $content .= '<n:publication_date>' . gmdate(DATE_W3C, $node->created) . '</n:publication_date>';
+    $content .= '</n:news>';
+    $content .= '</url>';
+  }
+
+  $content .= '</urlset>';
+
+  drupal_set_header('Content-Type: text/xml');
+  print $content;
+}
+
+/**
+ * Form builder; administration settings.
+ */
+function googlenews_admin_settings() {
+  $node_types = node_get_types('names');
+  $form['googlenews_node_types'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Select the content types to include in the <a href="@news-sitemap">news sitemap</a>', array('@news-sitemap' => url('googlenews.xml'))),
+    '#default_value' => variable_get('googlenews_node_types', array_keys($node_types)),
+    '#options' => $node_types,
+  );
+  $form['array_filter'] = array(
+    '#type' => 'value',
+    '#value' => TRUE,
+  );
+  return system_settings_form($form);
+}

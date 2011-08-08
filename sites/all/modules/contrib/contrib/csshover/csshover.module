@@ -1,0 +1,11 @@
+<?php
+// $Id: csshover.module,v 1.1 2009/06/29 15:49:14 nbz Exp $
+
+function csshover_init() {
+  drupal_set_html_head('
+    <!--[if lte IE 7]>
+      <style type="text/css">
+        body { behavior: url("'. base_path() . drupal_get_path('module', 'csshover') . '/csshover3.htc"); } 
+      </style>
+    <![endif]-->');
+}

@@ -1,0 +1,103 @@
+<?php
+// $Id: checkout.install,v 1.2 2007/12/02 08:18:39 smk Exp $
+
+/**
+ * Implementation of hook_install().
+ */
+function checkout_install() {
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      db_query("
+        CREATE TABLE {checkout} (
+          nid int(10) unsigned NOT NULL default '0',
+          uid int(10) unsigned NOT NULL default '0',
+          persistent tinyint(1) unsigned NOT NULL default '0',
+          timestamp int(10) unsigned NOT NULL default '0',
+          PRIMARY KEY (nid),
+          KEY (uid)
+        ) /*!40100 DEFAULT CHARACTER SET utf8 */"
+      );
+      break;
+    
+    case 'pgsql':
+      db_query("
+        CREATE TABLE {checkout} (
+          nid INTEGER NOT NULL DEFAULT 0,
+          uid INTEGER NOT NULL DEFAULT 0,
+          persistent SMALLINT NOT NULL DEFAULT 0,
+          timestamp INTEGER NOT NULL DEFAULT 0,
+          PRIMARY KEY (nid)
+        )"
+      );
+      db_query("CREATE INDEX {checkout}_uid_idx ON {checkout}(uid)");
+      break;
+  }
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function checkout_uninstall() {
+  db_query("DROP TABLE {checkout}");
+  variable_del('checkout_clear');
+}
+
+/**
+ * Helper function to add a permission to a role.
+ */
+function _checkout_add_permission($rid, $permission) {
+  if ($permission) {
+    $current_perm = db_result(db_query("SELECT perm FROM {permission} WHERE rid = %d", $rid));
+    if ($current_perm != '') {
+      $current_perm .= ', ';
+    }
+    $current_perm .= $permission;
+    db_query("UPDATE {permission} SET perm = '%s' WHERE rid = %d", $current_perm, $rid);
+  }
+}
+
+/**
+ * Update schema from Drupal 4.7.x to 5.x.
+ */
+function checkout_update_1() {
+  $ret = array();
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      $ret[] = update_sql("ALTER TABLE {checkout} CHANGE checkedout persistent tinyint(1) unsigned NOT NULL default '0'");
+      $ret[] = update_sql("ALTER TABLE {checkout} CHANGE date timestamp int(10) unsigned NOT NULL default '0'");
+      $ret[] = update_sql("ALTER TABLE {checkout} ADD KEY uid (uid)");
+      break;
+
+    case 'pgsql':
+      db_change_column($ret, 'checkout', 'checkedout', 'persistent', 'smallint', array('not null' => TRUE, 'default' => 0));
+      db_change_column($ret, 'checkout', 'date', 'timestamp', 'integer', array('not null' => TRUE, 'default' => 0));
+      $ret[] = update_sql("CREATE INDEX {checkout}_uid_idx ON {checkout}(uid)");
+      break;
+  }
+  return $ret;
+}
+
+/**
+ * Move the persistent check-out setting to the permissions table.
+ */
+function checkout_update_2() {
+  $ret = array();
+
+  // When persistent check-out was enabled, add a permission to every role
+  // that has the "check out documents" permission.
+  if (variable_get('checkout_long', 0)) {
+    foreach (user_roles(0, 'check out documents') as $rid => $role) {
+      _checkout_add_permission($rid, 'keep documents checked out');
+    }
+  }
+  variable_del('checkout_long');
+
+  $ret[] = array(
+    'query' => 'The access permissions have been updated by the checkout module.',
+    'success' => TRUE
+  );
+  return $ret;
+}
+

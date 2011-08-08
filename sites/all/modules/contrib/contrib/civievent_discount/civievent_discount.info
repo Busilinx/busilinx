@@ -1,0 +1,14 @@
+; $Id: civievent_discount.info,v 1.1 2010/12/16 17:56:14 dharmatech Exp $
+name = CiviEvent Discount
+description = Ability to apply discount codes to an event
+dependencies[] = civicrm
+core = 6.x
+package = "CiviCRM"
+version = "6.x-1.0-dev"
+
+; Information added by drupal.org packaging script on 2011-05-16
+version = "6.x-1.x-dev"
+core = "6.x"
+project = "civievent_discount"
+datestamp = "1305504313"
+

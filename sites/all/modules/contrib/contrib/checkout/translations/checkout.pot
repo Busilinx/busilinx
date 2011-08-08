@@ -1,0 +1,141 @@
+# $Id: checkout.pot,v 1.1 2008/07/10 14:27:42 smk Exp $
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  checkout.module,v 1.10 2008/03/27 09:44:14 smk
+#  checkout.info,v 1.3 2008/03/27 09:44:14 smk
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2008-07-10 16:23+0200\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: checkout.module:22
+msgid "Drupal's default locking strategy is optimistic, that is, whenever two users try to edit the same piece of content, the one hitting the save button first wins the race, while the other is displayed a message stating <em>this content has been modified by another user, changes cannot be saved</em>. Depending on the number of editors in your organization this might not be an acceptable solution."
+msgstr ""
+
+#: checkout.module:23
+msgid "The Checkout module implements pessimistic locking, which simply means that a content will be exclusively locked whenever a user starts editing it. The lock will be automatically released when the user saves the content or moves away from the edit page."
+msgstr ""
+
+#: checkout.module:24
+msgid "If permission has been given, it is possible to keep content checked out even after finishing the edit."
+msgstr ""
+
+#: checkout.module:25
+msgid "The ability to lock content is <a href=\"!uri\">permission</a> based. Documents that have been \"forgotten\" to check in can be automatically released through cron."
+msgstr ""
+
+#: checkout.module:29
+msgid "Below is a list of all locked documents. Click on <em>check in</em> to release a lock."
+msgstr ""
+
+#: checkout.module:32
+msgid "Below is a list of all documents locked by you. Click on <em>check in</em> to release a lock."
+msgstr ""
+
+#: checkout.module:81
+msgid "Keep document locked"
+msgstr ""
+
+#: checkout.module:85
+msgid "Check this box if you want to keep this document locked in your name after submitting it."
+msgstr ""
+
+#: checkout.module:93
+msgid "Disabled"
+msgstr ""
+
+#: checkout.module:96
+msgid "Automatic check-in"
+msgstr ""
+
+#: checkout.module:99
+msgid "The period after which locked documents will be automatically released."
+msgstr ""
+
+#: checkout.module:130
+msgid "Your lock has been removed!"
+msgstr ""
+
+#: checkout.module:130
+msgid "You can still save the content if this user aborts the edit operation without saving changes."
+msgstr ""
+
+#: checkout.module:136
+msgid "Your lock has been removed due to inactivity or by an administrator. Failed to regain the lock since the document has been changed since."
+msgstr ""
+
+#: checkout.module:168
+msgid "Released @count document(s) locked for more than @period."
+msgstr ""
+
+#: checkout.module:273
+msgid "This document is locked for editing by !name since @date."
+msgstr ""
+
+#: checkout.module:303
+msgid "Click <a href=\"!release-url\">here</a> to check back in now."
+msgstr ""
+
+#: checkout.module:314
+msgid "This document is now locked against simultaneous editing. It will unlock when you navigate elsewhere."
+msgstr ""
+
+#: checkout.module:359
+msgid "Title"
+msgstr ""
+
+#: checkout.module:361
+msgid "Username"
+msgstr ""
+
+#: checkout.module:366
+msgid "Locked since"
+msgstr ""
+
+#: checkout.module:367
+msgid "Persistent lock"
+msgstr ""
+
+#: checkout.module:368
+msgid "Operations"
+msgstr ""
+
+#: checkout.module:382
+msgid "yes"
+msgstr ""
+
+#: checkout.module:383
+msgid "check in"
+msgstr ""
+
+#: checkout.module:389
+msgid "No locked documents."
+msgstr ""
+
+#: checkout.module:410
+msgid "The editing lock has been released."
+msgstr ""
+
+#: checkout.module:170
+msgid "checkout"
+msgstr ""
+
+#: checkout.info:0
+msgid "Checkout"
+msgstr ""
+
+#: checkout.info:0
+msgid "Allows users to lock documents for modification."
+msgstr ""
+

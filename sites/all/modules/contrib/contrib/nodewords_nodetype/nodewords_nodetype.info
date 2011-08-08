@@ -1,0 +1,13 @@
+; $Id: nodewords_nodetype.info,v 1.1.4.2 2009/09/24 01:12:50 hanoii Exp $
+name = Meta tags node type
+description = Default Meta Tags on a per content type basis. Tokens are allowed.
+dependencies[] = nodewords
+dependencies[] = basic_metatags
+dependencies[] = token
+core = 6.x
+; Information added by drupal.org packaging script on 2009-09-29
+version = "6.x-1.3"
+core = "6.x"
+project = "nodewords_nodetype"
+datestamp = "1254248450"
+

@@ -1,0 +1,16 @@
+name = CiviEvent Discount for Ubercart
+description = Expose membership discount codes as a product in Ubercart.
+dependencies[] = civicrm
+dependencies[] = uc_cart
+dependencies[] = civievent_discount
+
+core = 6.x
+package = "CiviCRM"
+version = "6.x-1.0-dev"
+
+; Information added by drupal.org packaging script on 2011-05-16
+version = "6.x-1.x-dev"
+core = "6.x"
+project = "civievent_discount"
+datestamp = "1305504313"
+
