@@ -124,7 +124,9 @@
       </div> <!-- /admin user link -->
     <?php endif; ?>
     
-
+<?php if ($leaderboard): ?>
+    <div id="leaderboard"><? print $leaderboard; ?></div><!-- /leaderboard" -->
+<?php endif; ?>
 <div id="header-container">
 <div id="header" class="clearfix">
 
@@ -195,8 +197,6 @@
       <div id="secondary-content"><?php print $secondary_content; ?></div> <!-- /secondary-content -->
     <?php endif; ?>
 </div> <!-- /header-container -->
-
-<div id="leaderboard"><?php if ($leaderboard): print $leaderboard; endif; ?></div> <!-- /leaderboard -->
 
     <div id="columns"><div class="columns-inner clearfix">
 

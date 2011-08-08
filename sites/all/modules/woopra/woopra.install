@@ -1,6 +1,0 @@
-<?php
- // $iD: woopra.install,v 1.1 2008/04/21 15:04:08 tomdeb Exp $
-
-function woopra_uninstall() {
-  db_query('DELETE FROM {variable} WHERE name LIKE woopra\_%');
-}

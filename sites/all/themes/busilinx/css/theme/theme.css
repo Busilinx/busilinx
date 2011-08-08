@@ -259,20 +259,20 @@ li a.active {
 }
 /* #branding wraps #logo, #site-name and #site-slogan. */
 #branding {
-	padding:11px 4px 1px;
-	position: relative;
-    top: -1px;
-	float:none;
+	padding:0;
 }
 /* Logo and Site Name wrapper. */
 .logo-site-name {
 }
 /* Logo and Site Name wrapper h1 - normally applies only the homepage. */
 h1.logo-site-name {
+    float: left;
+    margin-right: 0.5em;
 }
 /* Logo and Site Name wrapper DIV - normally applies to all internal pages,
    or where no title is set. */
 div.logo-site-name {
+	float: left;
 }
 /* DIV/strong combo when when title is set. */
 div.logo-site-name strong {
@@ -302,13 +302,12 @@ span#site-name {
 }
 /* Site slogan. */
 #site-slogan {
-	color: #000000;
-	font-size: 1em;
-	font-weight: bold;
-	left: 271px;
-	position: absolute;
-	top: 4px;
-	font-family:Verdana, Geneva, sans-serif;
+    color: #000000;
+    float: left;
+    font-family: Verdana,Geneva,sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: 2.05em;
 }
 #leaderboard .leaderboard-banner-left {
 	height: 60px;
@@ -478,9 +477,6 @@ div.user-login-block a:hover {
 /* Float the serch box right. */
 #search-box {
 	padding: 0;
-	position: absolute;
-	right: 0;
-	top: -1px;
 }
 /* Reset form element margins. */
 #search-theme-form {
@@ -500,7 +496,6 @@ div.user-login-block a:hover {
 	margin:0 0.3em;
 }
 #search {
-	height:2.55em;
 }
 #search-theme-form .edit-submit input, #search-theme-form .edit-submit-1 input, #search-theme-form .edit-submit-2 input {
 	color:#000000;
@@ -603,19 +598,13 @@ span.search-info-upload {
 }
 /* Primary-links div wrapper */
 #primary {
-	height: 2.05em;
-	padding: 0;
-	position: absolute;
-	left: 270px;
-	top: 25px;
-	width: 690px;
-	background-color:#000000;
+    padding: 0;
 }
 /* Class on the ul */
 #primary ul {
 	list-style:none outside none;
 	margin:0;
-	padding:0 0 0 6px;
+	padding:0;
 	text-decoration:none;
 }
 /* Modify the margin to set tab spacings. */
@@ -657,7 +646,6 @@ span.search-info-upload {
 }
 /* Primary first and last classes. */
 #primary ul li.first {
-	margin-left:7px;
 }
 #primary ul li.last {
 }
@@ -690,6 +678,12 @@ padding: 0.4em 1.6em;
 #primary ul.nice-menu li.menuparent ul li {
 	margin-left: 0;
 	width: 14.5em;
+}
+ul.nice-menu-down li.menuparent {
+    background: url("arrow-down.png") no-repeat scroll 6em center #EEEEEE;
+}
+ul.nice-menu-down li.menuparent:hover {
+    background: url("arrow-down.png") no-repeat scroll 6em center #CCCCCC;
 }
 /* Secondary-links div wrapper */
 .section-links-frontpage {

@@ -1,7 +1,0 @@
-@CHARSET "US-ASCII";
-
-.ui-carousel-item {
-	/* Overide some garland themeing that won't work with carousels. */
-	background: none;
-	padding: 0;
-}

@@ -1,6 +1,0 @@
-; $Id:
-name = Modal Frame Register
-description = Provides a links that when clicked, opens either the login, register, or forgot password form in a modal window. 
-package = Modal frame
-dependencies[] = modalframe
-core = 6.x
