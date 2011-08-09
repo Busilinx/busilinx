@@ -92,12 +92,14 @@ class CRM_Cron_Action {
         $mapping->find( true );
 
         $actionSchedule = new CRM_Core_DAO_ActionSchedule( );
-        $actionSchedule->id = $mappingID;
+        $actionSchedule->mapping_id = $mappingID;
+        $actionSchedule->is_active = 1;
+        $actionSchedule->find( false );
 
         $tokenFields = array( );
         $session = & CRM_Core_Session::singleton();
 
-        if ( $actionSchedule->find( true ) ) {
+        while ( $actionSchedule->fetch( ) ) {
             $extraSelect = $extraJoin = '';
 
             if ( $actionSchedule->record_activity ) {
@@ -134,7 +136,7 @@ WHERE reminder.action_schedule_id = %1 AND reminder.action_date_time IS NULL";
                 if ( $toEmail ) {
                     $result = CRM_Core_BAO_ScheduleReminders::sendReminder( $dao->contact_id,
                                                                             $toEmail,
-                                                                            $mappingID,
+                                                                            $actionSchedule->id,
                                                                             $fromEmailAddress,
                                                                             $entityTokenParams );
                     if ( ! $result || is_a( $result, 'PEAR_Error' ) ) {
@@ -175,9 +177,11 @@ WHERE reminder.action_schedule_id = %1 AND reminder.action_date_time IS NULL";
     
     public function buildRecipientContacts( $mappingID ) {
         $actionSchedule = new CRM_Core_DAO_ActionSchedule( );
-        $actionSchedule->id = $mappingID;
+        $actionSchedule->mapping_id = $mappingID;
+        $actionSchedule->is_active = 1;
+        $actionSchedule->find( );
 
-        if ( $actionSchedule->find( true ) ) {
+        while ( $actionSchedule->fetch( ) ) {
             require_once 'CRM/Core/DAO/ActionMapping.php';
             $mapping = new CRM_Core_DAO_ActionMapping( );
             $mapping->id = $mappingID;
@@ -234,7 +238,7 @@ reminder.action_schedule_id = %1";
             }
 
             // ( now >= date_built_from_start_time )
-            $startEventClause = "reminder.id IS NULL AND {$this->_now} >= {$startEvent}";
+            $startEventClause = "reminder.id IS NULL AND '{$this->_now}' >= {$startEvent}";
 
             // build final query
             $selectClause = "SELECT " . implode( ', ', $select );
@@ -267,7 +271,7 @@ LEFT JOIN {$reminderJoinClause}
                 }
                 
                 // (now <= repeat_end_time )
-                $repeatEventClause = "{$this->_now} <= {$repeatEvent}"; 
+                $repeatEventClause = "'{$this->_now}' <= {$repeatEvent}"; 
                 // diff(now && logged_date_time) >= repeat_interval
                 $havingClause      = "HAVING TIMEDIFF({$this->_now}, latest_log_time) >= TIME('{$hrs}:00:00')";
                 $groupByClause     = "GROUP BY reminder.contact_id, reminder.entity_id, reminder.entity_table"; 

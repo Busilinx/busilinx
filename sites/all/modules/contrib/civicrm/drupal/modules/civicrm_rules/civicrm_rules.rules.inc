@@ -120,7 +120,34 @@ function civicrm_rules_event_info( ) {
 
 
 function civicrm_rules_condition_info() {
-    return civicrm_rules_entities_condition_info();
+   return  array(
+                 'rules_condition_civicrm_mailing_approved' => 
+                 array(
+                       'label' => t('Approval Status: Approved'),
+                       'arguments' => array(
+                                            'approvalstatus' => array(
+                                                                      'type' => 'mailing',
+                                                                      'label' => t('Approved'), ), ),
+                       'module' => 'CiviCRM Mailing',
+                       ),
+                 'rules_condition_civicrm_mailing_rejected' => 
+                 array(
+                       'label' => t('Approval Status: Rejected'),
+                       'arguments' => array(
+                                            'approvalstatus' => array(
+                                                                      'type' => 'mailing',
+                                                                      'label' => t('Rejected'), ), ),
+                       'module' => 'CiviCRM Mailing',
+                       ),
+                 ) + civicrm_rules_entities_condition_info();
+}
+
+function rules_condition_civicrm_mailing_approved(&$mailing, $settings) {
+    return $mailing->approval_status_id == 1;
+}
+
+function rules_condition_civicrm_mailing_rejected(&$mailing, $settings) {
+    return $mailing->approval_status_id != 1;
 }
 
 /*
@@ -144,8 +171,9 @@ function civicrm_rules_token_values($type, $object = NULL) {
         }
         break;
     }
-
-    return $values;
+    if (!empty($values) && is_array($values)){
+      return $values;
+    }
 }
 
 /**
@@ -391,7 +419,7 @@ function civicrm_rules_data_type_info() {
                                     'savable' => FALSE,
                                     'identifiable' => TRUE,
                                     ),
-                 );
+                 )+ civicrm_rules_entities_data_type_info();
                  
 
 }
@@ -418,5 +446,25 @@ class rules_data_type_mailing extends rules_data_type {
     function get_identifier() {
         $mailing = $this->get();
         return $mailing->id;
+    }
+}
+
+class rules_data_type_civicrm_event extends rules_data_type {
+    function load($id) {
+
+    }
+    
+    function get_identifier() {
+
+    }
+}
+
+class rules_data_type_civicrm_participant extends rules_data_type {
+    function load($id) {
+
+    }
+    
+    function get_identifier() {
+
     }
 }

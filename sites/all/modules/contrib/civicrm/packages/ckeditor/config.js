@@ -11,7 +11,6 @@ CKEDITOR.editorConfig = function( config )
     
     // disable auto spell check
     config.scayt_autoStartup = false;
-	config.baseHref = 'http://www.example.com';
     
     // This is actually the default value.
     config.toolbar_Full =
