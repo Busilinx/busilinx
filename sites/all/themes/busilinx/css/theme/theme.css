@@ -189,8 +189,12 @@ li a.active {
 /* Header region is embedded in the header, floated between the logo/site_name
    and the search box. */
 #header-region {
-	position: absolute;
-	width: 80em;
+	margin-top:4px;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+#header-region {
+	margin-top:3px;
+}
 }
 /* Menu Bar sits below the header and is ideal for dynamic menus 
    such as http://drupal.org/project/superfish. */
@@ -377,26 +381,28 @@ span#site-name {
  **********************************************************/
  
 #user-login-form {
-	text-align: center;
-	position: absolute;
-	right: 15px;
-	top: -30px;
 	z-index: 1;
 }
 div.toboggan-login-link-container a {
-	text-decoration: none;
-	color: white;
-	font-family: verdana;
+	background-color: black;
+    color: white;
+    font-family: verdana;
+    padding: 0.45em 1.28em;
+    text-decoration: none;
+}
+div.toboggan-login-link-container a:hover {
+	background-color:#797774;
 }
 div.user-login-block {
-	text-align: center;
-	background-color: #000000;
-	margin-top: 0px;
-	color: white;
-	padding: 14px;
-	right: -15px;
-	position: absolute;
-	width: 24em;
+    background-color: #000000;
+    color: white;
+    margin-top: 0;
+    padding: 14px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    width: 24em;
+    z-index: 1000;
 }
 div.user-login-block a {
 	color: #A9CBE6;
