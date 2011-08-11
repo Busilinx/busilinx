@@ -686,10 +686,10 @@ padding: 0.4em 1.6em;
 	width: 14.5em;
 }
 ul.nice-menu-down li.menuparent {
-    background: url("arrow-down.png") no-repeat scroll 6em center #EEEEEE;
+    background: url("../../images/arrow-down.png") no-repeat scroll 6em center #EEEEEE;
 }
 ul.nice-menu-down li.menuparent:hover {
-    background: url("arrow-down.png") no-repeat scroll 6em center #CCCCCC;
+    background: url("../../images/arrow-down.png") no-repeat scroll 6em center #CCCCCC;
 }
 /* Secondary-links div wrapper */
 .section-links-frontpage {
