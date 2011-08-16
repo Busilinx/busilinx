@@ -169,3 +169,12 @@ function busilinx_username($object) {
 
   return $output;
 }
+
+/**
+ * Render an icon to display in the Administration Menu.
+ *
+ * @ingroup themeable
+ */
+function busilinx_theme_admin_menu_icon() {
+  return '<img class="admin-menu-icon" src="/sites/all/themes/busilinx/logo-small.png" width="76" height="19" alt="'. t('Home') .'" />';
+}

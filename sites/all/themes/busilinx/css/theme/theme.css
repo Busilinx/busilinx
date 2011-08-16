@@ -21,6 +21,12 @@ body.admin-menu {
 }
 body.admin-menu #container {
 }
+#admin-menu ul a {
+    font-weight: bold;
+}
+#admin-menu {
+    font: bold 0.95em Verdana,Geneva,"DejaVu Sans",sans-serif;
+}
 /**********************************************************
  *                 HTML Elements
  **********************************************************/
